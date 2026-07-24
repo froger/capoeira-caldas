@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { eventDetailPath } from '../../lib/events';
 import { t } from '../../lib/i18n';
 
 interface Props {
@@ -9,22 +10,28 @@ interface Props {
 
 const { events, locale } = Astro.props;
 const detailsLabel = t(locale, 'common.view_details');
+const sorted = [...events].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<div class="grid md:grid-cols-2 gap-6">
-  {events.map((event) => (
-    <article id={event.id} class="card bg-base-100 shadow-md scroll-mt-24">
-      <div class="card-body">
-        <h3 class="card-title font-display text-xl">{event.data.title}</h3>
-        <p class="text-base text-verde-brasil font-semibold">
-          {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
-        </p>
-        <p>{event.data.description}</p>
-        <p class="text-base">📍 {event.data.location}</p>
-        <a href={`#${event.id}`} class="btn btn-sm bg-verde-brasil text-white border-none w-fit mt-2">
-          {detailsLabel}
-        </a>
-      </div>
-    </article>
+<ul class="space-y-4">
+  {sorted.map((event) => (
+    <li id={event.id} class="scroll-mt-24">
+      <a
+        href={eventDetailPath(locale, event.id)}
+        class="card bg-base-100 shadow-md block hover:shadow-lg transition-shadow"
+      >
+        <div class="card-body gap-1 py-5">
+          <h3 class="card-title font-display text-xl">{event.data.title}</h3>
+          <p class="text-base text-verde-brasil font-semibold">
+            {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
+          </p>
+          <p class="mt-1">{event.data.description}</p>
+          <p class="text-base">📍 {event.data.location}</p>
+          <span class="btn btn-sm bg-verde-brasil text-white border-none w-fit mt-3 pointer-events-none">
+            {detailsLabel}
+          </span>
+        </div>
+      </a>
+    </li>
   ))}
-</div>
+</ul>

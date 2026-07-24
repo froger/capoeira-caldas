@@ -1,8 +1,8 @@
 instructors:
   - id: marcelo
-    name: "Mestre Marcelo"
-    bio: "Mestre Marcelo lidera a Associação Capoeira Caldas com experiência e paixão pela Capoeira Angola."
-    bio_short: "Liderança e tradição na Capoeira Angola."
+    name: "Mestre Marcelo Angola"
+    bio: "O Mestre Marcelo Angola fundou o grupo Angoleiros do Mar em 1999 na ilha de Itaparica, Bahia. Graças à dedicação e à paixão pela Capoeira, o Mestre hoje tem muitas escolas de capoeira no mundo todo e abriu as portas para muitos capoeiristas."
+    bio_short: "Fundou Angoleiros do Mar em 1999."
     photo: "/images/mestre_marcelo.jpeg"
   - id: pedrinha
     name: "Treinel Pedrinha"

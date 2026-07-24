@@ -11,6 +11,8 @@ const events = defineCollection({
     date: z.coerce.date(),
     location: z.string(),
     rsvp_url: z.string().optional(),
+    /** CTA label on the event detail page (e.g. "Subscribe", "Contact us"). */
+    rsvp_label: z.string().optional(),
   }),
 });
 

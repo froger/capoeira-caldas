@@ -253,6 +253,11 @@ label,
   );
 }
 
+/* Homepage CTA sits flush against the footer (spacing lives on the CTA). */
+main:has(.cta-gradient) + footer {
+  margin-top: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-ginga,

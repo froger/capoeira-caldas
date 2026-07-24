@@ -74,9 +74,17 @@ const groupImage = withBase(toWebpPath('/images/about-associacao-capoeira-caldas
   <h2 class="text-3xl font-display text-azul-celeste mb-8">{t(locale, 'pages.about.instructors_title')}</h2>
   <div class="grid md:grid-cols-3 gap-8">
     {instructors.map((inst) => (
-      <div class="card bg-base-100 shadow-md">
-        <figure class="px-6 pt-6">
-          <img src={inst.photo} alt={inst.name} width="400" height="400" class="rounded-xl w-full aspect-square object-cover" loading="lazy" decoding="async" />
+      <div class="card bg-base-100 shadow-md overflow-hidden">
+        <figure>
+          <img
+            src={inst.photo}
+            alt={inst.name}
+            width="400"
+            height="400"
+            class="w-full aspect-square object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </figure>
         <div class="card-body">
           <h3 class="font-display text-xl">{inst.name}</h3>

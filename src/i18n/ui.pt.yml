@@ -33,7 +33,7 @@ home:
   schedule_tab_adults: "Adulto"
   schedule_cta: "Ver os eventos"
   testimonials_title: "O Que Dizem Nossos Alunos"
-  instructors_title: "Nossos Mestres e Instrutores"
+  instructors_title: "A nossa roda"
   cta_title: "1 aula grátis"
   cta_subtitle: "Experimente uma aula gratuita e sinta a energia da capoeira"
   cta_primary: "Contacta-nos"
@@ -55,6 +55,7 @@ common:
   location: "Local"
   schedule_label: "Horário:"
   view_details: "Ver detalhes"
+  rsvp: "Inscrever-se"
   contact_action: "Contactar"
   switch_lang: "EN"
   switch_lang_aria: "Mudar idioma"
@@ -62,6 +63,7 @@ common:
   menu: "Menu"
   email: "Email"
   whatsapp: "Telefone"
+  
 
 pages:
   classes:
@@ -81,7 +83,7 @@ pages:
     location_gaeiras_place: "Espaço O"
     pedrinha_title: "Treinel Pedrinha"
     pedrinha_body: "Treinel Pedrinha é da Suécia, viveu na Austrália e treina Capoeira desde criança com Mestre Marcelo. Em 2025 abriu o grupo de Capoeira em Caldas da Rainha. Ama acrobacias e é conhecida pela sua Capoeira."
-    instructors_title: "Nossos Instrutores"
+    instructors_title: "A nossa roda"
     intro_p1: "A Associação Capoeira Caldas é uma associação sem fins lucrativos dedicada à promoção da capoeira, da cultura afro-brasileira e da educação através do movimento, da música e da tradição."
     intro_p2: "A nossa missão é preservar e divulgar a história e os valores da capoeira, proporcionando um ambiente acolhedor onde crianças, jovens e adultos possam aprender, evoluir e desenvolver-se. Acreditamos que a capoeira vai muito além da atividade física: é uma expressão cultural que promove o respeito, a disciplina, a inclusão, a amizade e o espírito de comunidade."
     intro_p3: "Ao longo do nosso percurso, temos desenvolvido aulas, workshops, apresentações e projetos culturais e educativos, aproximando pessoas de diferentes idades e origens. Trabalhamos para manter viva a riqueza da capoeira, honrando as suas raízes e transmitindo este património cultural às gerações presentes e futuras."
@@ -102,7 +104,7 @@ pages:
     description: "Horários das aulas de Capoeira Angola e próximos eventos em Caldas da Rainha e Gaeiras."
     heading: "Horários das Aulas"
     classes_cta: "Ver as aulas"
-    events: "Próximos Eventos"
+    events: "Eventos"
   privacy:
     title: "Política de Privacidade"
     description: "Política de privacidade da Associação Capoeira Caldas — sem cookies de análise nem partilha de dados para marketing."

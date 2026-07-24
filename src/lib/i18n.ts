@@ -72,6 +72,15 @@ export function switchLocalePath(current: Locale, currentPath: string): string {
     }
   }
 
+  const ptEvent = normalized.match(/^\/calendario\/([^/]+)$/);
+  if (current === 'pt' && ptEvent) {
+    return withBase(`/en/schedule/${ptEvent[1]}`);
+  }
+  const enEvent = normalized.match(/^\/en\/schedule\/([^/]+)$/);
+  if (current === 'en' && enEvent) {
+    return withBase(`/calendario/${enEvent[1]}`);
+  }
+
   if (current === 'pt') {
     return withBase(normalized === '/' ? '/en/' : `/en${normalized}`);
   }
