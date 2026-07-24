@@ -1,9 +1,9 @@
 ---
 title: "Workshop Mestre Marcelo Angola"
 description: "Um final de semana cheio de capoeira, coco, musica, aprendizados e muitas amizades!"
-locale: pt
-date: 2025-04-12
-location: "Sociedade Columbófila Caldense"
+locale: "pt"
+date: "2025-04-12"
+location: "Sociedade Columbófila Caldense, Caldas da Rainha"
 rsvp_url: "https://wa.me/351912345678"
 rsvp_label: "Inscrever-se"
 ---
