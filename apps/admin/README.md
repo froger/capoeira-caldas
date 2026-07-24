@@ -7,6 +7,7 @@ Electron app for masters to edit site content without using git directly.
 - Node 22+
 - System `git` installed
 - GitHub OAuth App with **Device Flow** enabled; set `GITHUB_OAUTH_CLIENT_ID`
+- Scopes requested at login: `repo` + `workflow` (needed to push `.github/workflows/*`)
 
 ## Develop
 

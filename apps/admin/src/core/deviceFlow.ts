@@ -50,7 +50,7 @@ export class DeviceFlow {
       },
       body: formBody({
         client_id: this.clientId,
-        scope: 'repo',
+        scope: 'repo workflow',
       }),
     });
     if (!res.ok) {
