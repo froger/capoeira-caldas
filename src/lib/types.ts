@@ -1,5 +1,11 @@
 export type Locale = 'pt' | 'en';
 
+export interface SiteLocation {
+  name: string;
+  addressLocality: string;
+  streetAddress?: string;
+}
+
 export interface SiteConfig {
   name: string;
   description: string;
@@ -11,6 +17,7 @@ export interface SiteConfig {
     city: string;
     map_embed_url: string;
   };
+  locations?: SiteLocation[];
   social: {
     instagram: string;
     youtube: string;

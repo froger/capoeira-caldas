@@ -1,12 +1,14 @@
 ---
 import '../styles/global.css';
 import type { Locale } from '../lib/types';
-import { getSite } from '../lib/data';
-import { alternateLocale, switchLocalePath } from '../lib/i18n';
+import { getInstructors, getSite } from '../lib/data';
+import { alternateLocale, getRoutes, switchLocalePath } from '../lib/i18n';
 import { withBase } from '../lib/paths';
 import {
   absoluteUrl,
   organizationSchema,
+  personSchema,
+  webSiteSchema,
   type JsonLd,
 } from '../lib/seo';
 import Navbar from '../components/layout/Navbar.astro';
@@ -23,6 +25,7 @@ interface Props {
 
 const { title, description, locale = 'pt', path = '/', jsonLd = [], ogImage = '/images/og-default.jpg' } = Astro.props;
 const site = getSite(locale);
+const routes = getRoutes(locale);
 const siteOrigin = Astro.site ?? 'http://127.0.0.1:4321';
 const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
 const desc = description ?? site.description;
@@ -31,6 +34,14 @@ const alternatePath = switchLocalePath(locale, path);
 const alternateHref = absoluteUrl(alternatePath, siteOrigin);
 const ogImageUrl = absoluteUrl(ogImage, siteOrigin);
 const homeUrl = absoluteUrl('/', siteOrigin);
+const aboutUrl = absoluteUrl(routes.about, siteOrigin);
+
+const website = webSiteSchema({
+  name: site.name,
+  description: site.description,
+  url: homeUrl,
+  locale,
+});
 
 const org = organizationSchema({
   name: site.name,
@@ -41,10 +52,21 @@ const org = organizationSchema({
   address: site.contact.address,
   city: site.contact.city,
   sameAs: [site.social.instagram, site.social.facebook, site.social.x, site.social.youtube],
+  locations: site.locations,
 });
 
+const people = getInstructors(locale).instructors.map((inst) =>
+  personSchema({
+    name: inst.name,
+    description: inst.bio_short,
+    image: absoluteUrl(inst.photo, siteOrigin),
+    url: aboutUrl,
+    jobTitle: inst.graduation,
+  }),
+);
+
 const pageSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
-const schemas = [org, ...pageSchemas];
+const schemas = [website, org, ...people, ...pageSchemas];
 ---
 
 <!doctype html>

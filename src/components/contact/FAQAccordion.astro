@@ -1,12 +1,16 @@
 ---
 import type { FaqItem } from '../../lib/types';
+import { faqPageSchema } from '../../lib/seo';
 
 interface Props {
   items: FaqItem[];
 }
 
 const { items } = Astro.props;
+const schema = faqPageSchema(items);
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <div class="space-y-2">
   {items.map((item, i) => (

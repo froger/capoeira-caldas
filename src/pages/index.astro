@@ -8,7 +8,7 @@ import Testimonials from '../components/home/Testimonials.astro';
 import InstructorsPreview from '../components/home/InstructorsPreview.astro';
 import HomeCTA from '../components/home/HomeCTA.astro';
 import { getSite } from '../lib/data';
-import { absoluteUrl, webPageSchema, webSiteSchema } from '../lib/seo';
+import { absoluteUrl, webPageSchema } from '../lib/seo';
 
 const locale = 'pt';
 const site = getSite(locale);
@@ -18,12 +18,6 @@ const pageUrl = absoluteUrl(path, siteOrigin);
 const siteUrl = absoluteUrl('/', siteOrigin);
 
 const jsonLd = [
-  webSiteSchema({
-    name: site.name,
-    description: site.description,
-    url: siteUrl,
-    locale,
-  }),
   webPageSchema({
     title: site.name,
     description: site.description,

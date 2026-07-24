@@ -1,10 +1,16 @@
 ---
+import { breadcrumbSchema } from '../../lib/seo';
+
 interface Props {
   items: { label: string; href?: string }[];
 }
 
 const { items } = Astro.props;
+const siteOrigin = Astro.site ?? 'http://127.0.0.1:4321';
+const schema = breadcrumbSchema(items, siteOrigin);
 ---
+
+{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
 <nav class="container mx-auto px-4 py-4" aria-label="Breadcrumb">
   <div class="breadcrumbs text-base">

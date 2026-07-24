@@ -12,6 +12,7 @@
     "astro": "astro",
     "optimize:images": "node scripts/optimize-images.mjs",
     "validate:content": "node scripts/validate-content.mjs",
+    "validate:jsonld": "bash scripts/validate-jsonld.sh",
     "test:screenshots": "playwright test -c tests/playwright.config.ts",
     "test:screenshots:update": "playwright test -c tests/playwright.config.ts --update-snapshots"
   },

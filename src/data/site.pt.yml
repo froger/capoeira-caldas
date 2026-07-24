@@ -9,6 +9,12 @@ contact:
   city: "Caldas da Rainha, Portugal"
   map_embed_url: "https://maps.google.com/maps?q=Capoeira%20Caldas%20Caldas%20da%20Rainha&output=embed"
 
+locations:
+  - name: "Sociedade Columbófila Caldense"
+    addressLocality: "Caldas da Rainha"
+  - name: "Espaço O"
+    addressLocality: "Gaeiras"
+
 social:
   instagram: "https://www.instagram.com/capoeira_caldas/"
   youtube: ""
