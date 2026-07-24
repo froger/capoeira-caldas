@@ -13,7 +13,6 @@ const { programs } = getClasses(locale);
 
 <section id="programs" class="py-20 bg-cream reveal">
   <div class="container mx-auto px-4">
-    <span class="badge bg-verde-brasil text-white border-none mb-4 text-base">{t(locale, 'home.programs_badge')}</span>
     <h2 class="text-3xl sm:text-5xl font-display text-azul-celeste mb-12">{t(locale, 'home.programs_title')}</h2>
     <div class="grid md:grid-cols-2 gap-10">
       {programs.map((program) => (
@@ -29,7 +28,6 @@ const { programs } = getClasses(locale);
             />
           </figure>
           <div class="card-body">
-            <span class="badge w-fit bg-verde-brasil text-white border-none">{program.badge}</span>
             <h3 class="card-title font-display text-3xl text-azul-celeste">{program.title}</h3>
             <p class="text-base leading-relaxed">{program.description}</p>
             <p class="text-base text-base-content/80">{program.age_range} · {program.schedule_note}</p>

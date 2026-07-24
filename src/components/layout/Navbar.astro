@@ -25,7 +25,9 @@ const links = [
 ];
 
 const isActive = (href: string) =>
-  activePath === href || (href.includes('#') && activePath === routes.home);
+  activePath === href ||
+  (!href.includes('#') && activePath.startsWith(`${href}/`)) ||
+  (href.includes('#') && activePath === routes.home);
 ---
 
 <div class="drawer">

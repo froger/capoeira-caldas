@@ -1,6 +1,5 @@
 programs:
   - id: kids
-    badge: "Kids"
     title: "Capoeira Kids"
     age_range: "5–13 years"
     description: "Play, rhythm and respect in a welcoming space — development through Capoeira Angola."
@@ -22,7 +21,6 @@ programs:
       - "Comfortable clothes"
       - "Water bottle"
   - id: adult
-    badge: "Adults"
     title: "Capoeira Adults"
     age_range: "14+ years"
     description: "Explore the dynamic movement and captivating rhythm of Capoeira Angola, with experienced instructors in a welcoming environment."

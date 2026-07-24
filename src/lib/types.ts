@@ -79,7 +79,6 @@ export type PricingAudience = 'kids' | 'adult';
 
 export interface ClassProgram {
   id: string;
-  badge: string;
   title: string;
   age_range: string;
   description: string;

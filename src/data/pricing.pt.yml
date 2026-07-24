@@ -36,8 +36,8 @@ kids:
   plans:
     - id: open
       name: "Inscrições abertas"
-      price: "Sob consulta"
-      period: "vagas disponíveis"
+      price: "20€ / mês"
+      period: "vagas limitadas"
       features:
         - "Turma infantil 5–13 anos"
         - "Jogo, ritmo e respeito"
