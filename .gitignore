@@ -5,3 +5,5 @@ test-results/
 playwright-report/
 .DS_Store
 .env
+# Build-generated; sources stay jpg/jpeg/png in public/images
+public/**/*.webp

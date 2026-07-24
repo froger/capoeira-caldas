@@ -3,7 +3,7 @@ import WaveDivider from '../decor/WaveDivider.astro';
 import type { Locale } from '../../lib/types';
 import { getSite } from '../../lib/data';
 import { getRoutes, t } from '../../lib/i18n';
-import { withBase } from '../../lib/paths';
+import { toWebpPath, withBase } from '../../lib/paths';
 
 interface Props {
   locale: Locale;
@@ -15,7 +15,7 @@ const routes = getRoutes(locale);
 const contactPath = routes.contact;
 const headline = t(locale, 'home.hero_headline');
 const subhead = t(locale, 'home.hero_subhead');
-const poster = withBase('/images/hero-poster.jpg');
+const poster = withBase(toWebpPath('/images/hero-poster.jpg'));
 const videoSrc = withBase('/video/background-video.mp4');
 ---
 

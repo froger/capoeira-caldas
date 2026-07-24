@@ -9,7 +9,7 @@ adult:
         - "Meet the roda"
         - "All levels welcome"
       highlighted: true
-      cta: "Join WhatsApp"
+      cta: "WhatsApp Group"
     - id: monthly
       name: "Monthly"
       price: "€50"

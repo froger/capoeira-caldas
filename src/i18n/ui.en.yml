@@ -37,7 +37,7 @@ home:
   cta_title: "1 free class"
   cta_subtitle: "Try a free class and feel the energy of capoeira"
   cta_primary: "Contact us"
-  cta_secondary: "Join WhatsApp"
+  cta_secondary: "WhatsApp Group"
   trust_1: "No commitment"
   trust_2: "Classes for all levels"
   trust_3: "Family atmosphere"
@@ -61,7 +61,7 @@ common:
   map: "Map"
   menu: "Menu"
   email: "Email"
-  whatsapp: "WhatsApp"
+  whatsapp: "Phone"
 
 pages:
   classes:
@@ -90,7 +90,7 @@ pages:
     title: "Contact"
     description: "Contact Associação Capoeira Caldas by WhatsApp, email, or visit us in Caldas da Rainha."
     intro: "Write to us on WhatsApp or email."
-    whatsapp_cta: "Join WhatsApp"
+    whatsapp_cta: "WhatsApp Group"
     email_cta: "Send email"
     address_label: "Address"
   gallery:

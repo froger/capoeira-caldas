@@ -2,7 +2,7 @@
 import type { Locale } from '../../lib/types';
 import { getInstructors, getSite } from '../../lib/data';
 import { t } from '../../lib/i18n';
-import { withBase } from '../../lib/paths';
+import { toWebpPath, withBase } from '../../lib/paths';
 
 interface Props {
   locale: Locale;
@@ -12,7 +12,7 @@ const { locale } = Astro.props;
 const { instructors } = getInstructors(locale);
 const site = getSite(locale);
 const pedrinha = instructors.find((i) => i.id === 'pedrinha');
-const groupImage = withBase('/images/about-associacao-capoeira-caldas-da-rainha.jpg');
+const groupImage = withBase(toWebpPath('/images/about-associacao-capoeira-caldas-da-rainha.jpg'));
 ---
 
 <section class="py-12 text-white" style="background: linear-gradient(135deg, #1a3328, #224435);">

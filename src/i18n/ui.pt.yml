@@ -37,7 +37,7 @@ home:
   cta_title: "1 aula grátis"
   cta_subtitle: "Experimente uma aula gratuita e sinta a energia da capoeira"
   cta_primary: "Contacta-nos"
-  cta_secondary: "Entrar no WhatsApp"
+  cta_secondary: "Grupo WhatsApp"
   trust_1: "Sem compromisso"
   trust_2: "Turmas para todos os níveis"
   trust_3: "Ambiente familiar"
@@ -61,7 +61,7 @@ common:
   map: "Mapa"
   menu: "Menu"
   email: "Email"
-  whatsapp: "WhatsApp"
+  whatsapp: "Telefone"
 
 pages:
   classes:
@@ -90,7 +90,7 @@ pages:
     title: "Contato"
     description: "Contacta a Associação Capoeira Caldas por WhatsApp, email ou visita-nos em Caldas da Rainha."
     intro: "Escreve-nos por WhatsApp ou email."
-    whatsapp_cta: "Entrar no WhatsApp"
+    whatsapp_cta: "Grupo WhatsApp"
     email_cta: "Enviar email"
     address_label: "Morada"
   gallery:

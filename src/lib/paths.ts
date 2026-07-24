@@ -1,3 +1,8 @@
+/** Map committed raster sources to build-generated WebP (see scripts/optimize-images.mjs). */
+export function toWebpPath(path: string): string {
+  return path.replace(/\.(jpe?g|png)$/i, '.webp');
+}
+
 /** Prefix site-relative paths with Astro/Vite `BASE_URL` (e.g. `/capoeira-caldas/`). Idempotent. */
 export function withBase(path = '/'): string {
   if (/^(https?:|mailto:|tel:|\/\/)/i.test(path)) return path;

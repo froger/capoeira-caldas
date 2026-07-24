@@ -22,6 +22,9 @@ export default defineConfig({
   site,
   base,
   output: 'static',
+  build: {
+    inlineStylesheets: 'always',
+  },
   i18n: {
     defaultLocale: 'pt',
     locales: ['pt', 'en'],

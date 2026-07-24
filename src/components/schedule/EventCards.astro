@@ -15,7 +15,6 @@ const detailsLabel = t(locale, 'common.view_details');
   {events.map((event) => (
     <article id={event.id} class="card bg-base-100 shadow-md scroll-mt-24">
       <div class="card-body">
-        <span class="badge bg-verde-brasil text-white border-none">{event.data.type}</span>
         <h3 class="card-title font-display text-xl">{event.data.title}</h3>
         <p class="text-base text-verde-brasil font-semibold">
           {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}

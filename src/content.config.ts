@@ -11,7 +11,6 @@ const events = defineCollection({
     date: z.coerce.date(),
     location: z.string(),
     rsvp_url: z.string().optional(),
-    type: z.enum(['roda', 'batizado', 'workshop', 'festa']),
   }),
 });
 

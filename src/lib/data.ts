@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import { withBase } from './paths';
+import { toWebpPath, withBase } from './paths';
 import type {
   ClassProgram,
   FaqItem,
@@ -23,7 +23,7 @@ function loadYaml<T>(filename: string): T {
 }
 
 function asset(path?: string): string {
-  return path ? withBase(path) : '';
+  return path ? withBase(toWebpPath(path)) : '';
 }
 
 export function getSite(locale: 'pt' | 'en'): SiteConfig {

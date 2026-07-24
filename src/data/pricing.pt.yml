@@ -9,7 +9,7 @@ adult:
         - "Conheça a roda"
         - "Todos os níveis bem-vindos"
       highlighted: true
-      cta: "Entrar no WhatsApp"
+      cta: "Grupo WhatsApp"
     - id: monthly
       name: "Mensal"
       price: "50€"
