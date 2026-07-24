@@ -4,6 +4,9 @@ on:
   push:
     branches: [main, master]
   pull_request:
+  # Rebuild weekly so past / upcoming event UI stays current on the static site.
+  schedule:
+    - cron: '0 6 * * 3' # Wednesday 06:00 UTC
   workflow_dispatch:
     inputs:
       site:
@@ -54,7 +57,7 @@ jobs:
           BASE_PATH: ${{ env.BASE_PATH }}
 
       - uses: actions/upload-pages-artifact@v3
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: (github.event_name == 'push' || github.event_name == 'schedule') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         with:
           path: dist
 
@@ -90,7 +93,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: (github.event_name == 'push' || github.event_name == 'schedule') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     needs: build
     runs-on: ubuntu-latest
     permissions:

@@ -55,6 +55,8 @@ common:
   schedule_label: "Schedule:"
   view_details: "View details"
   rsvp: "Subscribe"
+  past_event: "Past event"
+  upcoming_soon: "Coming up"
   contact_action: "Contact"
   switch_lang: "PT"
   switch_lang_aria: "Switch language"

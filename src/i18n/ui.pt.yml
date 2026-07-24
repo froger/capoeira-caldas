@@ -55,6 +55,8 @@ common:
   schedule_label: "Horário:"
   view_details: "Ver detalhes"
   rsvp: "Inscrever-se"
+  past_event: "Evento passado"
+  upcoming_soon: "Em breve"
   contact_action: "Contactar"
   switch_lang: "EN"
   switch_lang_aria: "Mudar idioma"

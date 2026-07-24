@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { eventDetailPath } from '../../lib/events';
+import { eventDetailPath, isPastEvent, isSoonEvent } from '../../lib/events';
 import { t } from '../../lib/i18n';
 
 interface Props {
@@ -14,24 +14,43 @@ const sorted = [...events].sort((a, b) => b.data.date.getTime() - a.data.date.ge
 ---
 
 <ul class="space-y-4">
-  {sorted.map((event) => (
-    <li id={event.id} class="scroll-mt-24">
-      <a
-        href={eventDetailPath(locale, event.id)}
-        class="card bg-base-100 shadow-md block hover:shadow-lg transition-shadow"
-      >
-        <div class="card-body gap-1 py-5">
-          <h3 class="card-title font-display text-xl">{event.data.title}</h3>
-          <p class="text-base text-verde-brasil font-semibold">
-            {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
-          </p>
-          <p class="mt-1">{event.data.description}</p>
-          <p class="text-base">📍 {event.data.location}</p>
-          <span class="btn btn-sm bg-verde-brasil text-white border-none w-fit mt-3 pointer-events-none">
-            {detailsLabel}
-          </span>
-        </div>
-      </a>
-    </li>
-  ))}
+  {sorted.map((event) => {
+    const past = isPastEvent(event.data.date);
+    const soon = isSoonEvent(event.data.date);
+    return (
+      <li id={event.id} class="scroll-mt-24">
+        <a
+          href={eventDetailPath(locale, event.id)}
+          class:list={[
+            'card shadow-md block transition-all duration-300',
+            past && 'bg-base-200 opacity-70 hover:shadow-md',
+            soon && 'bg-amarelo-sol/20 ring-2 ring-verde-brasil scale-[1.02] shadow-lg hover:shadow-xl hover:scale-[1.03]',
+            !past && !soon && 'bg-base-100 hover:shadow-lg',
+          ]}
+        >
+          <div class="card-body gap-1 py-5">
+            {soon && (
+              <p class="text-sm font-semibold uppercase tracking-wide text-verde-brasil">
+                {t(locale, 'common.upcoming_soon')}
+              </p>
+            )}
+            {past && (
+              <p class="text-sm font-semibold uppercase tracking-wide text-terra-cota">
+                {t(locale, 'common.past_event')}
+              </p>
+            )}
+            <h3 class="card-title font-display text-xl">{event.data.title}</h3>
+            <p class="text-base text-verde-brasil font-semibold">
+              {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
+            </p>
+            <p class="mt-1">{event.data.description}</p>
+            <p class="text-base">📍 {event.data.location}</p>
+            <span class="btn btn-sm bg-verde-brasil text-white border-none w-fit mt-3 pointer-events-none">
+              {detailsLabel}
+            </span>
+          </div>
+        </a>
+      </li>
+    );
+  })}
 </ul>
