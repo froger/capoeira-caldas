@@ -46,7 +46,7 @@ const socials = [
 ].filter((s) => Boolean(s.href));
 ---
 
-<footer class="bg-deep-blue text-white py-16">
+<footer class="mt-32 bg-deep-blue text-white py-16">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <div>
@@ -61,7 +61,7 @@ const socials = [
         <p class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.contact_title')}</p>
         <ul class="space-y-2 text-base text-white/80 mb-6">
           <li><a href={`mailto:${site.contact.email}`} class="hover:text-amarelo-sol">{site.contact.email}</a></li>
-          <li><a href={`https://wa.me/${site.contact.whatsapp}`} class="hover:text-amarelo-sol">WhatsApp</a></li>
+          <li><a href={site.contact.whatsapp} class="hover:text-amarelo-sol">WhatsApp</a></li>
           <li>{site.contact.phone}</li>
           <li>{site.contact.address}, {site.contact.city}</li>
         </ul>

@@ -9,7 +9,7 @@ const locale = 'en';
 const program = getClassProgram(locale, 'kids')!;
 const pricing = getPricing(locale, 'kids');
 const site = getSite(locale);
-const ctaHref = program.registration_url || `https://wa.me/${site.contact.whatsapp}`;
+const ctaHref = program.registration_url || site.contact.whatsapp;
 ---
 
 <PageLayout

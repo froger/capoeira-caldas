@@ -30,6 +30,7 @@ export interface ScheduleClass {
   level: string;
   instructor: string;
   location: string;
+  audience?: PricingAudience;
 }
 
 export interface Instructor {

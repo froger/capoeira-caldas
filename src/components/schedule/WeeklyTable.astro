@@ -1,6 +1,6 @@
 ---
 import type { ScheduleClass } from '../../lib/types';
-import { t } from '../../lib/i18n';
+import { getRoutes, t } from '../../lib/i18n';
 
 interface Props {
   classes: ScheduleClass[];
@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { classes, locale } = Astro.props;
+const routes = getRoutes(locale);
 ---
 
 <div class="overflow-x-auto">
@@ -22,15 +23,30 @@ const { classes, locale } = Astro.props;
       </tr>
     </thead>
     <tbody>
-      {classes.map((c) => (
-        <tr>
-          <td>{c.day}</td>
-          <td>{c.time}</td>
-          <td>{c.level}</td>
-          <td>{c.instructor}</td>
-          <td>{c.location}</td>
-        </tr>
-      ))}
+      {classes.map((c) => {
+        const audience = c.audience ?? 'adult';
+        const href = audience === 'kids' ? routes.classes_kids : routes.classes_adults;
+        const label = audience === 'kids'
+          ? t(locale, 'home.schedule_tab_kids')
+          : t(locale, 'home.schedule_tab_adults');
+        return (
+          <tr>
+            <td>{c.day}</td>
+            <td>{c.time}</td>
+            <td>{c.level}</td>
+            <td>{c.instructor}</td>
+            <td>
+              <div>{c.location}</div>
+              <a
+                href={href}
+                class="badge badge-sm bg-verde-brasil text-white border-none mt-1 hover:opacity-90 transition-opacity"
+              >
+                {label}
+              </a>
+            </td>
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 </div>

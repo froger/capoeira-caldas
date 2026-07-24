@@ -15,20 +15,6 @@ const routes = getRoutes(locale);
 <section class="py-20 bg-cream reveal">
   <div class="container mx-auto px-4">
     <h2 class="text-3xl sm:text-4xl font-display text-azul-celeste mb-6">{t(locale, 'home.schedule_title')}</h2>
-    <div class="flex flex-wrap gap-3 mb-8">
-      <a
-        href={routes.classes_kids}
-        class="badge badge-lg bg-verde-brasil text-white border-none px-4 py-3 text-base hover:opacity-90 transition-opacity"
-      >
-        {t(locale, 'home.schedule_tab_kids')}
-      </a>
-      <a
-        href={routes.classes_adults}
-        class="badge badge-lg bg-verde-brasil text-white border-none px-4 py-3 text-base hover:opacity-90 transition-opacity"
-      >
-        {t(locale, 'home.schedule_tab_adults')}
-      </a>
-    </div>
     <div class="overflow-x-auto bg-base-100 border border-base-300 rounded-box mb-6">
       <table class="table">
         <thead>
@@ -40,14 +26,29 @@ const routes = getRoutes(locale);
           </tr>
         </thead>
         <tbody>
-          {schedule.classes.map((c) => (
-            <tr>
-              <td>{c.day}</td>
-              <td>{c.time}</td>
-              <td>{c.level}</td>
-              <td>{c.location}</td>
-            </tr>
-          ))}
+          {schedule.classes.map((c) => {
+            const audience = c.audience ?? 'adult';
+            const href = audience === 'kids' ? routes.classes_kids : routes.classes_adults;
+            const label = audience === 'kids'
+              ? t(locale, 'home.schedule_tab_kids')
+              : t(locale, 'home.schedule_tab_adults');
+            return (
+              <tr>
+                <td>{c.day}</td>
+                <td>{c.time}</td>
+                <td>{c.level}</td>
+                <td>
+                  <div>{c.location}</div>
+                  <a
+                    href={href}
+                    class="badge badge-sm bg-verde-brasil text-white border-none mt-1 hover:opacity-90 transition-opacity"
+                  >
+                    {label}
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

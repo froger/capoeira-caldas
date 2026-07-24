@@ -12,7 +12,7 @@ const { items, locale } = Astro.props;
 const site = getSite(locale);
 const openLabel = t(locale, 'common.view_details');
 const contactLabel = t(locale, 'common.contact_action');
-const contactHref = `https://wa.me/${site.contact.whatsapp}`;
+const contactHref = site.contact.whatsapp;
 ---
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id="gallery-grid">

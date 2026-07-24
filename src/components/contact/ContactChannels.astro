@@ -9,7 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const site = getSite(locale);
-const waHref = `https://wa.me/${site.contact.whatsapp}`;
+const waHref = site.contact.whatsapp;
 ---
 
 <div class="space-y-6">

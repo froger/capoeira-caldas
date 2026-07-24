@@ -10,7 +10,7 @@ interface Props {
 
 const { plans, locale, ctaHref } = Astro.props;
 const site = getSite(locale);
-const defaultHref = `https://wa.me/${site.contact.whatsapp}`;
+const defaultHref = site.contact.whatsapp;
 const href = ctaHref || defaultHref;
 ---
 
