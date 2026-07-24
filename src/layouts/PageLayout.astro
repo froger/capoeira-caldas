@@ -2,6 +2,14 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import type { Locale } from '../lib/types';
+import { getSite } from '../lib/data';
+import { withBase } from '../lib/paths';
+import {
+  absoluteUrl,
+  breadcrumbSchema,
+  webPageSchema,
+  type JsonLd,
+} from '../lib/seo';
 
 interface Props {
   title: string;
@@ -9,12 +17,48 @@ interface Props {
   locale?: Locale;
   path?: string;
   breadcrumbs?: { label: string; href?: string }[];
+  pageType?: string;
+  jsonLd?: JsonLd | JsonLd[];
+  ogImage?: string;
 }
 
-const { title, description, locale = 'pt', path = '/', breadcrumbs = [] } = Astro.props;
+const {
+  title,
+  description,
+  locale = 'pt',
+  path = '/',
+  breadcrumbs = [],
+  pageType = 'WebPage',
+  jsonLd = [],
+  ogImage,
+} = Astro.props;
+
+const site = getSite(locale);
+const siteOrigin = Astro.site ?? 'http://127.0.0.1:4321';
+const desc = description ?? site.description;
+const pageUrl = absoluteUrl(path, siteOrigin);
+const siteUrl = absoluteUrl('/', siteOrigin);
+const crumbItems = breadcrumbs.map((item) => ({
+  ...item,
+  href: item.href ? withBase(item.href) : item.href,
+}));
+
+const page = webPageSchema({
+  title,
+  description: desc,
+  url: pageUrl,
+  locale,
+  siteName: site.name,
+  siteUrl,
+  type: pageType,
+});
+
+const crumbs = breadcrumbSchema(crumbItems, siteOrigin);
+const extra = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const schemas = [page, ...(crumbs ? [crumbs] : []), ...extra];
 ---
 
-<BaseLayout title={title} description={description} locale={locale} path={path}>
-  {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+<BaseLayout title={title} description={desc} locale={locale} path={path} jsonLd={schemas} ogImage={ogImage}>
+  {crumbItems.length > 0 && <Breadcrumbs items={crumbItems} />}
   <slot />
 </BaseLayout>

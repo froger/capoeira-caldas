@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
+import { withBase } from './paths';
 import type {
   ClassProgram,
   FaqItem,
@@ -21,8 +22,22 @@ function loadYaml<T>(filename: string): T {
   return parse(content) as T;
 }
 
+function asset(path?: string): string {
+  return path ? withBase(path) : '';
+}
+
 export function getSite(locale: 'pt' | 'en'): SiteConfig {
-  return loadYaml<SiteConfig>(`site.${locale}.yml`);
+  const site = loadYaml<SiteConfig>(`site.${locale}.yml`);
+  return {
+    ...site,
+    positioning: {
+      ...site.positioning,
+      value_themes: site.positioning.value_themes.map((theme) => ({
+        ...theme,
+        image: theme.image ? asset(theme.image) : theme.image,
+      })),
+    },
+  };
 }
 
 export function getSchedule(locale: 'pt' | 'en'): { classes: ScheduleClass[] } {
@@ -30,11 +45,23 @@ export function getSchedule(locale: 'pt' | 'en'): { classes: ScheduleClass[] } {
 }
 
 export function getInstructors(locale: 'pt' | 'en'): { instructors: Instructor[] } {
-  return loadYaml(`instructors.${locale}.yml`);
+  const data = loadYaml<{ instructors: Instructor[] }>(`instructors.${locale}.yml`);
+  return {
+    instructors: data.instructors.map((inst) => ({
+      ...inst,
+      photo: asset(inst.photo),
+    })),
+  };
 }
 
 export function getTestimonials(locale: 'pt' | 'en'): { testimonials: Testimonial[] } {
-  return loadYaml(`testimonials.${locale}.yml`);
+  const data = loadYaml<{ testimonials: Testimonial[] }>(`testimonials.${locale}.yml`);
+  return {
+    testimonials: data.testimonials.map((item) => ({
+      ...item,
+      avatar: asset(item.avatar),
+    })),
+  };
 }
 
 export function getPricing(
@@ -48,7 +75,14 @@ export function getPricing(
 }
 
 export function getGallery(locale: 'pt' | 'en'): { items: GalleryItem[] } {
-  return loadYaml(`gallery.${locale}.yml`);
+  const data = loadYaml<{ items: GalleryItem[] }>(`gallery.${locale}.yml`);
+  return {
+    items: data.items.map((item) => ({
+      ...item,
+      src: asset(item.src),
+      images: item.images.map((img) => asset(img)),
+    })),
+  };
 }
 
 export function getFaq(locale: 'pt' | 'en'): { items: FaqItem[] } {
@@ -56,7 +90,14 @@ export function getFaq(locale: 'pt' | 'en'): { items: FaqItem[] } {
 }
 
 export function getClasses(locale: 'pt' | 'en'): { programs: ClassProgram[] } {
-  return loadYaml(`classes.${locale}.yml`);
+  const data = loadYaml<{ programs: ClassProgram[] }>(`classes.${locale}.yml`);
+  return {
+    programs: data.programs.map((program) => ({
+      ...program,
+      image: asset(program.image),
+      path: withBase(program.path),
+    })),
+  };
 }
 
 export function getClassProgram(locale: 'pt' | 'en', id: string): ClassProgram | undefined {

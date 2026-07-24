@@ -2,6 +2,7 @@
 import type { Locale } from '../../lib/types';
 import { getInstructors, getSite } from '../../lib/data';
 import { t } from '../../lib/i18n';
+import { withBase } from '../../lib/paths';
 
 interface Props {
   locale: Locale;
@@ -11,7 +12,7 @@ const { locale } = Astro.props;
 const { instructors } = getInstructors(locale);
 const site = getSite(locale);
 const pedrinha = instructors.find((i) => i.id === 'pedrinha');
-const groupImage = '/images/about-associacao-capoeira-caldas-da-rainha.jpg';
+const groupImage = withBase('/images/about-associacao-capoeira-caldas-da-rainha.jpg');
 ---
 
 <section class="py-12 text-white" style="background: linear-gradient(135deg, #1a3328, #224435);">
@@ -21,7 +22,7 @@ const groupImage = '/images/about-associacao-capoeira-caldas-da-rainha.jpg';
   </div>
 </section>
 
-<section class="container mx-auto px-4 py-16 reveal">
+<section class="container mx-auto px-4 py-16">
   <img
     src={groupImage}
     alt={t(locale, 'pages.about.group_alt')}
@@ -29,6 +30,8 @@ const groupImage = '/images/about-associacao-capoeira-caldas-da-rainha.jpg';
     height="675"
     class="w-full h-auto object-cover mb-12"
     loading="eager"
+    fetchpriority="high"
+    decoding="async"
   />
   <div class="max-w-3xl mx-auto space-y-6 text-lg sm:text-xl leading-relaxed">
     <p>{t(locale, 'pages.about.intro_p1')}</p>
@@ -73,7 +76,7 @@ const groupImage = '/images/about-associacao-capoeira-caldas-da-rainha.jpg';
     {instructors.map((inst) => (
       <div class="card bg-base-100 shadow-md">
         <figure class="px-6 pt-6">
-          <img src={inst.photo} alt={inst.name} class="rounded-xl w-full aspect-square object-cover" loading="lazy" />
+          <img src={inst.photo} alt={inst.name} width="400" height="400" class="rounded-xl w-full aspect-square object-cover" loading="lazy" decoding="async" />
         </figure>
         <div class="card-body">
           <h3 class="font-display text-xl">{inst.name}</h3>

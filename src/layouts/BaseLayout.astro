@@ -2,6 +2,13 @@
 import '../styles/global.css';
 import type { Locale } from '../lib/types';
 import { getSite } from '../lib/data';
+import { alternateLocale, switchLocalePath } from '../lib/i18n';
+import { withBase } from '../lib/paths';
+import {
+  absoluteUrl,
+  organizationSchema,
+  type JsonLd,
+} from '../lib/seo';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 
@@ -10,57 +17,65 @@ interface Props {
   description?: string;
   locale?: Locale;
   path?: string;
+  jsonLd?: JsonLd | JsonLd[];
+  ogImage?: string;
 }
 
-const { title, description, locale = 'pt', path = '/' } = Astro.props;
+const { title, description, locale = 'pt', path = '/', jsonLd = [], ogImage = '/images/og-default.jpg' } = Astro.props;
 const site = getSite(locale);
+const siteOrigin = Astro.site ?? 'http://127.0.0.1:4321';
 const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
 const desc = description ?? site.description;
-const canonical = new URL(path, Astro.site ?? 'https://capoeira.example.org').href;
+const canonical = absoluteUrl(path, siteOrigin);
+const alternatePath = switchLocalePath(locale, path);
+const alternateHref = absoluteUrl(alternatePath, siteOrigin);
+const ogImageUrl = absoluteUrl(ogImage, siteOrigin);
+const homeUrl = absoluteUrl('/', siteOrigin);
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'SportsActivityLocation',
+const org = organizationSchema({
   name: site.name,
   description: site.description,
-  url: Astro.site,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: site.contact.address,
-    addressLocality: site.contact.city,
-  },
-  telephone: site.contact.phone,
+  url: homeUrl,
   email: site.contact.email,
-};
+  phone: site.contact.phone,
+  address: site.contact.address,
+  city: site.contact.city,
+  sameAs: [site.social.instagram, site.social.facebook, site.social.x, site.social.youtube],
+});
+
+const pageSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const schemas = [org, ...pageSchemas];
 ---
 
 <!doctype html>
-<html lang={locale} data-theme="capoeira">
+<html lang={locale === 'pt' ? 'pt-PT' : 'en'} data-theme="capoeira">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="icon" type="image/svg+xml" href="/images/logo_vector.svg" />
-    <link rel="apple-touch-icon" href="/images/logo_vector.svg" />
+    <meta name="theme-color" content="#224435" />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
+    <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === 'pt' ? 'pt-PT' : 'en'} href={canonical} />
+    <link rel="alternate" hreflang={alternateLocale(locale) === 'pt' ? 'pt-PT' : 'en'} href={alternateHref} />
+    <link rel="alternate" hreflang="x-default" href={homeUrl} />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/images/logo_vector.svg', Astro.site ?? 'https://capoeira.example.org').href} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={locale === 'pt' ? 'pt_PT' : 'en_US'} />
+    <meta property="og:site_name" content={site.name} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {schemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body class="min-h-screen flex flex-col">
     <Navbar locale={locale} currentPath={path} />

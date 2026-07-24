@@ -66,6 +66,7 @@ common:
 pages:
   classes:
     title: "Nossas Aulas"
+    description: "Aulas de Capoeira Angola para crianças e adultos em Caldas da Rainha e Gaeiras — horários, preços e o que trazer."
     subtitle: "Encontre a turma perfeita para você"
     pricing: "Preços"
     bring: "O que trazer"
@@ -87,19 +88,23 @@ pages:
     intro_p4: "No Centro Cultural Capoeira Caldas, todos são bem-vindos. Juntos, construímos uma comunidade onde a cultura, o conhecimento e a união caminham lado a lado."
   contact:
     title: "Contato"
+    description: "Contacta a Associação Capoeira Caldas por WhatsApp, email ou visita-nos em Caldas da Rainha."
     intro: "Escreve-nos por WhatsApp ou email."
     whatsapp_cta: "Entrar no WhatsApp"
     email_cta: "Enviar email"
     address_label: "Morada"
   gallery:
     title: "Galeria"
+    description: "Galeria de instrumentos e material de Capoeira Angola — berimbau, atabaque, pandeiro e mais."
     intro: "Instrumentos e material de capoeira. Abra cada item para ver mais fotos e contacte-nos para encomendar."
   schedule:
     title: "Calendário"
+    description: "Horários das aulas de Capoeira Angola e próximos eventos em Caldas da Rainha e Gaeiras."
     heading: "Horários das Aulas"
     events: "Próximos Eventos"
   privacy:
     title: "Política de Privacidade"
+    description: "Política de privacidade da Associação Capoeira Caldas — sem cookies de análise nem partilha de dados para marketing."
     p1: "A Associação Capoeira Caldas não regista nem armazena informação sobre as visitas a este site (não utilizamos cookies de análise, pixels de seguimento nem perfis de navegação)."
     p2: "Os endereços de email e outros dados que nos enviares (WhatsApp ou email) são usados apenas para responder ao teu pedido. Não os partilhamos com terceiros para marketing."
     p3: "Se tiver questões sobre privacidade, contacte-nos em"

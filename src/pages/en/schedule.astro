@@ -13,6 +13,7 @@ const events = (await getCollection('events')).filter((e) => e.data.locale === '
 
 <PageLayout
   title={t(locale, 'pages.schedule.title')}
+  description={t(locale, 'pages.schedule.description')}
   locale={locale}
   path="/en/schedule"
   breadcrumbs={[{ label: t(locale, 'common.home'), href: '/en/' }, { label: t(locale, 'pages.schedule.title') }]}

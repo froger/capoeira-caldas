@@ -5,6 +5,17 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+    inputs:
+      site:
+        description: "Canonical origin (no path), e.g. https://froger.github.io or https://www.example.org"
+        required: false
+        type: string
+        default: ""
+      base_path:
+        description: "URL base path, e.g. /capoeira-caldas/ (project Pages) or / (custom domain / user site)"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -20,11 +31,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve SITE and BASE_PATH
+        env:
+          INPUT_SITE: ${{ github.event.inputs.site }}
+          INPUT_BASE_PATH: ${{ github.event.inputs.base_path }}
+          VAR_SITE: ${{ vars.SITE }}
+          VAR_BASE_PATH: ${{ vars.BASE_PATH }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: ./scripts/resolve-site-env.sh >> "$GITHUB_ENV"
+
       - name: Build in Docker
         run: docker compose -f docker/docker-compose.yml run --rm build
+        env:
+          SITE: ${{ env.SITE }}
+          BASE_PATH: ${{ env.BASE_PATH }}
 
       - name: Smoke test
         run: ./scripts/smoke.sh
+        env:
+          SITE: ${{ env.SITE }}
+          BASE_PATH: ${{ env.BASE_PATH }}
 
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
@@ -39,8 +66,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve SITE and BASE_PATH
+        env:
+          INPUT_SITE: ${{ github.event.inputs.site }}
+          INPUT_BASE_PATH: ${{ github.event.inputs.base_path }}
+          VAR_SITE: ${{ vars.SITE }}
+          VAR_BASE_PATH: ${{ vars.BASE_PATH }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: ./scripts/resolve-site-env.sh >> "$GITHUB_ENV"
+
       - name: Run Playwright screenshots
         run: docker compose -f docker/docker-compose.yml run --rm test-screenshots
+        env:
+          SITE: ${{ env.SITE }}
+          BASE_PATH: ${{ env.BASE_PATH }}
 
       - uses: actions/upload-artifact@v4
         if: failure()

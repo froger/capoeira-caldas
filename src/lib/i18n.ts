@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
 import type { Locale } from './types';
+import { withBase } from './paths';
 
 const i18nDir = resolve(process.cwd(), 'src/i18n');
 
@@ -38,29 +39,42 @@ export function getNav(locale: Locale) {
 
 export function getRoutes(locale: Locale): Record<string, string> {
   const dict = loadUi(locale);
-  return (dict.routes as Record<string, string>) ?? {};
+  const routes = (dict.routes as Record<string, string>) ?? {};
+  return Object.fromEntries(
+    Object.entries(routes).map(([key, value]) => [key, withBase(value)]),
+  );
 }
 
 export function alternateLocale(current: Locale): Locale {
   return current === 'pt' ? 'en' : 'pt';
 }
 
+/** Strip Astro base prefix so locale switching can match logical routes. */
+function logicalPath(path: string): string {
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  let value = path;
+  if (base && value.startsWith(base)) {
+    value = value.slice(base.length) || '/';
+  }
+  return value.replace(/\/$/, '') || '/';
+}
+
 /** Map a path to the other locale using matching keys in ui.*.yml `routes`. */
 export function switchLocalePath(current: Locale, currentPath: string): string {
-  const from = getRoutes(current);
+  const from = loadUi(current).routes as Record<string, string>;
   const to = getRoutes(alternateLocale(current));
-  const normalized = currentPath.replace(/\/$/, '') || '/';
+  const normalized = logicalPath(currentPath);
 
-  for (const [key, path] of Object.entries(from)) {
+  for (const [key, path] of Object.entries(from ?? {})) {
     const routePath = path.replace(/\/$/, '') || '/';
     if (routePath === normalized) {
-      return to[key] ?? (current === 'pt' ? `/en${normalized === '/' ? '/' : normalized}` : '/');
+      return to[key] ?? withBase(current === 'pt' ? (normalized === '/' ? '/en/' : `/en${normalized}`) : '/');
     }
   }
 
   if (current === 'pt') {
-    return normalized === '/' ? '/en/' : `/en${normalized}`;
+    return withBase(normalized === '/' ? '/en/' : `/en${normalized}`);
   }
   const stripped = normalized.replace(/^\/en/, '') || '/';
-  return stripped;
+  return withBase(stripped);
 }

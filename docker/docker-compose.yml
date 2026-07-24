@@ -4,6 +4,9 @@ services:
     working_dir: /app
     volumes:
       - ..:/app
+    environment:
+      SITE: ${SITE:-}
+      BASE_PATH: ${BASE_PATH:-}
     command: sh -c "npm ci && npm run build"
 
   dev:
@@ -13,6 +16,9 @@ services:
       - ..:/app
     ports:
       - "4321:4321"
+    environment:
+      SITE: ${SITE:-}
+      BASE_PATH: ${BASE_PATH:-}
     command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
     stdin_open: true
     tty: true
@@ -24,6 +30,9 @@ services:
       - ..:/app
     ports:
       - "4321:4321"
+    environment:
+      SITE: ${SITE:-}
+      BASE_PATH: ${BASE_PATH:-}
     command: sh -c "npm ci && npm run build && npm run preview -- --host 0.0.0.0"
 
   test-screenshots:
@@ -31,4 +40,7 @@ services:
     working_dir: /app
     volumes:
       - ..:/app
+    environment:
+      SITE: ${SITE:-}
+      BASE_PATH: ${BASE_PATH:-}
     command: sh -c "npm ci && npx playwright install chromium && npm run build && npm run test:screenshots"

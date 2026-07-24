@@ -12,8 +12,10 @@ const faq = getFaq(locale);
 
 <PageLayout
   title={t(locale, 'pages.contact.title')}
+  description={t(locale, 'pages.contact.description')}
   locale={locale}
   path="/contato"
+  pageType="ContactPage"
   breadcrumbs={[{ label: t(locale, 'common.home'), href: '/' }, { label: t(locale, 'pages.contact.title') }]}
 >
   <section class="container mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12">

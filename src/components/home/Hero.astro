@@ -3,6 +3,7 @@ import WaveDivider from '../decor/WaveDivider.astro';
 import type { Locale } from '../../lib/types';
 import { getSite } from '../../lib/data';
 import { getRoutes, t } from '../../lib/i18n';
+import { withBase } from '../../lib/paths';
 
 interface Props {
   locale: Locale;
@@ -14,23 +15,36 @@ const routes = getRoutes(locale);
 const contactPath = routes.contact;
 const headline = t(locale, 'home.hero_headline');
 const subhead = t(locale, 'home.hero_subhead');
+const poster = withBase('/images/hero-poster.jpg');
+const videoSrc = withBase('/video/background-video.mp4');
 ---
 
 <section class="relative min-h-[85vh] sm:min-h-screen overflow-hidden flex items-center">
+  <img
+    src={poster}
+    alt=""
+    width="464"
+    height="832"
+    class="absolute inset-0 h-full w-full object-cover"
+    fetchpriority="high"
+    decoding="async"
+  />
   <video
     class="absolute inset-0 h-full w-full object-cover"
     autoplay
     muted
     loop
     playsinline
-    preload="metadata"
+    preload="none"
+    poster={poster}
     aria-hidden="true"
+    data-hero-video
   >
-    <source src="/video/background-video.mp4" type="video/mp4" />
+    <source data-src={videoSrc} type="video/mp4" />
   </video>
   <div class="absolute inset-0 bg-[#224435]/65"></div>
 
-  <div class="container mx-auto px-4 py-20 sm:py-24 relative z-10 max-w-4xl text-white reveal">
+  <div class="container mx-auto px-4 py-20 sm:py-24 relative z-10 max-w-4xl text-white">
     <p class="font-display text-2xl sm:text-4xl text-amarelo-sol mb-3 hidden sm:block">{site.name}</p>
     <h1 class="text-3xl sm:text-5xl lg:text-7xl font-display leading-tight mb-6">{headline}</h1>
     <p class="text-lg sm:text-2xl text-white/95 mb-8 sm:mb-10 max-w-2xl leading-relaxed">{subhead}</p>
@@ -53,3 +67,23 @@ const subhead = t(locale, 'home.hero_subhead');
     <WaveDivider />
   </div>
 </section>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const source = video.querySelector('source');
+    const src = source?.dataset.src;
+    if (source && src) {
+      const load = () => {
+        source.src = src;
+        video.load();
+        void video.play().catch(() => {});
+      };
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(load, { timeout: 2000 });
+      } else {
+        window.addEventListener('load', () => setTimeout(load, 200));
+      }
+    }
+  }
+</script>
