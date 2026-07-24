@@ -1,13 +1,11 @@
 instructors:
   - id: marcelo
     name: "Mestre Marcelo"
-    graduation: "Mestre"
     bio: "Mestre Marcelo lidera a Associação Capoeira Caldas com experiência e paixão pela Capoeira Angola."
     bio_short: "Liderança e tradição na Capoeira Angola."
     photo: "/images/mestre_marcelo.jpeg"
   - id: pedrinha
     name: "Treinel Pedrinha"
-    graduation: "Treinel"
     bio: "Da Suécia, viveu na Austrália e treina desde criança com Mestre Marcelo. Em 2025 abriu o grupo em Caldas da Rainha. Ama acrobacias e é conhecida pela sua Capoeira."
     bio_short: "Abriu o grupo em Caldas em 2025. Ama acrobacias."
     photo: "/images/roda_pedrinha.jpg"
