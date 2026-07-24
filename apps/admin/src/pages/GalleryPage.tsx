@@ -4,6 +4,7 @@ import { useDirtyForm } from '../shared/dirtyForm';
 import type { GalleryFile, SyncResult } from '../core/schemas';
 import { PageShell } from '../components/PageShell';
 import { SaveButton } from '../components/SaveButton';
+import { ConfirmDialog } from '../components/ConfirmDialog';
 import { ipcError } from '../components/PairedTermsEditor';
 
 type Props = {
@@ -23,6 +24,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [picking, setPicking] = useState(false);
+  const [pendingRemove, setPendingRemove] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -118,6 +120,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
     const next = item.images.filter((p) => p !== path);
     const src = item.src === path ? (next[0] ?? '') : item.src;
     patchShared({ images: next, src });
+    setPendingRemove(null);
   }
 
   function setAsCover(path: string) {
@@ -130,6 +133,16 @@ export function GalleryPage({ onResult, onSaved }: Props) {
       actions={<SaveButton dirty={form.dirty} saving={saving} onSave={() => void save()} />}
     >
       {loadError ? <p className="error">{loadError}</p> : null}
+      <ConfirmDialog
+        open={Boolean(pendingRemove)}
+        title="Remove image?"
+        message={`Remove “${pendingRemove?.split('/').pop() ?? ''}” from this product? Save to publish.`}
+        confirmLabel="Remove"
+        onCancel={() => setPendingRemove(null)}
+        onConfirm={() => {
+          if (pendingRemove) removeImage(pendingRemove);
+        }}
+      />
       <label className="field">
         Item
         <select value={index} onChange={(e) => setIndex(Number(e.target.value))}>
@@ -154,7 +167,12 @@ export function GalleryPage({ onResult, onSaved }: Props) {
               <code>{item.src || '—'}</code>
             </label>
             <div className="row">
-              <button type="button" disabled={picking} onClick={() => void addImages()}>
+              <button
+                type="button"
+                className="btn btn-new"
+                disabled={picking}
+                onClick={() => void addImages()}
+              >
                 {picking ? 'Opening…' : 'Add images…'}
               </button>
             </div>
@@ -169,10 +187,14 @@ export function GalleryPage({ onResult, onSaved }: Props) {
                   <figcaption>
                     <code>{path.split('/').pop()}</code>
                     <div className="row">
-                      <button type="button" className="ghost" onClick={() => setAsCover(path)}>
+                      <button type="button" className="btn btn-ghost" onClick={() => setAsCover(path)}>
                         Cover
                       </button>
-                      <button type="button" className="danger" onClick={() => removeImage(path)}>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => setPendingRemove(path)}
+                      >
                         Remove
                       </button>
                     </div>

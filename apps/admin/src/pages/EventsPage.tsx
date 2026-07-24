@@ -4,6 +4,7 @@ import { useDirtyForm } from '../shared/dirtyForm';
 import type { EventDoc, SyncResult } from '../core/schemas';
 import { PageShell } from '../components/PageShell';
 import { SaveButton } from '../components/SaveButton';
+import { ConfirmDialog } from '../components/ConfirmDialog';
 
 type Props = {
   onResult: (r: SyncResult) => void;
@@ -33,6 +34,7 @@ export function EventsPage({ onResult, onSaved }: Props) {
     en: blank('new', 'en'),
   });
   const [saving, setSaving] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   async function refresh() {
     const list = await api('content.listEvents');
@@ -76,6 +78,7 @@ export function EventsPage({ onResult, onSaved }: Props) {
       const result = await api('content.deleteEvent', { slug: selected });
       onResult(result);
       if (result.kind === 'ok') {
+        setConfirmDelete(false);
         setSelected('');
         onSaved();
         await refresh();
@@ -97,16 +100,32 @@ export function EventsPage({ onResult, onSaved }: Props) {
       title="Events"
       actions={
         <>
-          <button type="button" onClick={newEvent}>
+          <button type="button" className="btn btn-new" onClick={newEvent}>
             New
           </button>
-          <button type="button" className="danger" disabled={!selected || saving} onClick={() => void remove()}>
+          <span className="action-sep" aria-hidden="true" />
+          <button
+            type="button"
+            className="btn btn-danger"
+            disabled={!selected || saving}
+            onClick={() => setConfirmDelete(true)}
+          >
             Delete
           </button>
+          <span className="action-sep" aria-hidden="true" />
           <SaveButton dirty={form.dirty} saving={saving} onSave={() => void save()} />
         </>
       }
     >
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Delete event?"
+        message={`Delete “${selected}” in PT and EN? This will publish the removal.`}
+        confirmLabel="Delete"
+        busy={saving}
+        onCancel={() => setConfirmDelete(false)}
+        onConfirm={() => void remove()}
+      />
       <div className="row">
         <label>
           Event

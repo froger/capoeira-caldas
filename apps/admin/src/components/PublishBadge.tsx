@@ -40,14 +40,14 @@ export function ConflictDialog({ conflict, onChoose, onClose }: ConflictProps) {
           <code>{conflict.remoteSha.slice(0, 7)}</code>
         </p>
         <p>Force-push your version, or discard local and take remote?</p>
-        <div className="row">
-          <button type="button" onClick={() => onChoose('force-push-mine')}>
+        <div className="row modal-actions">
+          <button type="button" className="btn btn-save" onClick={() => onChoose('force-push-mine')}>
             Force-push my version
           </button>
-          <button type="button" onClick={() => onChoose('discard-local')}>
+          <button type="button" className="btn btn-danger" onClick={() => onChoose('discard-local')}>
             Discard local
           </button>
-          <button type="button" className="ghost" onClick={onClose}>
+          <button type="button" className="btn btn-ghost" onClick={onClose}>
             Cancel
           </button>
         </div>

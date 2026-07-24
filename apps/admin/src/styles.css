@@ -24,22 +24,68 @@ body {
   gap: 0.35rem;
 }
 .nav h1 { font-size: 1rem; margin: 0 0 0.75rem; }
-.nav button, .page-actions button, .login button {
+.nav button, .page-actions .btn, .login button, .modal-actions .btn, .thumb .btn {
   appearance: none;
   border: 1px solid transparent;
   background: #292524;
-  color: inherit;
-  text-align: left;
-  padding: 0.45rem 0.6rem;
+  color: #fafaf9;
+  text-align: center;
+  padding: 0.45rem 0.75rem;
   border-radius: 6px;
   cursor: pointer;
+  font: inherit;
 }
-.nav button.active, .page-actions button:not(:disabled), .login button {
+.nav button { text-align: left; color: inherit; }
+.nav button.active, .login button {
   background: var(--accent);
+  color: #fff;
+}
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.page-actions .action-sep {
+  width: 1px;
+  align-self: stretch;
+  min-height: 1.75rem;
+  background: var(--line);
+  margin: 0 0.35rem;
+}
+.page-actions .btn-new {
+  background: #44403c;
+  color: #fafaf9;
+}
+.page-actions .btn-danger,
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+.page-actions .btn-save,
+.btn-save {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.page-actions .btn-save:disabled,
+.btn-save:disabled {
+  background: #a8a29e;
+  color: #fff;
+  opacity: 1;
+}
+.btn-ghost,
+button.ghost {
+  background: transparent !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+.nav button.ghost {
+  border-color: #57534e !important;
+  color: #fafaf9 !important;
 }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
-button.ghost { background: transparent; border-color: #57534e; }
-button.danger { background: var(--danger); }
+button.danger { background: var(--danger); color: #fff; }
 main { padding: 1.25rem; }
 .page-header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
 .locale-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -128,7 +174,8 @@ main { padding: 1.25rem; }
   position: fixed; inset: 0; background: rgba(0,0,0,.45);
   display: grid; place-items: center;
 }
-.modal-body { background: #fff; padding: 1.25rem; border-radius: 10px; max-width: 28rem; }
+.modal-body { background: #fff; padding: 1.25rem; border-radius: 10px; max-width: 28rem; color: var(--ink); }
+.modal-actions { justify-content: flex-end; margin-top: 1rem; }
 .row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
 fieldset { border: 1px solid var(--line); margin-bottom: 0.75rem; border-radius: 8px; }
 @media (max-width: 900px) {
