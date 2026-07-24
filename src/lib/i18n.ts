@@ -1,19 +1,30 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
 import type { Locale } from './types';
 import { withBase } from './paths';
 
 const i18nDir = resolve(process.cwd(), 'src/i18n');
+const pagesDir = join(i18nDir, 'pages');
 
-type UiDict = Record<string, string | Record<string, string>>;
+type UiDict = Record<string, unknown>;
 
 const cache: Partial<Record<Locale, UiDict>> = {};
 
+function loadYamlFile(path: string): UiDict {
+  return parse(readFileSync(path, 'utf-8')) as UiDict;
+}
+
 function loadUi(locale: Locale): UiDict {
   if (!cache[locale]) {
-    const content = readFileSync(join(i18nDir, `ui.${locale}.yml`), 'utf-8');
-    cache[locale] = parse(content) as UiDict;
+    const site = loadYamlFile(join(i18nDir, `site.${locale}.yml`));
+    const pages: Record<string, unknown> = {};
+    for (const file of readdirSync(pagesDir)) {
+      const match = file.match(new RegExp(`^(.+)\\.${locale}\\.yml$`));
+      if (!match) continue;
+      pages[match[1]] = loadYamlFile(join(pagesDir, file));
+    }
+    cache[locale] = { ...site, pages };
   }
   return cache[locale]!;
 }
@@ -59,7 +70,7 @@ function logicalPath(path: string): string {
   return value.replace(/\/$/, '') || '/';
 }
 
-/** Map a path to the other locale using matching keys in ui.*.yml `routes`. */
+/** Map a path to the other locale using matching keys in site.*.yml `routes`. */
 export function switchLocalePath(current: Locale, currentPath: string): string {
   const from = loadUi(current).routes as Record<string, string>;
   const to = getRoutes(alternateLocale(current));

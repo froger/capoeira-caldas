@@ -1,10 +1,12 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
 
 const root = resolve(process.cwd());
 const dataDir = join(root, 'src/data');
 const i18nDir = join(root, 'src/i18n');
+const pagesDir = join(i18nDir, 'pages');
+const PAGE_NAMES = ['classes', 'about', 'contact', 'gallery', 'schedule', 'privacy'];
 
 let errors = 0;
 
@@ -26,6 +28,20 @@ function flattenKeys(obj, prefix = '') {
     else keys.push(path);
   }
   return keys;
+}
+
+function loadMergedUi(locale) {
+  const site = loadYaml(join(i18nDir, `site.${locale}.yml`));
+  const pages = {};
+  for (const name of PAGE_NAMES) {
+    const path = join(pagesDir, `${name}.${locale}.yml`);
+    if (!existsSync(path)) {
+      fail(`missing ${path}`);
+      continue;
+    }
+    pages[name] = loadYaml(path);
+  }
+  return { ...site, pages };
 }
 
 for (const file of [
@@ -58,16 +74,16 @@ for (const [label, site] of [['site.pt.yml', sitePt], ['site.en.yml', siteEn]]) 
   if (!site.social?.x && site.social?.x !== '') fail(`${label} missing social.x`);
 }
 
-const uiPt = loadYaml(join(i18nDir, 'ui.pt.yml'));
-const uiEn = loadYaml(join(i18nDir, 'ui.en.yml'));
+const uiPt = loadMergedUi('pt');
+const uiEn = loadMergedUi('en');
 
 const ptKeys = new Set(flattenKeys(uiPt));
 const enKeys = new Set(flattenKeys(uiEn));
 for (const key of ptKeys) {
-  if (!enKeys.has(key)) fail(`ui.en.yml missing key ${key}`);
+  if (!enKeys.has(key)) fail(`i18n en missing key ${key}`);
 }
 for (const key of enKeys) {
-  if (!ptKeys.has(key)) fail(`ui.pt.yml missing key ${key}`);
+  if (!ptKeys.has(key)) fail(`i18n pt missing key ${key}`);
 }
 for (const section of ['nav', 'routes', 'footer', 'home', 'common', 'pages']) {
   if (!uiPt[section] || !uiEn[section]) fail(`missing i18n section: ${section}`);
@@ -77,6 +93,18 @@ const ptRouteKeys = Object.keys(uiPt.routes ?? {}).sort().join(',');
 const enRouteKeys = Object.keys(uiEn.routes ?? {}).sort().join(',');
 if (ptRouteKeys !== enRouteKeys) {
   fail(`routes key mismatch pt=[${ptRouteKeys}] en=[${enRouteKeys}]`);
+}
+
+for (const file of readdirSync(pagesDir)) {
+  if (!file.endsWith('.yml')) continue;
+  const match = file.match(/^(.+)\.(pt|en)\.yml$/);
+  if (!match) {
+    fail(`unexpected i18n page file name: ${file}`);
+    continue;
+  }
+  if (!PAGE_NAMES.includes(match[1])) {
+    fail(`unknown i18n page file: ${file}`);
+  }
 }
 
 for (const locale of ['pt', 'en']) {

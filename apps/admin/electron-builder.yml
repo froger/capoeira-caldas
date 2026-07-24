@@ -1,0 +1,20 @@
+appId: com.capoeiracaldas.admin
+productName: Capoeira Admin
+directories:
+  output: release
+files:
+  - dist/**/*
+  - dist-electron/**/*
+asar: true
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Office
+mac:
+  target:
+    - dmg
+  category: public.app-category.productivity
+win:
+  target:
+    - nsis

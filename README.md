@@ -23,7 +23,7 @@ docker compose -f docker/docker-compose.yml run --rm dev
 | Schedule | `src/data/schedule.pt.yml` |
 | Instructors | `src/data/instructors.pt.yml` |
 | Pricing | `src/data/pricing.pt.yml` |
-| UI labels (nav, buttons) | `src/i18n/ui.pt.yml` |
+| UI labels (nav, buttons) | `src/i18n/site.pt.yml` + `src/i18n/pages/*.pt.yml` |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full map.
 

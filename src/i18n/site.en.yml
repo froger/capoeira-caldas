@@ -1,0 +1,62 @@
+nav:
+  capoeira: Capoeira
+  classes: Classes
+  schedule: Schedule
+  gallery: Gallery
+  about: About Us
+  contact: Contact
+routes:
+  home: /en/
+  classes: /en/classes
+  classes_kids: /en/classes/kids
+  classes_adults: /en/classes/adults
+  schedule: /en/schedule
+  gallery: /en/gallery
+  about: /en/about
+  contact: /en/contact
+  privacy: /en/privacy
+footer:
+  links_title: Links
+  contact_title: Contact
+  social_title: Social Media
+  copyright: All rights reserved
+  privacy: Privacy Policy
+home:
+  programs_title: Capoeira for All Ages
+  benefits_title: The benefits of capoeira
+  schedule_title: Class Schedule
+  schedule_tab_kids: Kids
+  schedule_tab_adults: Adults
+  schedule_cta: View events
+  testimonials_title: What Our Students Say
+  instructors_title: Our roda
+  cta_title: 1 free class
+  cta_subtitle: Try a free class and feel the energy of capoeira
+  cta_primary: Contact us
+  cta_secondary: WhatsApp Group
+  trust_1: No commitment
+  trust_2: Classes for all levels
+  trust_3: Family atmosphere
+  hero_headline: Capoeira in Caldas da Rainha
+  hero_subhead: Capoeira Angola for kids and adults in Caldas da Rainha and Gaeiras.
+common:
+  see_more: See more
+  home: Home
+  faq: FAQ
+  day: Day
+  time: Time
+  level: Level
+  instructor: Instructor
+  location: Location
+  schedule_label: "Schedule:"
+  view_details: View details
+  rsvp: Subscribe
+  past_event: Past event
+  upcoming_soon: Coming up
+  contact_action: Contact
+  switch_lang: PT
+  switch_lang_aria: Switch language
+  map: Map
+  menu: Menu
+  email: Email
+  whatsapp: Phone

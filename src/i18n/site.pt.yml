@@ -1,0 +1,62 @@
+nav:
+  capoeira: Capoeira
+  classes: Aulas
+  schedule: Calendário
+  gallery: Galeria
+  about: Sobre Nós
+  contact: Contato
+routes:
+  home: /
+  classes: /aulas
+  classes_kids: /aulas/criancas
+  classes_adults: /aulas/adultos
+  schedule: /calendario
+  gallery: /galeria
+  about: /sobre
+  contact: /contato
+  privacy: /privacidade
+footer:
+  links_title: Links
+  contact_title: Contato
+  social_title: Redes Sociais
+  copyright: Todos os direitos reservados
+  privacy: Política de Privacidade
+home:
+  programs_title: Capoeira para Todos os Idades
+  benefits_title: Os benefícios da capoeira
+  schedule_title: Horários das Aulas
+  schedule_tab_kids: Infantil
+  schedule_tab_adults: Adulto
+  schedule_cta: Ver os eventos
+  testimonials_title: O Que Dizem Nossos Alunos
+  instructors_title: A nossa roda
+  cta_title: 1 aula grátis
+  cta_subtitle: Experimente uma aula gratuita e sinta a energia da capoeira
+  cta_primary: Contacta-nos
+  cta_secondary: Grupo WhatsApp
+  trust_1: Sem compromisso
+  trust_2: Turmas para todos os níveis
+  trust_3: Ambiente familiar
+  hero_headline: Capoeira nas Caldas da Rainha
+  hero_subhead: Capoeira Angola para crianças e adultos em Caldas da Rainha e Gaeiras.
+common:
+  see_more: Ver mais
+  home: Início
+  faq: Perguntas Frequentes
+  day: Dia
+  time: Hora
+  level: Nível
+  instructor: Instrutor
+  location: Local
+  schedule_label: "Horário:"
+  view_details: Ver detalhes
+  rsvp: Inscrever-se
+  past_event: Evento passado
+  upcoming_soon: Em breve
+  contact_action: Contactar
+  switch_lang: EN
+  switch_lang_aria: Mudar idioma
+  map: Mapa
+  menu: Menu
+  email: Email
+  whatsapp: Telefone

@@ -8,7 +8,7 @@ capoeira/
 │   ├── components/     # Astro UI components
 │   ├── content/        # Markdown events
 │   ├── data/           # YAML structured content (edit here!)
-│   ├── i18n/           # UI chrome strings (ui.pt.yml, ui.en.yml)
+│   ├── i18n/           # UI chrome (site.*.yml) + page terms (pages/*)
 │   ├── layouts/        # Page shells
 │   ├── pages/          # Routes (thin — compose components)
 │   └── styles/         # global.css (Tailwind + DaisyUI theme)
