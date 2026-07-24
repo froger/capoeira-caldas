@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Timeline from '../../components/about/Timeline.astro';
+import LineageTree from '../../components/about/LineageTree.astro';
+import StatsCounters from '../../components/about/StatsCounters.astro';
+import { getInstructors } from '../../lib/data';
+
+const locale = 'en';
+const { instructors } = getInstructors(locale);
+---
+
+<PageLayout
+  title="Our History and Philosophy"
+  locale={locale}
+  path="/en/about"
+  breadcrumbs={[{ label: 'Home', href: '/en/' }, { label: 'About Us' }]}
+>
+  <section class="py-12 text-white" style="background: linear-gradient(135deg, #012169, #009739);">
+    <div class="container mx-auto px-4 py-16 text-center">
+      <h1 class="text-5xl font-display mb-4">Our History and Philosophy</h1>
+    </div>
+  </section>
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Our History</h2>
+    <Timeline locale={locale} />
+  </section>
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Our Lineage</h2>
+    <LineageTree locale={locale} />
+  </section>
+  <StatsCounters locale={locale} />
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-8">Our Instructors</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {instructors.map((inst) => (
+        <div class="card bg-base-100 shadow-md">
+          <div class="card-body">
+            <h3 class="font-display text-xl">{inst.name}</h3>
+            <p class="text-sm">{inst.bio}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>

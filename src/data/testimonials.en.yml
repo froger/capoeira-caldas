@@ -1,0 +1,16 @@
+testimonials:
+  - quote: "Capoeira transformed my son's confidence. The musicality and respect in the roda are incredible."
+    name: "Maria Silva"
+    level: "Kids student's mother"
+    rating: 5
+    avatar: "/images/avatar-1.svg"
+  - quote: "I found a family in the roda. Live berimbau makes all the difference — it's not just exercise."
+    name: "Pedro Costa"
+    level: "Adult student — Intermediate"
+    rating: 5
+    avatar: "/images/avatar-2.svg"
+  - quote: "Authentic tradition with mestres who truly live the culture. I recommend it to all families."
+    name: "Carla Mendes"
+    level: "Adult student — Beginner"
+    rating: 5
+    avatar: "/images/avatar-3.svg"

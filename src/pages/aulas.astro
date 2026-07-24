@@ -1,0 +1,44 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ClassCard from '../components/classes/ClassCard.astro';
+import PricingTable from '../components/classes/PricingTable.astro';
+import FAQAccordion from '../components/contact/FAQAccordion.astro';
+import { getClasses, getPricing, getFaq } from '../lib/data';
+
+const locale = 'pt';
+const { programs } = getClasses(locale);
+const pricing = getPricing(locale);
+const faq = getFaq(locale);
+---
+
+<PageLayout
+  title="Nossas Aulas"
+  locale={locale}
+  path="/aulas"
+  breadcrumbs={[{ label: 'Início', href: '/' }, { label: 'Aulas' }]}
+>
+  <section class="py-16 text-white text-center" style="background: linear-gradient(135deg, #012169, #009739);">
+    <div class="container mx-auto px-4">
+      <h1 class="text-5xl font-display mb-4">Nossas Aulas</h1>
+      <p class="text-lg">Encontre a turma perfeita para você</p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16 grid md:grid-cols-3 gap-8 reveal">
+    {programs.map((p) => <ClassCard program={p} locale={locale} />)}
+  </section>
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-8">Preços</h2>
+    <PricingTable plans={pricing.plans} locale={locale} />
+  </section>
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-4">O que trazer</h2>
+    <ul class="list-disc list-inside mb-8">
+      {pricing.bring_items.map((item) => <li>{item}</li>)}
+    </ul>
+    <h2 class="text-3xl font-display text-azul-celeste mb-4">Perguntas Frequentes</h2>
+    <FAQAccordion items={faq.items} />
+  </section>
+</PageLayout>

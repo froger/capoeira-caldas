@@ -1,0 +1,20 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import WeeklyTable from '../../components/schedule/WeeklyTable.astro';
+import EventCards from '../../components/schedule/EventCards.astro';
+import { getSchedule } from '../../lib/data';
+import { getCollection } from 'astro:content';
+
+const locale = 'en';
+const schedule = getSchedule(locale);
+const events = (await getCollection('events')).filter((e) => e.data.locale === 'en');
+---
+
+<PageLayout title="Schedule" locale={locale} path="/en/schedule" breadcrumbs={[{ label: 'Home', href: '/en/' }, { label: 'Schedule' }]}>
+  <section class="container mx-auto px-4 py-16">
+    <h1 class="text-5xl font-display text-azul-celeste mb-8">Class Schedule</h1>
+    <WeeklyTable classes={schedule.classes} locale={locale} />
+    <h2 class="text-3xl font-display text-azul-celeste mb-6 mt-16">Upcoming Events</h2>
+    <EventCards events={events} locale={locale} />
+  </section>
+</PageLayout>

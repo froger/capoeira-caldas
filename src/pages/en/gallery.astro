@@ -1,0 +1,15 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import GalleryGrid from '../../components/gallery/GalleryGrid.astro';
+import { getGallery } from '../../lib/data';
+
+const locale = 'en';
+const { items } = getGallery(locale);
+---
+
+<PageLayout title="Gallery" locale={locale} path="/en/gallery" breadcrumbs={[{ label: 'Home', href: '/en/' }, { label: 'Gallery' }]}>
+  <section class="container mx-auto px-4 py-16">
+    <h1 class="text-5xl font-display text-azul-celeste mb-8">Photo and Video Gallery</h1>
+    <GalleryGrid items={items} locale={locale} />
+  </section>
+</PageLayout>

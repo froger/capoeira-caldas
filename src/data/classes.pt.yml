@@ -1,0 +1,55 @@
+programs:
+  - id: kids
+    badge: "Infantil"
+    title: "Capoeira Kids"
+    age_range: "5–9 anos"
+    description: "Desenvolvimento integral através do jogo, música e movimento"
+    pillars:
+      - icon: "🤸"
+        label: "Flexibilidade"
+      - icon: "⚡"
+        label: "Técnica"
+      - icon: "🎵"
+        label: "Musicalidade"
+      - icon: "🥁"
+        label: "Ritmos e Improvisação"
+    schedule_note: "Segunda e Quarta 17h, Sábado 10h"
+    equipment:
+      - "Roupa confortável"
+      - "Garrafa de água"
+  - id: teens
+    badge: "Juvenil"
+    title: "Capoeira Teens"
+    age_range: "10–13 anos"
+    description: "Currículo avançado com mais técnica e musicalidade na roda"
+    pillars:
+      - icon: "🤸"
+        label: "Flexibilidade"
+      - icon: "⚡"
+        label: "Técnica Avançada"
+      - icon: "🎵"
+        label: "Musicalidade"
+      - icon: "🎯"
+        label: "Jogo e Esquiva"
+    schedule_note: "Quarta 18h, Sábado 11h"
+    equipment:
+      - "Roupa confortável"
+      - "Garrafa de água"
+  - id: adult
+    badge: "Adulto"
+    title: "Capoeira Adulto"
+    age_range: "14+ anos"
+    description: "Aprimore seu corpo, mente e espírito na nossa roda"
+    pillars:
+      - icon: "💪"
+        label: "Condicionamento Físico"
+      - icon: "🎯"
+        label: "Técnica Avançada"
+      - icon: "🎶"
+        label: "Musicalidade e Cultura"
+      - icon: "🔄"
+        label: "Ritmos e Fluência"
+    schedule_note: "Terça e Quinta 19h30, Sexta 20h"
+    equipment:
+      - "Roupa confortável"
+      - "Garrafa de água"

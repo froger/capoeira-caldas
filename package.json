@@ -1,0 +1,31 @@
+{
+  "name": "capoeira",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate:content": "node scripts/validate-content.mjs",
+    "test:screenshots": "playwright test -c tests/playwright.config.ts",
+    "test:screenshots:update": "playwright test -c tests/playwright.config.ts --update-snapshots"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.3",
+    "@tailwindcss/vite": "4.3.2",
+    "astro": "^7.0.7",
+    "tailwindcss": "4.3.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/js-yaml": "4.0.9",
+    "daisyui": "5.6.16",
+    "js-yaml": "5.2.1",
+    "yaml": "2.9.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

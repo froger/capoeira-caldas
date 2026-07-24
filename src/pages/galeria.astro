@@ -1,0 +1,22 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GalleryGrid from '../components/gallery/GalleryGrid.astro';
+import { getGallery } from '../lib/data';
+
+const locale = 'pt';
+const { items } = getGallery(locale);
+---
+
+<PageLayout title="Galeria" locale={locale} path="/galeria" breadcrumbs={[{ label: 'Início', href: '/' }, { label: 'Galeria' }]}>
+  <section class="container mx-auto px-4 py-16">
+    <h1 class="text-5xl font-display text-azul-celeste mb-8">Galeria de Fotos e Vídeos</h1>
+    <div role="tablist" class="tabs tabs-boxed w-fit mb-8">
+      <input type="radio" name="gal-tabs" role="tab" class="tab" aria-label="Todas" checked />
+      <div role="tabpanel" class="tab-content mt-4"><GalleryGrid items={items} locale={locale} /></div>
+      <input type="radio" name="gal-tabs" role="tab" class="tab" aria-label="Fotos" />
+      <div role="tabpanel" class="tab-content mt-4"><GalleryGrid items={items.filter((i) => i.type === 'image')} locale={locale} /></div>
+      <input type="radio" name="gal-tabs" role="tab" class="tab" aria-label="Vídeos" />
+      <div role="tabpanel" class="tab-content mt-4"><GalleryGrid items={items.filter((i) => i.type === 'video')} locale={locale} /></div>
+    </div>
+  </section>
+</PageLayout>

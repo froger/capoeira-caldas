@@ -1,0 +1,25 @@
+instructors:
+  - id: raimundo
+    name: "Mestre Raimundo"
+    title: "Fundador"
+    graduation: "Mestre de Capoeira Angola"
+    bio: "Mestre Raimundo fundou o grupo em 2010, trazendo a linhagem da Bahia para Lisboa. Dedicado à preservação da musicalidade e da tradição oral da capoeira."
+    bio_short: "Fundador com mais de 30 anos de experiência na roda."
+    photo: "/images/instructor-1.svg"
+    instagram: "https://instagram.com/"
+    youtube: "https://youtube.com/"
+  - id: ana
+    name: "Contramestre Ana"
+    title: "Coordenadora Adulto"
+    graduation: "Contramestre"
+    bio: "Contramestre Ana coordena as turmas de adultos, com especialização em Capoeira Regional e condicionamento físico na roda."
+    bio_short: "Especialista em técnica avançada e musicalidade."
+    photo: "/images/instructor-2.svg"
+    instagram: "https://instagram.com/"
+  - id: joao
+    name: "Instrutor João"
+    title: "Coordenador Infantil"
+    graduation: "Instrutor"
+    bio: "Instrutor João desenvolve o programa infantil com foco no jogo, flexibilidade e introdução aos instrumentos da bateria."
+    bio_short: "Paixão por ensinar crianças através do jogo."
+    photo: "/images/instructor-3.svg"

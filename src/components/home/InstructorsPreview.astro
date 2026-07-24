@@ -1,0 +1,36 @@
+---
+import type { Locale } from '../../lib/types';
+import { getInstructors } from '../../lib/data';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { instructors } = getInstructors(locale);
+---
+
+<section class="py-20 bg-cream reveal">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-display text-azul-celeste mb-8">{t(locale, 'home.instructors_title')}</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {instructors.map((inst) => (
+        <div class="card bg-base-100 shadow-md hover:-translate-y-1 transition-all">
+          <figure class="px-6 pt-6">
+            <img src={inst.photo} alt={inst.name} class="rounded-xl w-full aspect-square object-cover" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title font-display text-2xl text-azul-celeste">{inst.name}</h3>
+            <span class="badge badge-outline">{inst.graduation}</span>
+            <p class="text-sm">{inst.bio_short}</p>
+            <div class="flex gap-2 mt-2">
+              {inst.instagram && <a href={inst.instagram} class="btn btn-ghost btn-xs">IG</a>}
+              {inst.youtube && <a href={inst.youtube} class="btn btn-ghost btn-xs">YT</a>}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

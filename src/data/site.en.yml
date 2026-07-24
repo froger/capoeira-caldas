@@ -1,0 +1,54 @@
+name: "Capoeira Brasil Group"
+tagline: "The art that connects bodies and souls"
+description: "Capoeira association with live music in Lisbon — Angola and Regional tradition for all ages."
+
+contact:
+  email: "contato@capoeirabrasil.pt"
+  phone: "+351 912 345 678"
+  whatsapp: "351912345678"
+  address: "Rua da Roda, 42"
+  city: "Lisbon, Portugal"
+  map_embed_url: "https://maps.google.com/maps?q=Lisboa%20Portugal&output=embed"
+
+social:
+  instagram: "https://instagram.com/capoeirabrasil"
+  youtube: "https://youtube.com/@capoeirabrasil"
+  facebook: "https://facebook.com/capoeirabrasil"
+  tiktok: "https://tiktok.com/@capoeirabrasil"
+
+forms:
+  newsletter_action: "#"
+  contact_formspree: ""
+
+positioning:
+  category: "Capoeira association with live music"
+  headline: "The Art that Connects Bodies and Souls"
+  subhead: "We are a capoeira association with live bateria — berimbau, pandeiro and atabaque in every roda. For families and adults seeking tradition, musicality and community, not MMA-style competition."
+  primary_cta: "Start Now"
+  navbar_cta: "Try for Free"
+  youtube_url: "https://youtube.com/@capoeirabrasil"
+  value_themes:
+    - id: tradicao
+      title: "Tradition and Authenticity"
+      description: "Angola and Regional capoeira with respected lineage and graduated mestres."
+    - id: musicalidade
+      title: "Live Music"
+      description: "Berimbau, pandeiro and atabaque in every roda — ladainhas, corridos and quadras."
+    - id: comunidade
+      title: "Welcoming Community"
+      description: "Family, respect and friendship in the roda. Holistic development through play."
+  anti_persona_hint: "We are not an MMA gym — we are a roda with bateria and respect."
+  pov:
+    - "Capoeira without live music is not complete capoeira."
+    - "Angola and Regional coexist in our roda — tradition before spectacle."
+    - "Children learn through play and song, not competition."
+
+stats:
+  - label: "Years of Tradition"
+    value: 15
+  - label: "Active Students"
+    value: 200
+  - label: "Classes per Week"
+    value: 12
+  - label: "Events Held"
+    value: 48

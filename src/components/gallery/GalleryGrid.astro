@@ -1,0 +1,42 @@
+---
+import type { GalleryItem } from '../../lib/types';
+
+interface Props {
+  items: GalleryItem[];
+  locale: 'pt' | 'en';
+}
+
+const { items, locale } = Astro.props;
+---
+
+<div class="columns-2 md:columns-3 gap-4" id="gallery-grid">
+  {items.map((item) => (
+    <div class="break-inside-avoid mb-4">
+      <button
+        type="button"
+        class="gallery-item w-full relative group rounded-xl overflow-hidden"
+        data-type={item.type}
+        data-src={item.src}
+        data-youtube={item.youtube_id ?? ''}
+        data-title={item.title}
+      >
+        <img src={item.thumbnail ?? item.src} alt={item.title} class="w-full" loading="lazy" />
+        {item.type === 'video' && (
+          <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+            <span class="text-5xl text-white">▶</span>
+          </div>
+        )}
+      </button>
+    </div>
+  ))}
+</div>
+
+<dialog id="lightbox-modal" class="modal">
+  <div class="modal-box max-w-4xl">
+    <h3 class="font-display text-2xl mb-4" id="lightbox-title"></h3>
+    <div id="lightbox-content"></div>
+  </div>
+  <form method="dialog" class="modal-backdrop"><button>close</button></form>
+</dialog>
+
+<script src="../../scripts/gallery.ts"></script>

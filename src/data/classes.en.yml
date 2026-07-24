@@ -1,0 +1,55 @@
+programs:
+  - id: kids
+    badge: "Kids"
+    title: "Capoeira Kids"
+    age_range: "Ages 5–9"
+    description: "Holistic development through play, music and movement"
+    pillars:
+      - icon: "🤸"
+        label: "Flexibility"
+      - icon: "⚡"
+        label: "Technique"
+      - icon: "🎵"
+        label: "Musicality"
+      - icon: "🥁"
+        label: "Rhythms and Improvisation"
+    schedule_note: "Mon & Wed 5pm, Sat 10am"
+    equipment:
+      - "Comfortable clothes"
+      - "Water bottle"
+  - id: teens
+    badge: "Teens"
+    title: "Capoeira Teens"
+    age_range: "Ages 10–13"
+    description: "Advanced curriculum with more technique and musicality in the roda"
+    pillars:
+      - icon: "🤸"
+        label: "Flexibility"
+      - icon: "⚡"
+        label: "Advanced Technique"
+      - icon: "🎵"
+        label: "Musicality"
+      - icon: "🎯"
+        label: "Game and Dodges"
+    schedule_note: "Wed 6pm, Sat 11am"
+    equipment:
+      - "Comfortable clothes"
+      - "Water bottle"
+  - id: adult
+    badge: "Adult"
+    title: "Capoeira Adult"
+    age_range: "Ages 14+"
+    description: "Improve your body, mind and spirit in our roda"
+    pillars:
+      - icon: "💪"
+        label: "Physical Conditioning"
+      - icon: "🎯"
+        label: "Advanced Technique"
+      - icon: "🎶"
+        label: "Musicality and Culture"
+      - icon: "🔄"
+        label: "Rhythms and Fluency"
+    schedule_note: "Tue & Thu 7:30pm, Fri 8pm"
+    equipment:
+      - "Comfortable clothes"
+      - "Water bottle"

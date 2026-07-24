@@ -1,0 +1,50 @@
+---
+import type { Locale } from '../../lib/types';
+import { getClasses } from '../../lib/data';
+import { getRoutes, t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { programs } = getClasses(locale);
+const routes = getRoutes(locale);
+const kids = programs.find((p) => p.id === 'kids') ?? programs[0];
+const adult = programs.find((p) => p.id === 'adult') ?? programs[programs.length - 1];
+const badgeClass = (id: string) => (id === 'kids' ? 'badge-error' : 'badge-success');
+const imageMap: Record<string, string> = {
+  kids: '/images/programs-kids.svg',
+  adult: '/images/programs-adult.svg',
+};
+---
+
+<section id="programs" class="py-20 bg-cream reveal">
+  <div class="container mx-auto px-4">
+    <span class="badge badge-outline border-verde-brasil text-verde-brasil mb-4">{t(locale, 'home.programs_badge')}</span>
+    <h2 class="text-4xl sm:text-5xl font-display text-azul-celeste mb-12">{t(locale, 'home.programs_title')}</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      {[kids, adult].map((program) => (
+        <div class="card bg-base-100 shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all">
+          <figure><img src={imageMap[program.id] ?? '/images/hero.svg'} alt={program.title} loading="lazy" /></figure>
+          <div class="card-body">
+            <span class={`badge ${badgeClass(program.id)} w-fit`}>{program.badge}</span>
+            <h3 class="card-title font-display text-3xl text-azul-celeste">{program.title}</h3>
+            <p>{program.description}</p>
+            <div class="grid grid-cols-2 gap-3 my-4">
+              {program.pillars.map((pillar) => (
+                <div class="flex items-center gap-2 text-sm">
+                  <span class="text-xl">{pillar.icon}</span>
+                  <span>{pillar.label}</span>
+                </div>
+              ))}
+            </div>
+            <div class="card-actions">
+              <a href={routes.schedule} class="btn bg-verde-brasil text-white border-none">{t(locale, 'home.schedule_link')}</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

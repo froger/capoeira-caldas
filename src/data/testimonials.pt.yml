@@ -1,0 +1,16 @@
+testimonials:
+  - quote: "A capoeira transformou a confiança do meu filho. A musicalidade e o respeito na roda são incríveis."
+    name: "Maria Silva"
+    level: "Mãe de aluno Kids"
+    rating: 5
+    avatar: "/images/avatar-1.svg"
+  - quote: "Encontrei uma família na roda. O berimbau ao vivo faz toda a diferença — não é só exercício."
+    name: "Pedro Costa"
+    level: "Aluno Adulto — Intermediário"
+    rating: 5
+    avatar: "/images/avatar-2.svg"
+  - quote: "Tradição autêntica com mestres que realmente vivem a cultura. Recomendo a todas as famílias."
+    name: "Carla Mendes"
+    level: "Aluna Adulto — Iniciante"
+    rating: 5
+    avatar: "/images/avatar-3.svg"

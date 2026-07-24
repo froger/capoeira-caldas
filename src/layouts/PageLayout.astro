@@ -1,0 +1,20 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  title: string;
+  description?: string;
+  locale?: Locale;
+  path?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const { title, description, locale = 'pt', path = '/', breadcrumbs = [] } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} locale={locale} path={path}>
+  {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+  <slot />
+</BaseLayout>

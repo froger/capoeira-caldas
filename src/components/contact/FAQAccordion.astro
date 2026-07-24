@@ -1,0 +1,19 @@
+---
+import type { FaqItem } from '../../lib/types';
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="space-y-2">
+  {items.map((item, i) => (
+    <div class="collapse collapse-arrow bg-base-200">
+      <input type="radio" name="faq-accordion" checked={i === 0} />
+      <div class="collapse-title font-semibold">{item.question}</div>
+      <div class="collapse-content"><p>{item.answer}</p></div>
+    </div>
+  ))}
+</div>

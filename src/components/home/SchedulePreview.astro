@@ -1,0 +1,52 @@
+---
+import type { Locale } from '../../lib/types';
+import { getSchedule } from '../../lib/data';
+import { getRoutes, t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const schedule = getSchedule(locale);
+const routes = getRoutes(locale);
+const kidsGroup = locale === 'pt' ? 'infantil' : 'kids';
+const adultGroup = locale === 'pt' ? 'adulto' : 'adult';
+const kidsClasses = schedule.classes.filter((c) => c.group === kidsGroup);
+const adultClasses = schedule.classes.filter((c) => c.group === adultGroup);
+---
+
+<section class="py-20 bg-cream reveal">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-display text-azul-celeste mb-8">{t(locale, 'home.schedule_title')}</h2>
+    <div role="tablist" class="tabs tabs-boxed bg-base-200 w-fit mb-6">
+      <input type="radio" name="schedule-tabs" role="tab" class="tab" aria-label={t(locale, 'home.schedule_tab_kids')} checked />
+      <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-0 mt-4">
+        <div class="overflow-x-auto">
+          <table class="table">
+            <thead><tr><th>{locale === 'pt' ? 'Dia' : 'Day'}</th><th>{locale === 'pt' ? 'Hora' : 'Time'}</th><th>{locale === 'pt' ? 'Nível' : 'Level'}</th><th>{locale === 'pt' ? 'Local' : 'Location'}</th></tr></thead>
+            <tbody>
+              {kidsClasses.map((c) => (
+                <tr><td>{c.day}</td><td>{c.time}</td><td>{c.level}</td><td>{c.location}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <input type="radio" name="schedule-tabs" role="tab" class="tab" aria-label={t(locale, 'home.schedule_tab_adults')} />
+      <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-0 mt-4">
+        <div class="overflow-x-auto">
+          <table class="table">
+            <thead><tr><th>{locale === 'pt' ? 'Dia' : 'Day'}</th><th>{locale === 'pt' ? 'Hora' : 'Time'}</th><th>{locale === 'pt' ? 'Nível' : 'Level'}</th><th>{locale === 'pt' ? 'Local' : 'Location'}</th></tr></thead>
+            <tbody>
+              {adultClasses.map((c) => (
+                <tr><td>{c.day}</td><td>{c.time}</td><td>{c.level}</td><td>{c.location}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <a href={routes.schedule} class="btn bg-verde-brasil text-white border-none">{t(locale, 'home.schedule_cta')}</a>
+  </div>
+</section>

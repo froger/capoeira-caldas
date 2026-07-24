@@ -1,0 +1,32 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ContactForm from '../../components/contact/ContactForm.astro';
+import FAQAccordion from '../../components/contact/FAQAccordion.astro';
+import { getSite, getFaq } from '../../lib/data';
+
+const locale = 'en';
+const site = getSite(locale);
+const faq = getFaq(locale);
+---
+
+<PageLayout title="Contact" locale={locale} path="/en/contact" breadcrumbs={[{ label: 'Home', href: '/en/' }, { label: 'Contact' }]}>
+  <section class="container mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12">
+    <div>
+      <h1 class="text-5xl font-display text-azul-celeste mb-8">Contact</h1>
+      <ContactForm locale={locale} />
+    </div>
+    <div>
+      <h2 class="text-2xl font-display text-azul-celeste mb-4">Info</h2>
+      <ul class="space-y-3 mb-8">
+        <li>📧 <a href={`mailto:${site.contact.email}`} class="link">{site.contact.email}</a></li>
+        <li>📱 <a href={`https://wa.me/${site.contact.whatsapp}`} class="link">WhatsApp</a></li>
+        <li>📞 {site.contact.phone}</li>
+        <li>📍 {site.contact.address}, {site.contact.city}</li>
+      </ul>
+      <FAQAccordion items={faq.items} />
+    </div>
+  </section>
+  <iframe src={site.contact.map_embed_url} class="w-full h-96 border-0 map-embed" loading="lazy" title="Map"></iframe>
+</PageLayout>
+
+<a href={`https://wa.me/${site.contact.whatsapp}`} class="fixed bottom-6 right-6 btn btn-circle bg-verde-brasil text-white border-none shadow-lg z-40 min-h-[44px] min-w-[44px]" aria-label="WhatsApp">💬</a>

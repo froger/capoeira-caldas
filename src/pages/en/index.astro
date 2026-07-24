@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import Programs from '../../components/home/Programs.astro';
+import Benefits from '../../components/home/Benefits.astro';
+import SchedulePreview from '../../components/home/SchedulePreview.astro';
+import Testimonials from '../../components/home/Testimonials.astro';
+import InstructorsPreview from '../../components/home/InstructorsPreview.astro';
+import GalleryPreview from '../../components/home/GalleryPreview.astro';
+import BlogPreview from '../../components/home/BlogPreview.astro';
+import HomeCTA from '../../components/home/HomeCTA.astro';
+import { getSite } from '../../lib/data';
+
+const locale = 'en';
+const site = getSite(locale);
+---
+
+<BaseLayout title={site.name} description={site.description} locale={locale} path="/en/">
+  <Hero locale={locale} />
+  <Programs locale={locale} />
+  <Benefits locale={locale} />
+  <SchedulePreview locale={locale} />
+  <Testimonials locale={locale} />
+  <InstructorsPreview locale={locale} />
+  <GalleryPreview locale={locale} />
+  <BlogPreview locale={locale} />
+  <HomeCTA locale={locale} />
+</BaseLayout>

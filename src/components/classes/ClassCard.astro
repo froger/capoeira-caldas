@@ -1,0 +1,28 @@
+---
+import type { ClassProgram } from '../../lib/types';
+
+interface Props {
+  program: ClassProgram;
+  locale?: 'pt' | 'en';
+}
+
+const { program, locale = 'pt' } = Astro.props;
+---
+
+<div class="card bg-base-100 shadow-lg">
+  <div class="card-body">
+    <span class="badge badge-primary w-fit">{program.badge}</span>
+    <h3 class="card-title font-display text-2xl text-azul-celeste">{program.title}</h3>
+    <p class="text-sm text-base-content/70">{program.age_range}</p>
+    <p>{program.description}</p>
+    <div class="grid grid-cols-2 gap-2 my-4">
+      {program.pillars.map((p) => (
+        <div class="flex items-center gap-2 text-sm"><span>{p.icon}</span><span>{p.label}</span></div>
+      ))}
+    </div>
+    <p class="text-sm"><strong>{locale === 'en' ? 'Schedule:' : 'Horário:'}</strong> {program.schedule_note}</p>
+    <ul class="list-disc list-inside text-sm mt-2">
+      {program.equipment.map((e) => <li>{e}</li>)}
+    </ul>
+  </div>
+</div>

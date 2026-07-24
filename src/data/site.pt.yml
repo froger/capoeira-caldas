@@ -1,0 +1,54 @@
+name: "Grupo Capoeira Brasil"
+tagline: "A arte que conecta corpos e almas"
+description: "Associação de capoeira com música ao vivo em Lisboa — tradição Angola e Regional para todas as idades."
+
+contact:
+  email: "contato@capoeirabrasil.pt"
+  phone: "+351 912 345 678"
+  whatsapp: "351912345678"
+  address: "Rua da Roda, 42"
+  city: "Lisboa, Portugal"
+  map_embed_url: "https://maps.google.com/maps?q=Lisboa%20Portugal&output=embed"
+
+social:
+  instagram: "https://instagram.com/capoeirabrasil"
+  youtube: "https://youtube.com/@capoeirabrasil"
+  facebook: "https://facebook.com/capoeirabrasil"
+  tiktok: "https://tiktok.com/@capoeirabrasil"
+
+forms:
+  newsletter_action: "#"
+  contact_formspree: ""
+
+positioning:
+  category: "Associação de capoeira com música ao vivo"
+  headline: "A Arte que Conecta Corpos e Almas"
+  subhead: "Somos uma associação de capoeira com bateria ao vivo — berimbau, pandeiro e atabaque em cada roda. Para famílias e adultos que buscam tradição, musicalidade e comunidade, não competição estilo MMA."
+  primary_cta: "Comece Agora"
+  navbar_cta: "Experimente Grátis"
+  youtube_url: "https://youtube.com/@capoeirabrasil"
+  value_themes:
+    - id: tradicao
+      title: "Tradição e Autenticidade"
+      description: "Capoeira Angola e Regional com linhagem respeitada e mestres graduados."
+    - id: musicalidade
+      title: "Música ao Vivo"
+      description: "Berimbau, pandeiro e atabaque em cada roda — ladainhas, corridos e quadras."
+    - id: comunidade
+      title: "Comunidade Acolhedora"
+      description: "Família, respeito e amizade na roda. Desenvolvimento integral pelo jogo."
+  anti_persona_hint: "Não somos academia de MMA — somos roda com bateria e respeito."
+  pov:
+    - "Capoeira sem música ao vivo não é capoeira completa."
+    - "Angola e Regional convivem na nossa roda — tradição antes de espetáculo."
+    - "Crianças aprendem pelo jogo e pelo canto, não por competição."
+
+stats:
+  - label: "Anos de Tradição"
+    value: 15
+  - label: "Alunos Ativos"
+    value: 200
+  - label: "Aulas por Semana"
+    value: 12
+  - label: "Eventos Realizados"
+    value: 48

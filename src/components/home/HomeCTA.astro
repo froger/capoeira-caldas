@@ -1,0 +1,35 @@
+---
+import WaveDivider from '../decor/WaveDivider.astro';
+import type { Locale } from '../../lib/types';
+import { getRoutes, t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const routes = getRoutes(locale);
+---
+
+<section class="relative py-20 cta-gradient text-white overflow-hidden reveal">
+  <div class="absolute inset-0 opacity-10">
+    <WaveDivider />
+  </div>
+  <div class="container mx-auto px-4 text-center relative z-10">
+    <h2 class="text-4xl sm:text-5xl font-display mb-4">{t(locale, 'home.cta_title')}</h2>
+    <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t(locale, 'home.cta_subtitle')}</p>
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <a href={routes.contact} class="btn btn-lg bg-amarelo-sol text-dark-blue border-none hover:scale-105 transition-transform min-h-[44px]">
+        {t(locale, 'home.cta_primary')}
+      </a>
+      <a href={routes.contact} class="btn btn-lg btn-outline text-white border-white hover:bg-white/10 min-h-[44px]">
+        {t(locale, 'home.cta_secondary')}
+      </a>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6 text-sm">
+      <span>✓ {t(locale, 'home.trust_1')}</span>
+      <span>✓ {t(locale, 'home.trust_2')}</span>
+      <span>✓ {t(locale, 'home.trust_3')}</span>
+    </div>
+  </div>
+</section>

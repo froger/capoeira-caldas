@@ -1,0 +1,38 @@
+---
+import type { ScheduleClass } from '../../lib/types';
+
+interface Props {
+  classes: ScheduleClass[];
+  locale: 'pt' | 'en';
+}
+
+const { classes, locale } = Astro.props;
+const labels = locale === 'pt'
+  ? { day: 'Dia', time: 'Hora', level: 'Nível', instructor: 'Instrutor', location: 'Local' }
+  : { day: 'Day', time: 'Time', level: 'Level', instructor: 'Instructor', location: 'Location' };
+---
+
+<div class="overflow-x-auto">
+  <table class="table table-zebra">
+    <thead>
+      <tr>
+        <th>{labels.day}</th>
+        <th>{labels.time}</th>
+        <th>{labels.level}</th>
+        <th>{labels.instructor}</th>
+        <th>{labels.location}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {classes.map((c) => (
+        <tr>
+          <td>{c.day}</td>
+          <td>{c.time}</td>
+          <td>{c.level}</td>
+          <td>{c.instructor}</td>
+          <td>{c.location}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

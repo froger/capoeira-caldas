@@ -1,0 +1,25 @@
+instructors:
+  - id: raimundo
+    name: "Mestre Raimundo"
+    title: "Founder"
+    graduation: "Mestre de Capoeira Angola"
+    bio: "Mestre Raimundo founded the group in 2010, bringing Bahian lineage to Lisbon. Dedicated to preserving musicality and oral tradition."
+    bio_short: "Founder with over 30 years of roda experience."
+    photo: "/images/instructor-1.svg"
+    instagram: "https://instagram.com/"
+    youtube: "https://youtube.com/"
+  - id: ana
+    name: "Contramestre Ana"
+    title: "Adult Coordinator"
+    graduation: "Contramestre"
+    bio: "Contramestre Ana coordinates adult classes, specializing in Regional capoeira and physical conditioning in the roda."
+    bio_short: "Specialist in advanced technique and musicality."
+    photo: "/images/instructor-2.svg"
+    instagram: "https://instagram.com/"
+  - id: joao
+    name: "Instructor João"
+    title: "Kids Coordinator"
+    graduation: "Instrutor"
+    bio: "Instructor João develops the kids program focusing on play, flexibility and introduction to bateria instruments."
+    bio_short: "Passionate about teaching children through play."
+    photo: "/images/instructor-3.svg"

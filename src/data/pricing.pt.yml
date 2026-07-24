@@ -1,0 +1,45 @@
+plans:
+  - id: trial
+    name: "Aula Experimental"
+    price: "Grátis"
+    period: "primeira aula"
+    features:
+      - "Sem compromisso"
+      - "Conheça a roda e a bateria"
+      - "Avaliação de nível"
+    highlighted: true
+    cta: "Agendar Agora"
+  - id: monthly
+    name: "Plano Mensal"
+    price: "45€"
+    period: "por mês"
+    features:
+      - "2 aulas por semana"
+      - "Acesso a rodas abertas"
+      - "Material de apoio"
+    cta: "Inscrever-se"
+  - id: quarterly
+    name: "Plano Trimestral"
+    price: "120€"
+    period: "por trimestre"
+    features:
+      - "2 aulas por semana"
+      - "10% de desconto"
+      - "Camiseta do grupo"
+    cta: "Inscrever-se"
+  - id: annual
+    name: "Plano Anual"
+    price: "420€"
+    period: "por ano"
+    features:
+      - "2 aulas por semana"
+      - "20% de desconto"
+      - "Camiseta + cordão"
+      - "Prioridade em eventos"
+    cta: "Inscrever-se"
+
+bring_items:
+  - "Roupa confortável (calção e t-shirt)"
+  - "Garrafa de água"
+  - "Toalha pequena"
+  - "Disposição para cantar e jogar na roda"

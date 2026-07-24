@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '../../lib/types';
+import { getRoutes, t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const routes = getRoutes(locale);
+const blogPrefix = locale === 'pt' ? '/blog/' : '/en/blog/';
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.locale === locale)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<section class="py-20 bg-cream reveal">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-display text-azul-celeste mb-8">{t(locale, 'home.blog_title')}</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {posts.map((post) => (
+        <div class="card bg-base-100 shadow-md hover:-translate-y-1 transition-all">
+          {post.data.image && <figure><img src={post.data.image} alt="" loading="lazy" /></figure>}
+          <div class="card-body">
+            <span class="badge badge-primary badge-sm">{post.data.category}</span>
+            <h3 class="card-title font-display text-xl text-azul-celeste">{post.data.title}</h3>
+            <p class="text-sm">{post.data.description}</p>
+            <div class="card-actions justify-between items-center mt-2">
+              <span class="text-xs text-base-content/60">{post.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB')}</span>
+              <a href={`${blogPrefix}${post.id}`} class="link link-primary">{t(locale, 'home.blog_read_more')}</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@plugin "daisyui/theme" {
+  name: "capoeira";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #fdf8f0;
+  --color-base-200: #f5ede0;
+  --color-base-300: #e8dcc8;
+  --color-base-content: #1a1a1a;
+
+  --color-primary: #009739;
+  --color-primary-content: #ffffff;
+  --color-secondary: #012169;
+  --color-secondary-content: #ffffff;
+  --color-accent: #fedb00;
+  --color-accent-content: #0a1b3f;
+  --color-neutral: #1a2a3a;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #1e90ff;
+  --color-success: #009739;
+  --color-warning: #e8a317;
+  --color-error: #c73e1d;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+}
+
+@plugin "daisyui";
+
+@theme {
+  --color-verde-brasil: #009739;
+  --color-amarelo-sol: #fedb00;
+  --color-azul-celeste: #012169;
+  --color-terra-cota: #c87a5a;
+  --color-capoeira-red: #c73e1d;
+  --color-samba-gold: #e8a317;
+  --color-bahia-blue: #1e90ff;
+  --color-dende-orange: #ff6b35;
+  --color-pandeiro-silver: #d4d4d4;
+  --color-atabaque-brown: #6b4226;
+  --color-cream: #fdf8f0;
+  --color-deep-blue: #1a2a3a;
+  --color-dark-blue: #0a1b3f;
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Nunito", sans-serif;
+  --font-accent: "Caveat", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: #1a1a1a;
+  background-color: var(--color-cream);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+    opacity: 1;
+  }
+}
+
+@keyframes ginga {
+  0%,
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(30px) scaleY(0.95);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-ginga {
+  animation: ginga 8s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar-glass {
+  background: rgba(253, 248, 240, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-glass.scrolled {
+  background: rgba(253, 248, 240, 0.95);
+  box-shadow: 0 2px 20px rgba(26, 42, 58, 0.1);
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-azul-celeste) 0%,
+    var(--color-verde-brasil) 50%,
+    var(--color-amarelo-sol) 100%
+  );
+}
+
+.cta-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-verde-brasil) 0%,
+    var(--color-azul-celeste) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-ginga,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,45 @@
+plans:
+  - id: trial
+    name: "Trial Class"
+    price: "Free"
+    period: "first class"
+    features:
+      - "No commitment"
+      - "Meet the roda and bateria"
+      - "Level assessment"
+    highlighted: true
+    cta: "Book Now"
+  - id: monthly
+    name: "Monthly Plan"
+    price: "€45"
+    period: "per month"
+    features:
+      - "2 classes per week"
+      - "Open roda access"
+      - "Support materials"
+    cta: "Sign Up"
+  - id: quarterly
+    name: "Quarterly Plan"
+    price: "€120"
+    period: "per quarter"
+    features:
+      - "2 classes per week"
+      - "10% discount"
+      - "Group t-shirt"
+    cta: "Sign Up"
+  - id: annual
+    name: "Annual Plan"
+    price: "€420"
+    period: "per year"
+    features:
+      - "2 classes per week"
+      - "20% discount"
+      - "T-shirt + cord"
+      - "Event priority"
+    cta: "Sign Up"
+
+bring_items:
+  - "Comfortable clothes (shorts and t-shirt)"
+  - "Water bottle"
+  - "Small towel"
+  - "Willingness to sing and play in the roda"

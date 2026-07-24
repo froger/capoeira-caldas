@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+QUICK=false
+if [[ "${1:-}" == "--quick" ]]; then
+  QUICK=true
+fi
+
+echo "==> npm ci"
+npm ci
+
+echo "==> npm run build"
+npm run build
+
+echo "==> smoke.sh"
+./scripts/smoke.sh
+
+echo "==> validate-content"
+node scripts/validate-content.mjs
+
+if [[ "$QUICK" == "false" ]]; then
+  echo "==> test:screenshots"
+  npm run test:screenshots
+fi
+
+echo "OK: bin/check passed"

@@ -1,0 +1,27 @@
+---
+import type { PricingPlan } from '../../lib/types';
+
+interface Props {
+  plans: PricingPlan[];
+  locale: 'pt' | 'en';
+}
+
+const { plans, locale } = Astro.props;
+const contactLabel = locale === 'pt' ? 'contacto' : 'contact';
+---
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  {plans.map((plan) => (
+    <div class:list={['card bg-base-100 shadow-md', { 'ring-2 ring-verde-brasil': plan.highlighted }]}>
+      <div class="card-body">
+        <h3 class="card-title font-display text-xl">{plan.name}</h3>
+        <p class="text-3xl font-bold text-verde-brasil">{plan.price}</p>
+        <p class="text-sm text-base-content/70">{plan.period}</p>
+        <ul class="list-disc list-inside text-sm my-4 space-y-1">
+          {plan.features.map((f) => <li>{f}</li>)}
+        </ul>
+        <a href={locale === 'pt' ? '/contato' : '/en/contact'} class="btn btn-sm bg-verde-brasil text-white border-none mt-auto">{plan.cta}</a>
+      </div>
+    </div>
+  ))}
+</div>

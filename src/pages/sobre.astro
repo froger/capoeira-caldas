@@ -1,0 +1,70 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Timeline from '../components/about/Timeline.astro';
+import LineageTree from '../components/about/LineageTree.astro';
+import StatsCounters from '../components/about/StatsCounters.astro';
+import { getInstructors } from '../lib/data';
+
+const locale = 'pt';
+const { instructors } = getInstructors(locale);
+---
+
+<PageLayout
+  title="Nossa História e Filosofia"
+  description="Conheça a história, filosofia e linhagem do Grupo Capoeira Brasil."
+  locale={locale}
+  path="/sobre"
+  breadcrumbs={[
+    { label: 'Início', href: '/' },
+    { label: 'Sobre Nós' },
+  ]}
+>
+  <section class="py-12 bg-hero-gradient text-white" style="background: linear-gradient(135deg, #012169, #009739);">
+    <div class="container mx-auto px-4 py-16 text-center">
+      <h1 class="text-5xl font-display mb-4">Nossa História e Filosofia</h1>
+      <p class="text-lg max-w-2xl mx-auto">Tradição, musicalidade e comunidade desde 2010.</p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Nossa História</h2>
+    <Timeline locale={locale} />
+  </section>
+
+  <section class="container mx-auto px-4 py-16 bg-base-200 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Nossa Filosofia</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card bg-base-100"><div class="card-body"><h3 class="font-display text-xl">Missão</h3><p>Preservar e ensinar a capoeira com musicalidade e respeito à tradição.</p></div></div>
+      <div class="card bg-base-100"><div class="card-body"><h3 class="font-display text-xl">Visão</h3><p>Ser referência em capoeira com bateria ao vivo em Lisboa.</p></div></div>
+      <div class="card bg-base-100"><div class="card-body"><h3 class="font-display text-xl">Valores</h3><p>Respeito, tradição, musicalidade, comunidade e jogo.</p></div></div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Nossa Linhagem</h2>
+    <LineageTree locale={locale} />
+  </section>
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-6">Capoeira Angola vs Regional</h2>
+    <p class="mb-4">A <strong>Angola</strong> é mais lenta, próxima ao chão, com jogo ritualístico. A <strong>Regional</strong> é mais rápida, com movimentos acrobáticos. Na nossa roda, ambas convivem com respeito.</p>
+  </section>
+
+  <StatsCounters locale={locale} />
+
+  <section class="container mx-auto px-4 py-16 reveal">
+    <h2 class="text-3xl font-display text-azul-celeste mb-8">Nossos Instrutores</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {instructors.map((inst) => (
+        <div class="card bg-base-100 shadow-md">
+          <figure class="px-6 pt-6"><img src={inst.photo} alt={inst.name} class="rounded-xl" /></figure>
+          <div class="card-body">
+            <h3 class="font-display text-xl">{inst.name}</h3>
+            <span class="badge">{inst.graduation}</span>
+            <p class="text-sm">{inst.bio}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>

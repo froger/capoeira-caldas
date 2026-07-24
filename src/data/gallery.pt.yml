@@ -1,0 +1,33 @@
+items:
+  - id: roda-1
+    type: image
+    src: "/images/gallery-1.svg"
+    title: "Roda de capoeira"
+    category: rodas
+  - id: treino-1
+    type: image
+    src: "/images/gallery-2.svg"
+    title: "Treino de ginga"
+    category: treinos
+  - id: evento-1
+    type: image
+    src: "/images/gallery-3.svg"
+    title: "Batizado 2025"
+    category: eventos
+  - id: viagem-1
+    type: image
+    src: "/images/gallery-4.svg"
+    title: "Viagem à Bahia"
+    category: viagens
+  - id: video-1
+    type: video
+    src: "/images/gallery-5.svg"
+    thumbnail: "/images/gallery-5.svg"
+    title: "Aula de musicalidade"
+    category: treinos
+    youtube_id: "dQw4w9WgXcQ"
+  - id: roda-2
+    type: image
+    src: "/images/gallery-6.svg"
+    title: "Roda aberta"
+    category: rodas

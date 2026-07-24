@@ -1,0 +1,23 @@
+---
+interface Props {
+  locale: 'pt' | 'en';
+}
+
+const { locale } = Astro.props;
+const lineage = locale === 'pt'
+  ? ['Mestre Bimba', 'Mestre Pastinha', 'Mestre João Grande', 'Mestre Raimundo', 'Contramestre Ana', 'Instrutor João']
+  : ['Mestre Bimba', 'Mestre Pastinha', 'Mestre João Grande', 'Mestre Raimundo', 'Contramestre Ana', 'Instructor João'];
+---
+
+<div class="flex flex-wrap justify-center items-center gap-4 py-8">
+  {lineage.map((name, i) => (
+    <>
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 rounded-full bg-verde-brasil/20 border-2 border-verde-brasil flex items-center justify-center text-center p-2">
+          <span class="text-xs font-semibold">{name}</span>
+        </div>
+      </div>
+      {i < lineage.length - 1 && <span class="text-2xl text-verde-brasil hidden sm:inline">→</span>}
+    </>
+  ))}
+</div>

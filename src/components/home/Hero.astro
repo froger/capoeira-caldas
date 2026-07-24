@@ -1,0 +1,56 @@
+---
+import WaveDivider from '../decor/WaveDivider.astro';
+import AzulejoPattern from '../decor/AzulejoPattern.astro';
+import GingaBackground from '../decor/GingaBackground.astro';
+import FloatingNotes from '../decor/FloatingNotes.astro';
+import type { Locale } from '../../lib/types';
+import { getSite } from '../../lib/data';
+import { getRoutes, t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const site = getSite(locale);
+const routes = getRoutes(locale);
+const contactPath = routes.contact ?? (locale === 'pt' ? '/contato' : '/en/contact');
+---
+
+<section class="relative min-h-[85vh] sm:min-h-screen hero-gradient overflow-hidden flex items-center">
+  <AzulejoPattern />
+  <GingaBackground />
+  <FloatingNotes />
+  <div class="container mx-auto px-4 py-20 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+    <div class="text-white reveal">
+      <p class="font-accent text-2xl text-amarelo-sol mb-2">{site.positioning.category}</p>
+      <h1 class="text-5xl sm:text-7xl font-display leading-tight mb-6">{site.positioning.headline}</h1>
+      <p class="text-lg sm:text-xl text-white/90 mb-8 max-w-xl">{site.positioning.subhead}</p>
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a href={contactPath} class="btn btn-lg bg-amarelo-sol text-dark-blue border-none hover:scale-105 transition-transform min-h-[44px]">
+          {site.positioning.primary_cta}
+        </a>
+        <a href={site.positioning.youtube_url} target="_blank" rel="noopener" class="btn btn-lg btn-outline text-white border-white hover:bg-white/10 min-h-[44px]">
+          {t(locale, 'home.watch_youtube')}
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="avatar-group -space-x-3">
+          <div class="avatar"><div class="w-10 rounded-full bg-amarelo-sol/80"></div></div>
+          <div class="avatar"><div class="w-10 rounded-full bg-verde-brasil/80"></div></div>
+          <div class="avatar"><div class="w-10 rounded-full bg-bahia-blue/80"></div></div>
+        </div>
+        <span class="text-sm font-semibold">{t(locale, 'home.students_count')}</span>
+      </div>
+    </div>
+    <div class="relative reveal">
+      <img src="/images/hero.svg" alt="Roda de capoeira" class="rounded-2xl shadow-2xl w-full" loading="eager" />
+      <div class="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg px-6 py-4">
+        <p class="font-display text-3xl text-verde-brasil">{t(locale, 'home.years_stat')}</p>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-0 left-0 right-0">
+    <WaveDivider />
+  </div>
+</section>

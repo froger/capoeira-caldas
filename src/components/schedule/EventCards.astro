@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  events: CollectionEntry<'events'>[];
+  locale: 'pt' | 'en';
+}
+
+const { events, locale } = Astro.props;
+const rsvpLabel = locale === 'pt' ? 'Inscrever-se' : 'RSVP';
+---
+
+<div class="grid md:grid-cols-2 gap-6">
+  {events.map((event) => (
+    <div class="card bg-base-100 shadow-md">
+      <div class="card-body">
+        <span class="badge badge-secondary">{event.data.type}</span>
+        <h3 class="card-title font-display text-xl">{event.data.title}</h3>
+        <p class="text-sm text-verde-brasil font-semibold">
+          {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
+        </p>
+        <p>{event.data.description}</p>
+        <p class="text-sm">📍 {event.data.location}</p>
+        {event.data.rsvp_url && (
+          <a href={event.data.rsvp_url} class="btn btn-sm bg-capoeira-red text-white border-none w-fit">{rsvpLabel}</a>
+        )}
+      </div>
+    </div>
+  ))}
+</div>

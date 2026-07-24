@@ -1,0 +1,34 @@
+services:
+  build:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ..:/app
+    command: sh -c "npm ci && npm run build"
+
+  dev:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ..:/app
+    ports:
+      - "4321:4321"
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    stdin_open: true
+    tty: true
+
+  preview:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ..:/app
+    ports:
+      - "4321:4321"
+    command: sh -c "npm ci && npm run build && npm run preview -- --host 0.0.0.0"
+
+  test-screenshots:
+    image: mcr.microsoft.com/playwright:v1.49.0-jammy
+    working_dir: /app
+    volumes:
+      - ..:/app
+    command: sh -c "npm ci && npx playwright install chromium && npm run build && npm run test:screenshots"
