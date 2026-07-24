@@ -1,45 +1,49 @@
-plans:
-  - id: trial
-    name: "Aula Experimental"
-    price: "Grátis"
-    period: "primeira aula"
-    features:
-      - "Sem compromisso"
-      - "Conheça a roda e a bateria"
-      - "Avaliação de nível"
-    highlighted: true
-    cta: "Agendar Agora"
-  - id: monthly
-    name: "Plano Mensal"
-    price: "45€"
-    period: "por mês"
-    features:
-      - "2 aulas por semana"
-      - "Acesso a rodas abertas"
-      - "Material de apoio"
-    cta: "Inscrever-se"
-  - id: quarterly
-    name: "Plano Trimestral"
-    price: "120€"
-    period: "por trimestre"
-    features:
-      - "2 aulas por semana"
-      - "10% de desconto"
-      - "Camiseta do grupo"
-    cta: "Inscrever-se"
-  - id: annual
-    name: "Plano Anual"
-    price: "420€"
-    period: "por ano"
-    features:
-      - "2 aulas por semana"
-      - "20% de desconto"
-      - "Camiseta + cordão"
-      - "Prioridade em eventos"
-    cta: "Inscrever-se"
+adult:
+  plans:
+    - id: trial
+      name: "Primeira Aula"
+      price: "Grátis"
+      period: "primeira aula"
+      features:
+        - "Sem compromisso"
+        - "Conheça a roda"
+        - "Todos os níveis bem-vindos"
+      highlighted: true
+      cta: "Entrar no WhatsApp"
+    - id: monthly
+      name: "Mensal"
+      price: "50€"
+      period: "por mês"
+      features:
+        - "2 treinos por semana"
+        - "Flexibilidade de horários"
+        - "Ambiente acolhedor"
+      cta: "Inscrever-se"
+    - id: dropin
+      name: "Por Aula"
+      price: "10€"
+      period: "por aula"
+      features:
+        - "Ideal se não puder vir todas as semanas"
+        - "Mesmo acesso à roda"
+        - "Sem mensalidade"
+      cta: "Contactar"
+  bring_items:
+    - "Roupa confortável (calção e t-shirt)"
+    - "Garrafa de água"
 
-bring_items:
-  - "Roupa confortável (calção e t-shirt)"
-  - "Garrafa de água"
-  - "Toalha pequena"
-  - "Disposição para cantar e jogar na roda"
+kids:
+  plans:
+    - id: open
+      name: "Inscrições abertas"
+      price: "Sob consulta"
+      period: "vagas disponíveis"
+      features:
+        - "Turma infantil 5–13 anos"
+        - "Jogo, ritmo e respeito"
+        - "Ambiente acolhedor"
+      highlighted: true
+      cta: "Inscrever-se"
+  bring_items:
+    - "Roupa confortável"
+    - "Garrafa de água"

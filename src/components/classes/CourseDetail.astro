@@ -1,0 +1,35 @@
+---
+import type { ClassProgram, Locale } from '../../lib/types';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  program: ClassProgram;
+  locale: Locale;
+}
+
+const { program, locale } = Astro.props;
+---
+
+<div class="space-y-8">
+  <img
+    src={program.image}
+    alt={program.title}
+    width="960"
+    height="540"
+    class="w-full max-w-3xl aspect-[16/9] object-cover"
+    loading="eager"
+  />
+  <p class="text-base leading-relaxed max-w-3xl">{program.description}</p>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    {program.pillars.map((p) => (
+      <div class="flex items-center gap-2 text-base">
+        <span class="text-xl">{p.icon}</span>
+        <span>{p.label}</span>
+      </div>
+    ))}
+  </div>
+  <p class="text-base"><strong>{t(locale, 'common.schedule_label')}</strong> {program.schedule_note}</p>
+  <ul class="list-disc list-inside text-base space-y-1">
+    {program.equipment.map((e) => <li>{e}</li>)}
+  </ul>
+</div>

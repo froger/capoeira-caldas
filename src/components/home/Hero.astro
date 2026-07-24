@@ -1,8 +1,5 @@
 ---
 import WaveDivider from '../decor/WaveDivider.astro';
-import AzulejoPattern from '../decor/AzulejoPattern.astro';
-import GingaBackground from '../decor/GingaBackground.astro';
-import FloatingNotes from '../decor/FloatingNotes.astro';
 import type { Locale } from '../../lib/types';
 import { getSite } from '../../lib/data';
 import { getRoutes, t } from '../../lib/i18n';
@@ -14,43 +11,45 @@ interface Props {
 const { locale } = Astro.props;
 const site = getSite(locale);
 const routes = getRoutes(locale);
-const contactPath = routes.contact ?? (locale === 'pt' ? '/contato' : '/en/contact');
+const contactPath = routes.contact;
+const headline = t(locale, 'home.hero_headline');
+const subhead = t(locale, 'home.hero_subhead');
 ---
 
-<section class="relative min-h-[85vh] sm:min-h-screen hero-gradient overflow-hidden flex items-center">
-  <AzulejoPattern />
-  <GingaBackground />
-  <FloatingNotes />
-  <div class="container mx-auto px-4 py-20 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-    <div class="text-white reveal">
-      <p class="font-accent text-2xl text-amarelo-sol mb-2">{site.positioning.category}</p>
-      <h1 class="text-5xl sm:text-7xl font-display leading-tight mb-6">{site.positioning.headline}</h1>
-      <p class="text-lg sm:text-xl text-white/90 mb-8 max-w-xl">{site.positioning.subhead}</p>
-      <div class="flex flex-wrap gap-4 mb-8">
-        <a href={contactPath} class="btn btn-lg bg-amarelo-sol text-dark-blue border-none hover:scale-105 transition-transform min-h-[44px]">
-          {site.positioning.primary_cta}
-        </a>
-        <a href={site.positioning.youtube_url} target="_blank" rel="noopener" class="btn btn-lg btn-outline text-white border-white hover:bg-white/10 min-h-[44px]">
-          {t(locale, 'home.watch_youtube')}
-        </a>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="avatar-group -space-x-3">
-          <div class="avatar"><div class="w-10 rounded-full bg-amarelo-sol/80"></div></div>
-          <div class="avatar"><div class="w-10 rounded-full bg-verde-brasil/80"></div></div>
-          <div class="avatar"><div class="w-10 rounded-full bg-bahia-blue/80"></div></div>
-        </div>
-        <span class="text-sm font-semibold">{t(locale, 'home.students_count')}</span>
-      </div>
-    </div>
-    <div class="relative reveal">
-      <img src="/images/hero.svg" alt="Roda de capoeira" class="rounded-2xl shadow-2xl w-full" loading="eager" />
-      <div class="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg px-6 py-4">
-        <p class="font-display text-3xl text-verde-brasil">{t(locale, 'home.years_stat')}</p>
-      </div>
+<section class="relative min-h-[85vh] sm:min-h-screen overflow-hidden flex items-center">
+  <video
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+  >
+    <source src="/video/background-video.mp4" type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 bg-[#224435]/65"></div>
+
+  <div class="container mx-auto px-4 py-20 sm:py-24 relative z-10 max-w-4xl text-white reveal">
+    <p class="font-display text-2xl sm:text-4xl text-amarelo-sol mb-3 hidden sm:block">{site.name}</p>
+    <h1 class="text-3xl sm:text-5xl lg:text-7xl font-display leading-tight mb-6">{headline}</h1>
+    <p class="text-lg sm:text-2xl text-white/95 mb-8 sm:mb-10 max-w-2xl leading-relaxed">{subhead}</p>
+    <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+      <a
+        href={`https://wa.me/${site.contact.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-lg bg-amarelo-sol text-dark-blue border-none hover:scale-105 transition-transform min-h-[48px] text-base sm:text-lg"
+      >
+        {site.positioning.primary_cta}
+      </a>
+      <a href={contactPath} class="btn btn-lg btn-outline text-white border-white hover:bg-white/10 min-h-[48px] text-base sm:text-lg">
+        {t(locale, 'home.cta_secondary')}
+      </a>
     </div>
   </div>
-  <div class="absolute bottom-0 left-0 right-0">
+
+  <div class="absolute bottom-0 left-0 right-0 z-10">
     <WaveDivider />
   </div>
 </section>

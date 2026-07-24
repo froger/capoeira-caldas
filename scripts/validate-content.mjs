@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'yaml';
 
@@ -17,7 +17,17 @@ function loadYaml(path) {
   return parse(readFileSync(path, 'utf-8'));
 }
 
-// Required data files
+function flattenKeys(obj, prefix = '') {
+  const keys = [];
+  if (!obj || typeof obj !== 'object') return keys;
+  for (const [k, v] of Object.entries(obj)) {
+    const path = prefix ? `${prefix}.${k}` : k;
+    if (v && typeof v === 'object' && !Array.isArray(v)) keys.push(...flattenKeys(v, path));
+    else keys.push(path);
+  }
+  return keys;
+}
+
 for (const file of [
   'site.pt.yml', 'site.en.yml',
   'schedule.pt.yml', 'schedule.en.yml',
@@ -39,28 +49,45 @@ for (const file of [
   }
 }
 
-// site.pt.yml positioning keys
 const sitePt = loadYaml(join(dataDir, 'site.pt.yml'));
-for (const key of ['name', 'positioning']) {
-  if (!sitePt[key]) fail(`site.pt.yml missing ${key}`);
+const siteEn = loadYaml(join(dataDir, 'site.en.yml'));
+for (const [label, site] of [['site.pt.yml', sitePt], ['site.en.yml', siteEn]]) {
+  if (!site.name) fail(`${label} missing name`);
+  if (!site.positioning?.primary_cta) fail(`${label} missing positioning.primary_cta`);
+  if (!site.positioning?.navbar_cta) fail(`${label} missing positioning.navbar_cta`);
+  if (!site.social?.x && site.social?.x !== '') fail(`${label} missing social.x`);
 }
-if (!sitePt.positioning?.headline) fail('site.pt.yml missing positioning.headline');
 
-// i18n key parity (top-level nav keys)
 const uiPt = loadYaml(join(i18nDir, 'ui.pt.yml'));
 const uiEn = loadYaml(join(i18nDir, 'ui.en.yml'));
-for (const section of ['nav', 'routes', 'footer', 'home']) {
+
+const ptKeys = new Set(flattenKeys(uiPt));
+const enKeys = new Set(flattenKeys(uiEn));
+for (const key of ptKeys) {
+  if (!enKeys.has(key)) fail(`ui.en.yml missing key ${key}`);
+}
+for (const key of enKeys) {
+  if (!ptKeys.has(key)) fail(`ui.pt.yml missing key ${key}`);
+}
+for (const section of ['nav', 'routes', 'footer', 'home', 'common', 'pages']) {
   if (!uiPt[section] || !uiEn[section]) fail(`missing i18n section: ${section}`);
-  for (const key of Object.keys(uiPt[section])) {
-    if (!(key in uiEn[section])) fail(`ui.en.yml missing key ${section}.${key}`);
-  }
 }
 
-// Gallery image paths exist
-const gallery = loadYaml(join(dataDir, 'gallery.pt.yml'));
-for (const item of gallery.items ?? []) {
-  const imgPath = join(root, 'public', item.src.replace(/^\//, ''));
-  if (!existsSync(imgPath)) fail(`gallery image missing: ${item.src}`);
+const ptRouteKeys = Object.keys(uiPt.routes ?? {}).sort().join(',');
+const enRouteKeys = Object.keys(uiEn.routes ?? {}).sort().join(',');
+if (ptRouteKeys !== enRouteKeys) {
+  fail(`routes key mismatch pt=[${ptRouteKeys}] en=[${enRouteKeys}]`);
+}
+
+for (const locale of ['pt', 'en']) {
+  const gallery = loadYaml(join(dataDir, `gallery.${locale}.yml`));
+  for (const item of gallery.items ?? []) {
+    for (const src of [item.src, ...(item.images ?? [])]) {
+      if (!src) continue;
+      const imgPath = join(root, 'public', src.replace(/^\//, ''));
+      if (!existsSync(imgPath)) fail(`gallery image missing (${locale}): ${src}`);
+    }
+  }
 }
 
 if (errors > 0) {

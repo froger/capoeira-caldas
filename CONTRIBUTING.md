@@ -6,7 +6,7 @@
 capoeira/
 ├── src/
 │   ├── components/     # Astro UI components
-│   ├── content/        # Markdown blog + events
+│   ├── content/        # Markdown events
 │   ├── data/           # YAML structured content (edit here!)
 │   ├── i18n/           # UI chrome strings (ui.pt.yml, ui.en.yml)
 │   ├── layouts/        # Page shells
@@ -29,7 +29,6 @@ capoeira/
 | FAQ | `src/data/faq.{pt,en}.yml` |
 | Gallery | `src/data/gallery.{pt,en}.yml` |
 | Nav labels, section titles | `src/i18n/ui.{pt,en}.yml` |
-| Blog posts | `src/content/blog/*.md` |
 | Events | `src/content/events/*.md` |
 
 ## Check before PR

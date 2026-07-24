@@ -30,9 +30,9 @@ const { testimonials } = getTestimonials(locale);
                   <div class="w-12 rounded-full"><img src={item.avatar} alt="" /></div>
                 </div>
                 <div>
-                  <p class="font-semibold">{item.name}</p>
-                  <p class="text-sm text-base-content/70">{item.level}</p>
-                </div>
+                    <p class="font-semibold">{item.name}</p>
+                    {item.level && <p class="text-base text-base-content/80">{item.level}</p>}
+                  </div>
               </div>
             </div>
           </div>

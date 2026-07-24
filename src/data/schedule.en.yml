@@ -1,37 +1,16 @@
 classes:
-  - group: kids
-    day: Monday
-    time: "17:00"
-    level: Beginner
-    instructor: "Instructor João"
-    location: "Main Gym"
-  - group: kids
-    day: Wednesday
-    time: "17:00"
-    level: Beginner
-    instructor: "Instructor João"
-    location: "Main Gym"
-  - group: kids
-    day: Saturday
-    time: "10:00"
+  - day: Monday
+    time: "18:00–19:30"
     level: All levels
-    instructor: "Mestre Raimundo"
-    location: "Main Gym"
-  - group: adult
-    day: Tuesday
-    time: "19:30"
-    level: Beginner
-    instructor: "Contramestre Ana"
-    location: "Main Gym"
-  - group: adult
-    day: Thursday
-    time: "19:30"
-    level: Intermediate
-    instructor: "Contramestre Ana"
-    location: "Main Gym"
-  - group: adult
-    day: Friday
-    time: "20:00"
-    level: Advanced
-    instructor: "Mestre Raimundo"
-    location: "Main Gym"
+    instructor: "Instructors"
+    location: "Caldas — Sociedade Columbófila Caldense"
+  - day: Thursday
+    time: "19:00–20:30"
+    level: All levels
+    instructor: "Instructors"
+    location: "Caldas — Sociedade Columbófila Caldense"
+  - day: Tuesday
+    time: "19:00–20:30"
+    level: All levels
+    instructor: "Instructors"
+    location: "Gaeiras — Espaço O"

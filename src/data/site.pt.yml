@@ -1,54 +1,33 @@
-name: "Grupo Capoeira Brasil"
-tagline: "A arte que conecta corpos e almas"
-description: "Associação de capoeira com música ao vivo em Lisboa — tradição Angola e Regional para todas as idades."
+name: "Associação Capoeira Caldas"
+description: "Associação de Capoeira Angola em Caldas da Rainha e Gaeiras — movimentos dinâmicos, ritmo e comunidade."
 
 contact:
-  email: "contato@capoeirabrasil.pt"
-  phone: "+351 912 345 678"
-  whatsapp: "351912345678"
-  address: "Rua da Roda, 42"
-  city: "Lisboa, Portugal"
-  map_embed_url: "https://maps.google.com/maps?q=Lisboa%20Portugal&output=embed"
+  email: "capoeiraangola.pt@gmail.com"
+  phone: "+351 920 477 255"
+  whatsapp: "351920477255"
+  address: "Sociedade Columbófila Caldense"
+  city: "Caldas da Rainha, Portugal"
+  map_embed_url: "https://maps.google.com/maps?q=Capoeira%20Caldas%20Caldas%20da%20Rainha&output=embed"
 
 social:
-  instagram: "https://instagram.com/capoeirabrasil"
-  youtube: "https://youtube.com/@capoeirabrasil"
-  facebook: "https://facebook.com/capoeirabrasil"
-  tiktok: "https://tiktok.com/@capoeirabrasil"
-
-forms:
-  newsletter_action: "#"
-  contact_formspree: ""
+  instagram: "https://www.instagram.com/capoeira_caldas/"
+  youtube: ""
+  facebook: "https://www.facebook.com/profile.php?id=61556212329374"
+  x: "https://twitter.com/Capoeira_PT"
 
 positioning:
-  category: "Associação de capoeira com música ao vivo"
-  headline: "A Arte que Conecta Corpos e Almas"
-  subhead: "Somos uma associação de capoeira com bateria ao vivo — berimbau, pandeiro e atabaque em cada roda. Para famílias e adultos que buscam tradição, musicalidade e comunidade, não competição estilo MMA."
-  primary_cta: "Comece Agora"
-  navbar_cta: "Experimente Grátis"
-  youtube_url: "https://youtube.com/@capoeirabrasil"
+  primary_cta: "Primeira Aula Grátis"
+  navbar_cta: "Entrar no WhatsApp"
   value_themes:
-    - id: tradicao
-      title: "Tradição e Autenticidade"
-      description: "Capoeira Angola e Regional com linhagem respeitada e mestres graduados."
     - id: musicalidade
-      title: "Música ao Vivo"
-      description: "Berimbau, pandeiro e atabaque em cada roda — ladainhas, corridos e quadras."
+      title: "Musicalidade"
+      description: "Berimbau, canto e ritmo guiam o jogo e ligam cada aula à tradição da Capoeira Angola."
+      image: "/images/berimbaus.jpg"
+    - id: agilidade
+      title: "Agilidade"
+      description: "Movimento, ginga e coordenação melhoram flexibilidade, equilíbrio e agilidade do corpo."
+      image: "/images/roda_pedrinha.jpg"
     - id: comunidade
-      title: "Comunidade Acolhedora"
-      description: "Família, respeito e amizade na roda. Desenvolvimento integral pelo jogo."
-  anti_persona_hint: "Não somos academia de MMA — somos roda com bateria e respeito."
-  pov:
-    - "Capoeira sem música ao vivo não é capoeira completa."
-    - "Angola e Regional convivem na nossa roda — tradição antes de espetáculo."
-    - "Crianças aprendem pelo jogo e pelo canto, não por competição."
-
-stats:
-  - label: "Anos de Tradição"
-    value: 15
-  - label: "Alunos Ativos"
-    value: 200
-  - label: "Aulas por Semana"
-    value: 12
-  - label: "Eventos Realizados"
-    value: 48
+      title: "Comunidade"
+      description: "A roda cria laços de amizade, camaradagem e respeito em Caldas da Rainha e Gaeiras."
+      image: "/images/roda_pedrinha_zumbi.jpg"

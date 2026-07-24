@@ -1,45 +1,52 @@
-plans:
-  - id: trial
-    name: "Trial Class"
-    price: "Free"
-    period: "first class"
-    features:
-      - "No commitment"
-      - "Meet the roda and bateria"
-      - "Level assessment"
-    highlighted: true
-    cta: "Book Now"
-  - id: monthly
-    name: "Monthly Plan"
-    price: "€45"
-    period: "per month"
-    features:
-      - "2 classes per week"
-      - "Open roda access"
-      - "Support materials"
-    cta: "Sign Up"
-  - id: quarterly
-    name: "Quarterly Plan"
-    price: "€120"
-    period: "per quarter"
-    features:
-      - "2 classes per week"
-      - "10% discount"
-      - "Group t-shirt"
-    cta: "Sign Up"
-  - id: annual
-    name: "Annual Plan"
-    price: "€420"
-    period: "per year"
-    features:
-      - "2 classes per week"
-      - "20% discount"
-      - "T-shirt + cord"
-      - "Event priority"
-    cta: "Sign Up"
+adult:
+  plans:
+    - id: trial
+      name: "First Class"
+      price: "Free"
+      period: "first class"
+      features:
+        - "No commitment"
+        - "Meet the roda"
+        - "All levels welcome"
+      highlighted: true
+      cta: "Join WhatsApp"
+    - id: monthly
+      name: "Monthly"
+      price: "€50"
+      period: "per month"
+      features:
+        - "Classes in Caldas and Gaeiras"
+        - "Flexible schedule"
+        - "Welcoming environment"
+      cta: "Sign Up"
+    - id: dropin
+      name: "Per Class"
+      price: "€10"
+      period: "per class"
+      features:
+        - "Ideal if you cannot come every week"
+        - "Same access to the roda"
+        - "No monthly fee"
+      cta: "Contact"
+  bring_items:
+    - "Comfortable clothes (shorts and t-shirt)"
+    - "Water bottle"
+    - "Small towel"
+    - "Willingness to sing and play in the roda"
 
-bring_items:
-  - "Comfortable clothes (shorts and t-shirt)"
-  - "Water bottle"
-  - "Small towel"
-  - "Willingness to sing and play in the roda"
+kids:
+  plans:
+    - id: open
+      name: "Registration open"
+      price: "On request"
+      period: "places available"
+      features:
+        - "Kids class ages 5–13"
+        - "Play, rhythm and respect"
+        - "Welcoming environment"
+      highlighted: true
+      cta: "Register"
+  bring_items:
+    - "Comfortable clothes"
+    - "Water bottle"
+    - "Willingness to play and sing"

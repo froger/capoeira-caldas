@@ -17,59 +17,57 @@ const footerLinks = [
   { label: nav.capoeira, href: `${routes.home ?? '/'}#programs` },
   { label: nav.classes, href: routes.classes },
   { label: nav.schedule, href: routes.schedule },
-  { label: nav.about, href: routes.about },
   { label: nav.gallery, href: routes.gallery },
-  { label: nav.blog, href: routes.blog },
+  { label: nav.about, href: routes.about },
   { label: nav.contact, href: routes.contact },
 ];
+
+const socials = [
+  { href: site.social.instagram, label: 'Instagram', icon: 'ri-instagram-line' },
+  { href: site.social.facebook, label: 'Facebook', icon: 'ri-facebook-circle-line' },
+  { href: site.social.x, label: 'X', icon: 'ri-twitter-x-line' },
+  { href: site.social.youtube, label: 'YouTube', icon: 'ri-youtube-line' },
+].filter((s) => Boolean(s.href));
 ---
 
 <footer class="bg-deep-blue text-white py-16">
-  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-    <div>
-      <div class="flex items-center gap-2 mb-4">
-        <img src="/icons/instruments/berimbau.svg" alt="" width="32" height="32" />
-        <span class="font-display text-2xl text-amarelo-sol">{site.name}</span>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.links_title')}</h3>
+        <ul class="space-y-2">
+          {footerLinks.map((link) => (
+            <li><a href={link.href} class="text-base hover:text-amarelo-sol transition-colors">{link.label}</a></li>
+          ))}
+        </ul>
       </div>
-      <p class="text-sm text-white/80">{t(locale, 'footer.description')}</p>
-    </div>
-    <div>
-      <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.links_title')}</h3>
-      <ul class="space-y-2">
-        {footerLinks.map((link) => (
-          <li><a href={link.href} class="text-sm hover:text-amarelo-sol transition-colors">{link.label}</a></li>
-        ))}
-      </ul>
-    </div>
-    <div>
-      <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.contact_title')}</h3>
-      <ul class="space-y-2 text-sm text-white/80">
-        <li><a href={`mailto:${site.contact.email}`} class="hover:text-amarelo-sol">{site.contact.email}</a></li>
-        <li><a href={`https://wa.me/${site.contact.whatsapp}`} class="hover:text-amarelo-sol">WhatsApp</a></li>
-        <li>{site.contact.phone}</li>
-        <li>{site.contact.address}, {site.contact.city}</li>
-      </ul>
-    </div>
-    <div>
-      <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.social_title')}</h3>
-      <div class="flex gap-3 mb-6">
-        <a href={site.social.instagram} class="btn btn-circle btn-sm btn-ghost text-white" aria-label="Instagram">IG</a>
-        <a href={site.social.youtube} class="btn btn-circle btn-sm btn-ghost text-white" aria-label="YouTube">YT</a>
-        <a href={site.social.facebook} class="btn btn-circle btn-sm btn-ghost text-white" aria-label="Facebook">FB</a>
-        <a href={site.social.tiktok} class="btn btn-circle btn-sm btn-ghost text-white" aria-label="TikTok">TK</a>
+      <div>
+        <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.contact_title')}</h3>
+        <ul class="space-y-2 text-base text-white/80 mb-6">
+          <li><a href={`mailto:${site.contact.email}`} class="hover:text-amarelo-sol">{site.contact.email}</a></li>
+          <li><a href={`https://wa.me/${site.contact.whatsapp}`} class="hover:text-amarelo-sol">WhatsApp</a></li>
+          <li>{site.contact.phone}</li>
+          <li>{site.contact.address}, {site.contact.city}</li>
+        </ul>
+        <h3 class="font-display text-lg text-amarelo-sol mb-4">{t(locale, 'footer.social_title')}</h3>
+        <div class="flex gap-3">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              class="btn btn-circle btn-sm btn-ghost text-white text-xl"
+              aria-label={s.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class={s.icon} aria-hidden="true"></i>
+            </a>
+          ))}
+        </div>
       </div>
-      <h3 class="font-display text-lg text-amarelo-sol mb-2">{t(locale, 'footer.newsletter_title')}</h3>
-      <form action={site.forms.newsletter_action} method="post" class="flex gap-2">
-        <input type="email" name="email" placeholder={t(locale, 'footer.newsletter_placeholder')} class="input input-sm input-bordered flex-1 bg-white/10 text-white placeholder:text-white/50" required />
-        <button type="submit" class="btn btn-sm bg-verde-brasil text-white border-none">{t(locale, 'footer.newsletter_button')}</button>
-      </form>
     </div>
   </div>
-  <div class="container mx-auto px-4 mt-12 pt-8 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/60">
+  <div class="container mx-auto px-4 mt-12 pt-8 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-4 text-base text-white/60">
     <p>© {year} {site.name} — {t(locale, 'footer.copyright')}</p>
-    <div class="flex gap-4">
-      <a href={routes.privacy} class="hover:text-amarelo-sol">{t(locale, 'footer.privacy')}</a>
-      <a href={routes.terms} class="hover:text-amarelo-sol">{t(locale, 'footer.terms')}</a>
-    </div>
+    <a href={routes.privacy} class="hover:text-amarelo-sol">{t(locale, 'footer.privacy')}</a>
   </div>
 </footer>

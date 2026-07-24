@@ -2,14 +2,23 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import GalleryGrid from '../../components/gallery/GalleryGrid.astro';
 import { getGallery } from '../../lib/data';
+import { t } from '../../lib/i18n';
 
 const locale = 'en';
 const { items } = getGallery(locale);
 ---
 
-<PageLayout title="Gallery" locale={locale} path="/en/gallery" breadcrumbs={[{ label: 'Home', href: '/en/' }, { label: 'Gallery' }]}>
+<PageLayout
+  title={t(locale, 'pages.gallery.title')}
+  locale={locale}
+  path="/en/gallery"
+  breadcrumbs={[{ label: t(locale, 'common.home'), href: '/en/' }, { label: t(locale, 'pages.gallery.title') }]}
+>
   <section class="container mx-auto px-4 py-16">
-    <h1 class="text-5xl font-display text-azul-celeste mb-8">Photo and Video Gallery</h1>
+    <h1 class="text-3xl sm:text-5xl font-display text-azul-celeste mb-4">{t(locale, 'pages.gallery.title')}</h1>
+    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-base-content/80">
+      {t(locale, 'pages.gallery.intro')}
+    </p>
     <GalleryGrid items={items} locale={locale} />
   </section>
 </PageLayout>

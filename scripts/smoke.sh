@@ -9,7 +9,7 @@ if [[ ! -f dist/index.html ]]; then
   exit 1
 fi
 
-grep -q 'A Arte que Conecta Corpos e Almas\|The Art that Connects Bodies and Souls' dist/index.html || {
+grep -q 'Capoeira nas Caldas da Rainha' dist/index.html || {
   echo "ERROR: PT hero headline not found in dist/index.html"
   exit 1
 }
@@ -29,12 +29,14 @@ grep -q 'lang="en"' dist/en/index.html || {
   exit 1
 }
 
+grep -q 'Capoeira in Caldas da Rainha' dist/en/index.html || {
+  echo "ERROR: EN hero headline not found in dist/en/index.html"
+  exit 1
+}
+
 if [[ ! -f dist/en/contact/index.html ]] && [[ ! -f dist/en/contact.html ]]; then
-  # Astro may output en/contact/index.html
-  if [[ ! -f dist/en/contact/index.html ]]; then
-    echo "ERROR: EN contact page missing"
-    exit 1
-  fi
+  echo "ERROR: EN contact page missing"
+  exit 1
 fi
 
 echo "OK: smoke tests passed"

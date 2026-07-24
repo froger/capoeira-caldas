@@ -1,25 +1,18 @@
 instructors:
-  - id: raimundo
-    name: "Mestre Raimundo"
-    title: "Founder"
-    graduation: "Mestre de Capoeira Angola"
-    bio: "Mestre Raimundo founded the group in 2010, bringing Bahian lineage to Lisbon. Dedicated to preserving musicality and oral tradition."
-    bio_short: "Founder with over 30 years of roda experience."
+  - id: marcelo
+    name: "Mestre Marcelo"
+    graduation: "Mestre"
+    bio: "Mestre Marcelo leads Associação Capoeira Caldas with experience and passion for Capoeira Angola."
+    bio_short: "Leadership and tradition in Capoeira Angola."
     photo: "/images/instructor-1.svg"
-    instagram: "https://instagram.com/"
-    youtube: "https://youtube.com/"
-  - id: ana
-    name: "Contramestre Ana"
-    title: "Adult Coordinator"
-    graduation: "Contramestre"
-    bio: "Contramestre Ana coordinates adult classes, specializing in Regional capoeira and physical conditioning in the roda."
-    bio_short: "Specialist in advanced technique and musicality."
-    photo: "/images/instructor-2.svg"
-    instagram: "https://instagram.com/"
-  - id: joao
-    name: "Instructor João"
-    title: "Kids Coordinator"
-    graduation: "Instrutor"
-    bio: "Instructor João develops the kids program focusing on play, flexibility and introduction to bateria instruments."
-    bio_short: "Passionate about teaching children through play."
-    photo: "/images/instructor-3.svg"
+  - id: pedrinha
+    name: "Treinel Pedrinha"
+    graduation: "Treinel"
+    bio: "From Sweden, lived in Australia, and has trained since childhood with Mestre Marcelo. In 2025 she opened the group in Caldas da Rainha. She loves acrobatics and is known for her Capoeira."
+    bio_short: "Opened the Caldas group in 2025. Loves acrobatics."
+    photo: "/images/roda_pedrinha.jpg"
+  - id: zumbi
+    name: "Zumbi"
+    bio: "Zumbi shares Capoeira Angola with energy and community spirit in Caldas and Gaeiras."
+    bio_short: "Energy and community in Capoeira Angola."
+    photo: "/images/zumbi_portrait.jpg"

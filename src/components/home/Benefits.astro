@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../../lib/types';
 import { getSite } from '../../lib/data';
+import { t } from '../../lib/i18n';
 
 interface Props {
   locale: Locale;
@@ -8,27 +9,32 @@ interface Props {
 
 const { locale } = Astro.props;
 const site = getSite(locale);
-const icons = ['🎭', '🎶', '🤝'];
 ---
 
 <section class="py-20 bg-base-200 reveal">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl sm:text-5xl font-display text-azul-celeste mb-12 text-center">
-      {locale === 'pt' ? 'Por que Escolher Nossa Associação?' : 'Why Choose Our Association?'}
+    <h2 class="text-3xl sm:text-5xl font-display text-azul-celeste mb-12 text-center">
+      {t(locale, 'home.benefits_title')}
     </h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {site.positioning.value_themes.map((theme, i) => (
-        <div class="card bg-base-100 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all">
-          <div class="card-body items-center text-center">
-            <div class="w-16 h-16 rounded-full bg-verde-brasil flex items-center justify-center text-2xl mb-2">
-              {icons[i] ?? '✨'}
-            </div>
-            <h3 class="card-title font-display text-xl text-azul-celeste">{theme.title}</h3>
-            <p class="text-sm">{theme.description}</p>
+      {site.positioning.value_themes.map((theme) => (
+        <div class="overflow-hidden bg-base-100 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all">
+          {theme.image && (
+            <img
+              src={theme.image}
+              alt={theme.title}
+              width="640"
+              height="400"
+              class="w-full aspect-[4/3] object-cover"
+              loading="lazy"
+            />
+          )}
+          <div class="p-6 text-center">
+            <h3 class="font-display text-2xl text-azul-celeste mb-2">{theme.title}</h3>
+            <p class="text-base leading-relaxed">{theme.description}</p>
           </div>
         </div>
       ))}
     </div>
-    <p class="text-center mt-8 text-sm text-base-content/70 font-accent text-xl">{site.positioning.anti_persona_hint}</p>
   </div>
 </section>

@@ -6,6 +6,7 @@ import type {
   FaqItem,
   GalleryItem,
   Instructor,
+  PricingAudience,
   PricingPlan,
   ScheduleClass,
   SiteConfig,
@@ -36,8 +37,14 @@ export function getTestimonials(locale: 'pt' | 'en'): { testimonials: Testimonia
   return loadYaml(`testimonials.${locale}.yml`);
 }
 
-export function getPricing(locale: 'pt' | 'en'): { plans: PricingPlan[]; bring_items: string[] } {
-  return loadYaml(`pricing.${locale}.yml`);
+export function getPricing(
+  locale: 'pt' | 'en',
+  audience: PricingAudience,
+): { plans: PricingPlan[]; bring_items: string[] } {
+  const data = loadYaml<Record<PricingAudience, { plans: PricingPlan[]; bring_items: string[] }>>(
+    `pricing.${locale}.yml`,
+  );
+  return data[audience];
 }
 
 export function getGallery(locale: 'pt' | 'en'): { items: GalleryItem[] } {
@@ -50,4 +57,8 @@ export function getFaq(locale: 'pt' | 'en'): { items: FaqItem[] } {
 
 export function getClasses(locale: 'pt' | 'en'): { programs: ClassProgram[] } {
   return loadYaml(`classes.${locale}.yml`);
+}
+
+export function getClassProgram(locale: 'pt' | 'en', id: string): ClassProgram | undefined {
+  return getClasses(locale).programs.find((p) => p.id === id);
 }

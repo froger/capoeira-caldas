@@ -1,25 +1,18 @@
 instructors:
-  - id: raimundo
-    name: "Mestre Raimundo"
-    title: "Fundador"
-    graduation: "Mestre de Capoeira Angola"
-    bio: "Mestre Raimundo fundou o grupo em 2010, trazendo a linhagem da Bahia para Lisboa. Dedicado à preservação da musicalidade e da tradição oral da capoeira."
-    bio_short: "Fundador com mais de 30 anos de experiência na roda."
+  - id: marcelo
+    name: "Mestre Marcelo"
+    graduation: "Mestre"
+    bio: "Mestre Marcelo lidera a Associação Capoeira Caldas com experiência e paixão pela Capoeira Angola."
+    bio_short: "Liderança e tradição na Capoeira Angola."
     photo: "/images/instructor-1.svg"
-    instagram: "https://instagram.com/"
-    youtube: "https://youtube.com/"
-  - id: ana
-    name: "Contramestre Ana"
-    title: "Coordenadora Adulto"
-    graduation: "Contramestre"
-    bio: "Contramestre Ana coordena as turmas de adultos, com especialização em Capoeira Regional e condicionamento físico na roda."
-    bio_short: "Especialista em técnica avançada e musicalidade."
-    photo: "/images/instructor-2.svg"
-    instagram: "https://instagram.com/"
-  - id: joao
-    name: "Instrutor João"
-    title: "Coordenador Infantil"
-    graduation: "Instrutor"
-    bio: "Instrutor João desenvolve o programa infantil com foco no jogo, flexibilidade e introdução aos instrumentos da bateria."
-    bio_short: "Paixão por ensinar crianças através do jogo."
-    photo: "/images/instructor-3.svg"
+  - id: pedrinha
+    name: "Treinel Pedrinha"
+    graduation: "Treinel"
+    bio: "Da Suécia, viveu na Austrália e treina desde criança com Mestre Marcelo. Em 2025 abriu o grupo em Caldas da Rainha. Ama acrobacias e é conhecida pela sua Capoeira."
+    bio_short: "Abriu o grupo em Caldas em 2025. Ama acrobacias."
+    photo: "/images/roda_pedrinha.jpg"
+  - id: zumbi
+    name: "Zumbi"
+    bio: "Zumbi partilha a Capoeira Angola com energia e espírito de comunidade em Caldas e Gaeiras."
+    bio_short: "Energia e comunidade na Capoeira Angola."
+    photo: "/images/zumbi_portrait.jpg"

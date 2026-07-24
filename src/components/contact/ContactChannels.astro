@@ -1,0 +1,44 @@
+---
+import type { Locale } from '../../lib/types';
+import { getSite } from '../../lib/data';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const site = getSite(locale);
+const waHref = `https://wa.me/${site.contact.whatsapp}`;
+---
+
+<div class="space-y-6">
+  <p class="text-base leading-relaxed max-w-xl">{t(locale, 'pages.contact.intro')}</p>
+  <div class="flex flex-wrap gap-4">
+    <a
+      href={waHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn bg-verde-brasil text-white border-none min-h-[44px]"
+    >
+      {t(locale, 'pages.contact.whatsapp_cta')}
+    </a>
+    <a href={`mailto:${site.contact.email}`} class="btn btn-outline border-verde-brasil text-verde-brasil min-h-[44px]">
+      {t(locale, 'pages.contact.email_cta')}
+    </a>
+  </div>
+  <ul class="space-y-3 text-base">
+    <li>
+      <strong>{t(locale, 'common.email')}:</strong>
+      <a href={`mailto:${site.contact.email}`} class="link link-hover ml-1">{site.contact.email}</a>
+    </li>
+    <li>
+      <strong>{t(locale, 'common.whatsapp')}:</strong>
+      <a href={waHref} class="link link-hover ml-1" target="_blank" rel="noopener noreferrer">{site.contact.phone}</a>
+    </li>
+    <li>
+      <strong>{t(locale, 'pages.contact.address_label')}:</strong>
+      <span class="ml-1">{site.contact.address}, {site.contact.city}</span>
+    </li>
+  </ul>
+</div>

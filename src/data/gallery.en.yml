@@ -1,33 +1,45 @@
 items:
-  - id: roda-1
-    type: image
-    src: "/images/gallery-1.svg"
-    title: "Capoeira roda"
-    category: rodas
-  - id: treino-1
-    type: image
-    src: "/images/gallery-2.svg"
-    title: "Ginga training"
-    category: treinos
-  - id: evento-1
-    type: image
-    src: "/images/gallery-3.svg"
-    title: "Batizado 2025"
-    category: eventos
-  - id: viagem-1
-    type: image
-    src: "/images/gallery-4.svg"
-    title: "Trip to Bahia"
-    category: viagens
-  - id: video-1
-    type: video
-    src: "/images/gallery-5.svg"
-    thumbnail: "/images/gallery-5.svg"
-    title: "Musicality class"
-    category: treinos
-    youtube_id: "dQw4w9WgXcQ"
-  - id: roda-2
-    type: image
-    src: "/images/gallery-6.svg"
-    title: "Open roda"
-    category: rodas
+  - id: tshirt
+    src: /images/products/tshirt-2.jpg
+    title: T-shirt
+    price: €25
+    images:
+      - /images/products/tshirt-2.jpg
+      - /images/products/tshirt-1.jpg
+  - id: berimbau-kid
+    src: /images/products/berimbau-2.jpg
+    title: Kids Berimbau
+    price: €80
+    images:
+      - /images/products/berimbau-2.jpg
+      - /images/products/berimbau-1.jpg
+      - /images/products/instrumentos-1.jpg
+  - id: berimbau
+    src: /images/products/berimbau-1.jpg
+    title: Berimbau
+    price: €120
+    images:
+      - /images/products/berimbau-1.jpg
+      - /images/products/berimbau-2.jpg
+      - /images/products/capoeira-1.jpg
+  - id: caxixi
+    src: /images/products/caxixi-1.jpg
+    title: Caxixi
+    price: €15
+    images:
+      - /images/products/caxixi-1.jpg
+      - /images/products/instrumentos-1.jpg
+  - id: atabaque
+    src: /images/products/atabaque-1.jpg
+    title: Atabaque
+    price: €200
+    images:
+      - /images/products/atabaque-1.jpg
+      - /images/products/instrumentos-1.jpg
+  - id: pandeiro
+    src: /images/products/pandeiro-1.jpg
+    title: Pandeiro
+    price: €45
+    images:
+      - /images/products/pandeiro-1.jpg
+      - /images/products/berimbau-1.jpg

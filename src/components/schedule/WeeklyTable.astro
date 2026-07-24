@@ -1,5 +1,6 @@
 ---
 import type { ScheduleClass } from '../../lib/types';
+import { t } from '../../lib/i18n';
 
 interface Props {
   classes: ScheduleClass[];
@@ -7,20 +8,17 @@ interface Props {
 }
 
 const { classes, locale } = Astro.props;
-const labels = locale === 'pt'
-  ? { day: 'Dia', time: 'Hora', level: 'Nível', instructor: 'Instrutor', location: 'Local' }
-  : { day: 'Day', time: 'Time', level: 'Level', instructor: 'Instructor', location: 'Location' };
 ---
 
 <div class="overflow-x-auto">
   <table class="table table-zebra">
     <thead>
       <tr>
-        <th>{labels.day}</th>
-        <th>{labels.time}</th>
-        <th>{labels.level}</th>
-        <th>{labels.instructor}</th>
-        <th>{labels.location}</th>
+        <th>{t(locale, 'common.day')}</th>
+        <th>{t(locale, 'common.time')}</th>
+        <th>{t(locale, 'common.level')}</th>
+        <th>{t(locale, 'common.instructor')}</th>
+        <th>{t(locale, 'common.location')}</th>
       </tr>
     </thead>
     <tbody>

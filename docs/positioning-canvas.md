@@ -1,4 +1,4 @@
-# Positioning canvas — Grupo Capoeira Brasil
+# Positioning canvas — Associação Capoeira Caldas
 
 ## Success definition
 

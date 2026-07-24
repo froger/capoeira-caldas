@@ -1,11 +1,26 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { getSite } from '../lib/data';
+import { t } from '../lib/i18n';
+
+const locale = 'pt';
+const site = getSite(locale);
 ---
 
-<PageLayout title="Política de Privacidade" locale="pt" path="/privacidade" breadcrumbs={[{ label: 'Início', href: '/' }, { label: 'Privacidade' }]}>
-  <section class="container mx-auto px-4 py-16 prose max-w-3xl">
-    <h1>Política de Privacidade</h1>
-    <p>Esta política descreve como o Grupo Capoeira Brasil recolhe e utiliza dados pessoais.</p>
-    <p>Os dados submetidos através do formulário de contacto são utilizados apenas para responder ao seu pedido.</p>
+<PageLayout
+  title={t(locale, 'pages.privacy.title')}
+  locale={locale}
+  path="/privacidade"
+  breadcrumbs={[{ label: t(locale, 'common.home'), href: '/' }, { label: t(locale, 'footer.privacy') }]}
+>
+  <section class="container mx-auto px-4 py-16 max-w-3xl space-y-6">
+    <h1 class="font-display text-azul-celeste">{t(locale, 'pages.privacy.title')}</h1>
+    <p>{t(locale, 'pages.privacy.p1')}</p>
+    <p>{t(locale, 'pages.privacy.p2')}</p>
+    <p>
+      {t(locale, 'pages.privacy.p3')}
+      {' '}
+      <a class="link text-verde-brasil" href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+    </p>
   </section>
 </PageLayout>

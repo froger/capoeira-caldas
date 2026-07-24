@@ -10,42 +10,46 @@ interface Props {
 const { locale } = Astro.props;
 const schedule = getSchedule(locale);
 const routes = getRoutes(locale);
-const kidsGroup = locale === 'pt' ? 'infantil' : 'kids';
-const adultGroup = locale === 'pt' ? 'adulto' : 'adult';
-const kidsClasses = schedule.classes.filter((c) => c.group === kidsGroup);
-const adultClasses = schedule.classes.filter((c) => c.group === adultGroup);
 ---
 
 <section class="py-20 bg-cream reveal">
   <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-display text-azul-celeste mb-8">{t(locale, 'home.schedule_title')}</h2>
-    <div role="tablist" class="tabs tabs-boxed bg-base-200 w-fit mb-6">
-      <input type="radio" name="schedule-tabs" role="tab" class="tab" aria-label={t(locale, 'home.schedule_tab_kids')} checked />
-      <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-0 mt-4">
-        <div class="overflow-x-auto">
-          <table class="table">
-            <thead><tr><th>{locale === 'pt' ? 'Dia' : 'Day'}</th><th>{locale === 'pt' ? 'Hora' : 'Time'}</th><th>{locale === 'pt' ? 'Nível' : 'Level'}</th><th>{locale === 'pt' ? 'Local' : 'Location'}</th></tr></thead>
-            <tbody>
-              {kidsClasses.map((c) => (
-                <tr><td>{c.day}</td><td>{c.time}</td><td>{c.level}</td><td>{c.location}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <input type="radio" name="schedule-tabs" role="tab" class="tab" aria-label={t(locale, 'home.schedule_tab_adults')} />
-      <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-0 mt-4">
-        <div class="overflow-x-auto">
-          <table class="table">
-            <thead><tr><th>{locale === 'pt' ? 'Dia' : 'Day'}</th><th>{locale === 'pt' ? 'Hora' : 'Time'}</th><th>{locale === 'pt' ? 'Nível' : 'Level'}</th><th>{locale === 'pt' ? 'Local' : 'Location'}</th></tr></thead>
-            <tbody>
-              {adultClasses.map((c) => (
-                <tr><td>{c.day}</td><td>{c.time}</td><td>{c.level}</td><td>{c.location}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <h2 class="text-4xl font-display text-azul-celeste mb-6">{t(locale, 'home.schedule_title')}</h2>
+    <div class="flex flex-wrap gap-3 mb-8">
+      <a
+        href={routes.classes_kids}
+        class="badge badge-lg bg-verde-brasil text-white border-none px-4 py-3 text-base hover:opacity-90 transition-opacity"
+      >
+        {t(locale, 'home.schedule_tab_kids')}
+      </a>
+      <a
+        href={routes.classes_adults}
+        class="badge badge-lg bg-verde-brasil text-white border-none px-4 py-3 text-base hover:opacity-90 transition-opacity"
+      >
+        {t(locale, 'home.schedule_tab_adults')}
+      </a>
+    </div>
+    <div class="overflow-x-auto bg-base-100 border border-base-300 rounded-box mb-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{t(locale, 'common.day')}</th>
+            <th>{t(locale, 'common.time')}</th>
+            <th>{t(locale, 'common.level')}</th>
+            <th>{t(locale, 'common.location')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {schedule.classes.map((c) => (
+            <tr>
+              <td>{c.day}</td>
+              <td>{c.time}</td>
+              <td>{c.level}</td>
+              <td>{c.location}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
     <a href={routes.schedule} class="btn bg-verde-brasil text-white border-none">{t(locale, 'home.schedule_cta')}</a>
   </div>

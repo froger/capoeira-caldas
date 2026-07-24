@@ -1,37 +1,16 @@
 classes:
-  - group: infantil
-    day: Segunda
-    time: "17:00"
-    level: Iniciante
-    instructor: "Instrutor João"
-    location: "Ginásio Principal"
-  - group: infantil
-    day: Quarta
-    time: "17:00"
-    level: Iniciante
-    instructor: "Instrutor João"
-    location: "Ginásio Principal"
-  - group: infantil
-    day: Sábado
-    time: "10:00"
+  - day: Segunda
+    time: "18:00–19:30"
     level: Todos
-    instructor: "Mestre Raimundo"
-    location: "Ginásio Principal"
-  - group: adulto
-    day: Terça
-    time: "19:30"
-    level: Iniciante
-    instructor: "Contramestre Ana"
-    location: "Ginásio Principal"
-  - group: adulto
-    day: Quinta
-    time: "19:30"
-    level: Intermediário
-    instructor: "Contramestre Ana"
-    location: "Ginásio Principal"
-  - group: adulto
-    day: Sexta
-    time: "20:00"
-    level: Avançado
-    instructor: "Mestre Raimundo"
-    location: "Ginásio Principal"
+    instructor: "Instrutores"
+    location: "Caldas — Sociedade Columbófila Caldense"
+  - day: Quinta
+    time: "19:00–20:30"
+    level: Todos
+    instructor: "Instrutores"
+    location: "Caldas — Sociedade Columbófila Caldense"
+  - day: Terça
+    time: "19:00–20:30"
+    level: Todos
+    instructor: "Instrutores"
+    location: "Gaeiras — Espaço O"

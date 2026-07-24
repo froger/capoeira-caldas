@@ -1,40 +1,73 @@
 ---
-import type { GalleryItem } from '../../lib/types';
+import type { GalleryItem, Locale } from '../../lib/types';
+import { getSite } from '../../lib/data';
+import { t } from '../../lib/i18n';
 
 interface Props {
   items: GalleryItem[];
-  locale: 'pt' | 'en';
+  locale: Locale;
 }
 
 const { items, locale } = Astro.props;
+const site = getSite(locale);
+const openLabel = t(locale, 'common.view_details');
+const contactLabel = t(locale, 'common.contact_action');
+const contactHref = `https://wa.me/${site.contact.whatsapp}`;
 ---
 
-<div class="columns-2 md:columns-3 gap-4" id="gallery-grid">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id="gallery-grid">
   {items.map((item) => (
-    <div class="break-inside-avoid mb-4">
+    <article class="flex flex-col gap-4">
       <button
         type="button"
-        class="gallery-item w-full relative group rounded-xl overflow-hidden"
-        data-type={item.type}
-        data-src={item.src}
-        data-youtube={item.youtube_id ?? ''}
+        class="gallery-item group w-full overflow-hidden rounded-xl bg-base-200 aspect-[4/3] text-left"
         data-title={item.title}
+        data-price={item.price}
+        data-images={JSON.stringify(item.images)}
       >
-        <img src={item.thumbnail ?? item.src} alt={item.title} class="w-full" loading="lazy" />
-        {item.type === 'video' && (
-          <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
-            <span class="text-5xl text-white">▶</span>
-          </div>
-        )}
+        <img
+          src={item.src}
+          alt={item.title}
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
       </button>
-    </div>
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display text-2xl text-azul-celeste">{item.title}</h2>
+          <p class="text-xl font-semibold text-verde-brasil mt-1">{item.price}</p>
+        </div>
+        <button
+          type="button"
+          class="gallery-item btn bg-verde-brasil text-white border-none text-base min-h-[44px]"
+          data-title={item.title}
+          data-price={item.price}
+          data-images={JSON.stringify(item.images)}
+        >
+          {openLabel}
+        </button>
+      </div>
+    </article>
   ))}
 </div>
 
 <dialog id="lightbox-modal" class="modal">
-  <div class="modal-box max-w-4xl">
-    <h3 class="font-display text-2xl mb-4" id="lightbox-title"></h3>
-    <div id="lightbox-content"></div>
+  <div class="modal-box max-w-3xl bg-base-100">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3" aria-label="Close">✕</button>
+    </form>
+    <h3 class="font-display text-3xl text-azul-celeste" id="lightbox-title"></h3>
+    <p class="text-xl font-semibold text-verde-brasil mt-1 mb-6" id="lightbox-price"></p>
+    <div id="lightbox-content" class="space-y-4"></div>
+    <div class="modal-action justify-between items-center">
+      <div class="flex gap-2">
+        <button type="button" id="lightbox-prev" class="btn btn-outline btn-sm">‹</button>
+        <button type="button" id="lightbox-next" class="btn btn-outline btn-sm">›</button>
+      </div>
+      <a href={contactHref} class="btn bg-verde-brasil text-white border-none" target="_blank" rel="noopener noreferrer">
+        {contactLabel}
+      </a>
+    </div>
   </div>
   <form method="dialog" class="modal-backdrop"><button>close</button></form>
 </dialog>

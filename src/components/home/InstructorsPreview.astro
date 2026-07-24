@@ -22,8 +22,8 @@ const { instructors } = getInstructors(locale);
           </figure>
           <div class="card-body">
             <h3 class="card-title font-display text-2xl text-azul-celeste">{inst.name}</h3>
-            <span class="badge badge-outline">{inst.graduation}</span>
-            <p class="text-sm">{inst.bio_short}</p>
+            {inst.graduation && <span class="badge badge-outline">{inst.graduation}</span>}
+            <p class="text-base">{inst.bio_short}</p>
             <div class="flex gap-2 mt-2">
               {inst.instagram && <a href={inst.instagram} class="btn btn-ghost btn-xs">IG</a>}
               {inst.youtube && <a href={inst.youtube} class="btn btn-ghost btn-xs">YT</a>}

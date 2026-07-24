@@ -1,16 +1,13 @@
 testimonials:
-  - quote: "Capoeira transformed my son's confidence. The musicality and respect in the roda are incredible."
-    name: "Maria Silva"
-    level: "Kids student's mother"
+  - quote: "I've practiced capoeira at this school since activities started in Caldas. The teachers are very polite and attentive. Capoeira is a rich art, and the classes go far beyond the physical side — we leave every day soaked in sweat — with instrumental music and singing too."
+    name: "Sávio"
     rating: 5
-    avatar: "/images/avatar-1.svg"
-  - quote: "I found a family in the roda. Live berimbau makes all the difference — it's not just exercise."
-    name: "Pedro Costa"
-    level: "Adult student — Intermediate"
+    avatar: "/images/testimonials/savio.png"
+  - quote: "A lovely group! Attentive teachers, always in a good mood and patient when teaching! Highly recommend!!"
+    name: "Jão"
     rating: 5
-    avatar: "/images/avatar-2.svg"
-  - quote: "Authentic tradition with mestres who truly live the culture. I recommend it to all families."
-    name: "Carla Mendes"
-    level: "Adult student — Beginner"
+    avatar: "/images/testimonials/jao.png"
+  - quote: "Excellent and generous teachers who make everyone feel very welcome. Solid physical training + lots of fun + a real community. We're lucky to have this capoeira group in Caldas!"
+    name: "Pelin"
     rating: 5
-    avatar: "/images/avatar-3.svg"
+    avatar: "/images/testimonials/pelin.png"

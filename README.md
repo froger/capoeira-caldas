@@ -1,4 +1,4 @@
-# Grupo Capoeira Brasil — static site
+# Associação Capoeira Caldas — static site
 
 Associação de capoeira com música ao vivo. Astro 5 + Tailwind CSS 4 + DaisyUI 5.
 
@@ -23,7 +23,6 @@ docker compose -f docker/docker-compose.yml run --rm dev
 | Schedule | `src/data/schedule.pt.yml` |
 | Instructors | `src/data/instructors.pt.yml` |
 | Pricing | `src/data/pricing.pt.yml` |
-| Blog posts | `src/content/blog/*.md` |
 | UI labels (nav, buttons) | `src/i18n/ui.pt.yml` |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full map.
@@ -55,4 +54,4 @@ docker compose -f docker/docker-compose.yml run --rm build   # → dist/
 
 ## License
 
-Content © Grupo Capoeira Brasil. Code: MIT (adjust as needed).
+Content © Associação Capoeira Caldas. Code: MIT (adjust as needed).

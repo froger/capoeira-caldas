@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { t } from '../../lib/i18n';
 
 interface Props {
   events: CollectionEntry<'events'>[];
@@ -7,24 +8,24 @@ interface Props {
 }
 
 const { events, locale } = Astro.props;
-const rsvpLabel = locale === 'pt' ? 'Inscrever-se' : 'RSVP';
+const detailsLabel = t(locale, 'common.view_details');
 ---
 
 <div class="grid md:grid-cols-2 gap-6">
   {events.map((event) => (
-    <div class="card bg-base-100 shadow-md">
+    <article id={event.id} class="card bg-base-100 shadow-md scroll-mt-24">
       <div class="card-body">
-        <span class="badge badge-secondary">{event.data.type}</span>
+        <span class="badge bg-verde-brasil text-white border-none">{event.data.type}</span>
         <h3 class="card-title font-display text-xl">{event.data.title}</h3>
-        <p class="text-sm text-verde-brasil font-semibold">
+        <p class="text-base text-verde-brasil font-semibold">
           {event.data.date.toLocaleDateString(locale === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long' })}
         </p>
         <p>{event.data.description}</p>
-        <p class="text-sm">📍 {event.data.location}</p>
-        {event.data.rsvp_url && (
-          <a href={event.data.rsvp_url} class="btn btn-sm bg-capoeira-red text-white border-none w-fit">{rsvpLabel}</a>
-        )}
+        <p class="text-base">📍 {event.data.location}</p>
+        <a href={`#${event.id}`} class="btn btn-sm bg-verde-brasil text-white border-none w-fit mt-2">
+          {detailsLabel}
+        </a>
       </div>
-    </div>
+    </article>
   ))}
 </div>

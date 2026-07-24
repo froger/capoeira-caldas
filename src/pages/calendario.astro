@@ -4,26 +4,23 @@ import WeeklyTable from '../components/schedule/WeeklyTable.astro';
 import EventCards from '../components/schedule/EventCards.astro';
 import { getSchedule } from '../lib/data';
 import { getCollection } from 'astro:content';
+import { t } from '../lib/i18n';
 
 const locale = 'pt';
 const schedule = getSchedule(locale);
 const events = (await getCollection('events')).filter((e) => e.data.locale === 'pt');
-const kidsGroup = 'infantil';
-const adultGroup = 'adulto';
 ---
 
-<PageLayout title="Calendário" locale={locale} path="/calendario" breadcrumbs={[{ label: 'Início', href: '/' }, { label: 'Calendário' }]}>
+<PageLayout
+  title={t(locale, 'pages.schedule.title')}
+  locale={locale}
+  path="/calendario"
+  breadcrumbs={[{ label: t(locale, 'common.home'), href: '/' }, { label: t(locale, 'pages.schedule.title') }]}
+>
   <section class="container mx-auto px-4 py-16">
-    <h1 class="text-5xl font-display text-azul-celeste mb-8">Horários das Aulas</h1>
-    <div role="tablist" class="tabs tabs-boxed w-fit mb-8">
-      <input type="radio" name="cal-tabs" role="tab" class="tab" aria-label="Todos" checked />
-      <div role="tabpanel" class="tab-content mt-4"><WeeklyTable classes={schedule.classes} locale={locale} /></div>
-      <input type="radio" name="cal-tabs" role="tab" class="tab" aria-label="Infantil" />
-      <div role="tabpanel" class="tab-content mt-4"><WeeklyTable classes={schedule.classes.filter((c) => c.group === kidsGroup)} locale={locale} /></div>
-      <input type="radio" name="cal-tabs" role="tab" class="tab" aria-label="Adulto" />
-      <div role="tabpanel" class="tab-content mt-4"><WeeklyTable classes={schedule.classes.filter((c) => c.group === adultGroup)} locale={locale} /></div>
-    </div>
-    <h2 class="text-3xl font-display text-azul-celeste mb-6 mt-16">Próximos Eventos</h2>
+    <h1 class="text-3xl sm:text-5xl font-display text-azul-celeste mb-8">{t(locale, 'pages.schedule.heading')}</h1>
+    <WeeklyTable classes={schedule.classes} locale={locale} />
+    <h2 class="text-3xl font-display text-azul-celeste mb-6 mt-16">{t(locale, 'pages.schedule.events')}</h2>
     <EventCards events={events} locale={locale} />
   </section>
 </PageLayout>
