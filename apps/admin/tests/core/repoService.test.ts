@@ -30,15 +30,20 @@ describe('RepoService', () => {
     expect(g.clone).toHaveBeenCalled();
   });
 
-  it('sets remote when already a repo', async () => {
+  it('sets clean remote when already a repo (no token in url)', async () => {
     const g = mockGit();
     const svc = new RepoService({ createGit: () => g as never });
     await svc.ensureClone({
       repoDir: '/tmp/r',
-      remoteUrl: 'https://github.com/froger/capoeira-caldas.git',
+      remoteUrl: 'https://x-access-token:OLD@github.com/froger/capoeira-caldas.git',
       token: 't',
     });
-    expect(g.raw).toHaveBeenCalled();
+    expect(g.raw).toHaveBeenCalledWith([
+      'remote',
+      'set-url',
+      'origin',
+      'https://github.com/froger/capoeira-caldas.git',
+    ]);
   });
 
   it('pulls ff-only when behind', async () => {

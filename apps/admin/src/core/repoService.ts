@@ -2,11 +2,6 @@ import { simpleGit, type SimpleGit } from 'simple-git';
 import type { ConflictChoice, SyncResult } from './schemas';
 import { SyncResultSchema } from './schemas';
 
-export type GitAuth = {
-  token: string;
-  remoteUrl: string;
-};
-
 export type RepoServiceDeps = {
   createGit?: (cwd: string) => SimpleGit;
 };
@@ -15,11 +10,22 @@ function defaultGit(cwd: string): SimpleGit {
   return simpleGit({ baseDir: cwd });
 }
 
-function authedUrl(remoteUrl: string, token: string): string {
-  const u = new URL(remoteUrl);
+/** One-shot authed URL — never persist this with `remote set-url`. */
+export function authedUrl(remoteUrl: string, token: string): string {
+  const u = new URL(remoteUrl.replace(/\.git$/, '') + '.git');
+  // Strip any previous embedded credentials first.
   u.username = 'x-access-token';
   u.password = token;
-  return u.toString();
+  return u.toString().replace(/\.git$/, '') + '.git';
+}
+
+function cleanRemoteUrl(remoteUrl: string): string {
+  const u = new URL(remoteUrl.includes('://') ? remoteUrl : `https://${remoteUrl}`);
+  u.username = '';
+  u.password = '';
+  let href = u.toString();
+  if (!href.endsWith('.git')) href = `${href.replace(/\/$/, '')}.git`;
+  return href;
 }
 
 export class RepoService {
@@ -36,23 +42,32 @@ export class RepoService {
     branch?: string;
   }): Promise<void> {
     const branch = opts.branch ?? 'main';
+    const clean = cleanRemoteUrl(opts.remoteUrl);
     const git = this.createGit(opts.repoDir);
     const isRepo = await git.checkIsRepo().catch(() => false);
     if (!isRepo) {
       const rootGit = this.createGit('/');
-      await rootGit.clone(authedUrl(opts.remoteUrl, opts.token), opts.repoDir, [
+      await rootGit.clone(authedUrl(clean, opts.token), opts.repoDir, [
         '--branch',
         branch,
         '--single-branch',
       ]);
+      // Drop credentials from origin after clone.
+      const cloned = this.createGit(opts.repoDir);
+      await cloned.raw(['remote', 'set-url', 'origin', clean]);
       return;
     }
-    await git.raw(['remote', 'set-url', 'origin', authedUrl(opts.remoteUrl, opts.token)]);
+    // Keep a credential-free origin so CLI pushes use gh/SSH, not a stale OAuth token.
+    await git.raw(['remote', 'set-url', 'origin', clean]);
   }
 
-  async pull(repoDir: string): Promise<SyncResult> {
+  async pull(repoDir: string, remoteUrl?: string, token?: string): Promise<SyncResult> {
     const git = this.createGit(repoDir);
-    await git.fetch('origin');
+    if (remoteUrl && token) {
+      await git.fetch(authedUrl(cleanRemoteUrl(remoteUrl), token));
+    } else {
+      await git.fetch('origin');
+    }
     const status = await git.status();
     const localSha = (await git.revparse(['HEAD'])).trim();
     const remoteSha = (await git.revparse(['origin/main'])).trim();
@@ -64,7 +79,11 @@ export class RepoService {
     const behind = status.behind;
     const ahead = status.ahead;
     if (ahead === 0 && behind > 0) {
-      await git.pull('origin', 'main', { '--ff-only': null });
+      if (remoteUrl && token) {
+        await git.pull(authedUrl(cleanRemoteUrl(remoteUrl), token), 'main', { '--ff-only': null });
+      } else {
+        await git.pull('origin', 'main', { '--ff-only': null });
+      }
       return SyncResultSchema.parse({ kind: 'ok' });
     }
     if (ahead > 0 && behind === 0) {
@@ -81,7 +100,9 @@ export class RepoService {
     remoteUrl: string;
   }): Promise<SyncResult> {
     const git = this.createGit(opts.repoDir);
-    await git.raw(['remote', 'set-url', 'origin', authedUrl(opts.remoteUrl, opts.token)]);
+    const clean = cleanRemoteUrl(opts.remoteUrl);
+    const pushUrl = authedUrl(clean, opts.token);
+    await git.raw(['remote', 'set-url', 'origin', clean]);
     await git.add(opts.paths);
     const status = await git.status();
     if (status.staged.length === 0 && status.files.length === 0) {
@@ -97,10 +118,10 @@ export class RepoService {
     await git.commit(opts.message);
 
     try {
-      await git.push('origin', 'main');
+      await git.push(pushUrl, 'main');
       return SyncResultSchema.parse({ kind: 'ok' });
     } catch {
-      await git.fetch('origin');
+      await git.fetch(pushUrl);
       const localSha = (await git.revparse(['HEAD'])).trim();
       const remoteSha = (await git.revparse(['origin/main'])).trim();
       if (localSha === remoteSha) {
@@ -117,14 +138,16 @@ export class RepoService {
     token: string,
   ): Promise<SyncResult> {
     const git = this.createGit(repoDir);
-    await git.raw(['remote', 'set-url', 'origin', authedUrl(remoteUrl, token)]);
-    await git.fetch('origin');
+    const clean = cleanRemoteUrl(remoteUrl);
+    const pushUrl = authedUrl(clean, token);
+    await git.raw(['remote', 'set-url', 'origin', clean]);
+    await git.fetch(pushUrl);
     if (choice === 'discard-local') {
       await git.reset(['--hard', 'origin/main']);
       return SyncResultSchema.parse({ kind: 'ok' });
     }
     try {
-      await git.push(['origin', 'main', '--force-with-lease']);
+      await git.push([pushUrl, 'main', '--force-with-lease']);
       return SyncResultSchema.parse({ kind: 'ok' });
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);

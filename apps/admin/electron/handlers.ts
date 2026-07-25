@@ -261,8 +261,8 @@ export const handlers: HandlerMap = {
     });
   },
   'sync.pull': async (ctx) => {
-    requireToken(ctx);
-    return ctx.repo.pull(ctx.repoDir);
+    const token = requireToken(ctx);
+    return ctx.repo.pull(ctx.repoDir, ctx.remoteUrl, token);
   },
   'sync.resolve': async (ctx, input) => {
     const token = requireToken(ctx);
