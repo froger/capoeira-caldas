@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import { api } from '../ports/api';
 import { useDirtyForm } from '../shared/dirtyForm';
 import type { ScheduleFile, ScheduleRow, SyncResult } from '../core/schemas';
+import { ScheduleFileSchema } from '../core/schemas';
+import type { FieldErrors } from '../core/formErrors';
+import { validateLocalePair } from '../core/formErrors';
 import { PageShell } from '../components/PageShell';
 import { SaveButton } from '../components/SaveButton';
 import { ConfirmDialog } from '../components/ConfirmDialog';
+import { FieldError, fieldClass } from '../components/FieldError';
 import { ipcError } from '../components/PairedTermsEditor';
 
 type Props = {
@@ -32,12 +36,16 @@ export function TimetablePage({ onResult, onSaved }: Props) {
   const [saving, setSaving] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<number | null>(null);
+  const [errors, setErrors] = useState<FieldErrors>({});
 
   useEffect(() => {
     let cancelled = false;
     void api('content.loadSchedule')
       .then((data) => {
-        if (!cancelled) form.reset(data);
+        if (!cancelled) {
+          form.reset(data);
+          setErrors({});
+        }
       })
       .catch((e) => {
         if (!cancelled) setLoadError(ipcError(e));
@@ -48,15 +56,21 @@ export function TimetablePage({ onResult, onSaved }: Props) {
   }, []);
 
   async function save() {
+    const parsed = validateLocalePair(ScheduleFileSchema, form.value);
+    if (!parsed.ok) {
+      setErrors(parsed.errors);
+      return;
+    }
     setSaving(true);
     try {
       const result = await api('content.saveAndPublish', {
         pageId: 'timetable',
-        payload: form.value,
+        payload: parsed.data,
       });
       onResult(result);
       if (result.kind === 'ok') {
         form.markSaved();
+        setErrors({});
         onSaved();
       }
     } finally {
@@ -78,6 +92,7 @@ export function TimetablePage({ onResult, onSaved }: Props) {
       return { ...row, [field]: value };
     });
     form.setValue({ ...form.value, [locale]: { classes } });
+    setErrors({});
   }
 
   function addEntry() {
@@ -85,6 +100,7 @@ export function TimetablePage({ onResult, onSaved }: Props) {
       pt: { classes: [...form.value.pt.classes, blankRow()] },
       en: { classes: [...form.value.en.classes, blankRow()] },
     });
+    setErrors({});
   }
 
   function deleteEntry(index: number) {
@@ -93,6 +109,7 @@ export function TimetablePage({ onResult, onSaved }: Props) {
       en: { classes: form.value.en.classes.filter((_, i) => i !== index) },
     });
     setPendingDelete(null);
+    setErrors({});
   }
 
   const count = Math.max(form.value.pt.classes.length, form.value.en.classes.length);
@@ -117,6 +134,9 @@ export function TimetablePage({ onResult, onSaved }: Props) {
       }
     >
       {loadError ? <p className="error">{loadError}</p> : null}
+      {Object.keys(errors).length > 0 ? (
+        <p className="form-error-banner">Fix the highlighted fields before saving.</p>
+      ) : null}
       <ConfirmDialog
         open={pendingDelete !== null}
         title="Delete class slot?"
@@ -146,16 +166,20 @@ export function TimetablePage({ onResult, onSaved }: Props) {
               return (
                 <div key={locale} className="card">
                   <h4>{locale.toUpperCase()}</h4>
-                  {(['day', 'time', 'level', 'instructor', 'location'] as const).map((field) => (
-                    <label key={field} className="field">
-                      <span>{field}</span>
-                      <input
-                        value={row[field]}
-                        onChange={(e) => updateRow(locale, i, field, e.target.value)}
-                      />
-                    </label>
-                  ))}
-                  <label className="field">
+                  {(['day', 'time', 'level', 'instructor', 'location'] as const).map((field) => {
+                    const path = `${locale}.classes.${i}.${field}`;
+                    return (
+                      <label key={field} className={fieldClass(errors, path)}>
+                        <span>{field}</span>
+                        <input
+                          value={row[field]}
+                          onChange={(e) => updateRow(locale, i, field, e.target.value)}
+                        />
+                        <FieldError errors={errors} path={path} />
+                      </label>
+                    );
+                  })}
+                  <label className={fieldClass(errors, `${locale}.classes.${i}.audience`)}>
                     <span>audience</span>
                     <select
                       value={row.audience ?? ''}
@@ -165,6 +189,7 @@ export function TimetablePage({ onResult, onSaved }: Props) {
                       <option value="adult">adult</option>
                       <option value="kids">kids</option>
                     </select>
+                    <FieldError errors={errors} path={`${locale}.classes.${i}.audience`} />
                   </label>
                 </div>
               );

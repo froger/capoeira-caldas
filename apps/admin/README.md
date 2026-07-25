@@ -26,11 +26,20 @@ If term pages are empty, the app is reading a clone that does not have `src/i18n
 
 ```bash
 yarn lint
-yarn test:coverage   # fails under 90% lines/branches/functions/statements
+yarn test:coverage   # global ≥90%; auth + validation modules require ≥95–100%
 ```
 
-## Installers
+Critical paths with stricter coverage floors: `deviceFlow` (login/poll failures), `tokenStore` (save/load/clear logout), `formErrors` + `schemas` (validation).
 
-CI builds on tag `admin-v*` (Linux AppImage/deb, macOS dmg, Windows NSIS). Artifacts are unsigned in v1.
+## Installers / GitHub Releases
 
-Download from the GitHub Release for that tag, install, sign in with GitHub, then edit and **Save** (publishes). Use **Sync** to pull remote changes.
+Push a tag to build unsigned installers and attach them to a GitHub Release:
+
+```bash
+git tag admin-v0.1.0
+git push origin admin-v0.1.0
+```
+
+Assets: Linux AppImage + `.deb`, macOS `.dmg`, Windows NSIS `.exe`.
+
+Repo secret required for sign-in in the packaged app: `ADMIN_GITHUB_OAUTH_CLIENT_ID` (OAuth App client id with Device Flow).

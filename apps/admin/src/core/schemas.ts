@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const LocaleSchema = z.enum(['pt', 'en']);
 export type Locale = z.infer<typeof LocaleSchema>;
 
-export const StringMapSchema = z.record(z.string(), z.string());
+export const StringMapSchema = z.record(z.string(), z.string().min(1, 'Required'));
 
 export const NestedStringMapSchema = z.record(
   z.string(),
@@ -21,7 +21,7 @@ export type SiteTerms = z.infer<typeof SiteTermsSchema>;
 
 export const PageTermsSchema: z.ZodType<Record<string, string>> = z.record(
   z.string(),
-  z.coerce.string(),
+  z.string().min(1, 'Required'),
 );
 export type PageTerms = z.infer<typeof PageTermsSchema>;
 
@@ -36,18 +36,18 @@ export const PageNameSchema = z.enum([
 export type PageName = z.infer<typeof PageNameSchema>;
 
 export const EventFrontmatterSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
+  title: z.string().min(1, 'Required'),
+  description: z.string().min(1, 'Required'),
   locale: LocaleSchema,
-  date: z.string().min(1),
-  location: z.string().min(1),
+  date: z.string().min(1, 'Required'),
+  location: z.string().min(1, 'Required'),
   rsvp_url: z.string().optional(),
   rsvp_label: z.string().optional(),
 });
 export type EventFrontmatter = z.infer<typeof EventFrontmatterSchema>;
 
 export const EventDocSchema = z.object({
-  slug: z.string().min(1),
+  slug: z.string().min(1, 'Required'),
   locale: LocaleSchema,
   data: EventFrontmatterSchema,
   body: z.string(),
@@ -55,11 +55,11 @@ export const EventDocSchema = z.object({
 export type EventDoc = z.infer<typeof EventDocSchema>;
 
 export const GalleryItemSchema = z.object({
-  id: z.string().min(1),
-  src: z.string(),
-  title: z.string().min(1),
-  price: z.string(),
-  images: z.array(z.string()),
+  id: z.string().min(1, 'Required'),
+  src: z.string().min(1, 'Add an image and set a cover'),
+  title: z.string().min(1, 'Required'),
+  price: z.string().min(1, 'Required'),
+  images: z.array(z.string()).min(1, 'Add at least one image'),
 });
 export type GalleryItem = z.infer<typeof GalleryItemSchema>;
 
@@ -69,11 +69,11 @@ export const GalleryFileSchema = z.object({
 export type GalleryFile = z.infer<typeof GalleryFileSchema>;
 
 export const ScheduleRowSchema = z.object({
-  day: z.string().min(1),
-  time: z.string().min(1),
-  level: z.string().min(1),
-  instructor: z.string().min(1),
-  location: z.string().min(1),
+  day: z.string().min(1, 'Required'),
+  time: z.string().min(1, 'Required'),
+  level: z.string().min(1, 'Required'),
+  instructor: z.string().min(1, 'Required'),
+  location: z.string().min(1, 'Required'),
   audience: z.enum(['kids', 'adult']).optional(),
 });
 export type ScheduleRow = z.infer<typeof ScheduleRowSchema>;

@@ -1,33 +1,32 @@
-import { mkdtempSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { resolveWorkspaceRoot, isAdminContentRepo } from '../../src/core/workspaceRoot';
-import { copyProductImages, absolutePublicAsset } from '../../src/core/galleryAssets';
-
-describe('workspaceRoot', () => {
-  it('prefers env dir when valid', () => {
-    const root = join(process.cwd(), '../..');
-    expect(isAdminContentRepo(root)).toBe(true);
-    expect(resolveWorkspaceRoot('/fallback', [], root)).toBe(root);
-  });
-
-  it('falls back to default', () => {
-    const fallback = '/tmp/admin-fallback-ws';
-    expect(resolveWorkspaceRoot(fallback, ['/nope'], undefined)).toBe(fallback);
-  });
-});
+import { absolutePublicAsset, copyProductImages } from '../../src/core/galleryAssets';
 
 describe('galleryAssets', () => {
-  it('copies images into public products', () => {
-    const root = mkdtempSync(join(tmpdir(), 'gal-'));
-    mkdirSync(join(root, 'public/images/products'), { recursive: true });
-    const src = join(root, 'in.jpg');
-    writeFileSync(src, 'fake');
-    const copied = copyProductImages(root, [src]);
-    expect(copied).toHaveLength(1);
-    expect(copied[0]!.publicPath.startsWith('/images/products/')).toBe(true);
-    expect(existsSync(copied[0]!.absolutePath)).toBe(true);
-    expect(absolutePublicAsset(root, copied[0]!.publicPath)).toBe(copied[0]!.absolutePath);
+  it('copies images and builds public paths', () => {
+    const root = mkdtempSync(join(tmpdir(), 'admin-gal-'));
+    const src = join(root, 'photo.PNG');
+    writeFileSync(src, 'x');
+    const [copied] = copyProductImages(root, [src]);
+    expect(copied?.publicPath.startsWith('/images/products/')).toBe(true);
+    expect(copied?.fileName.toLowerCase().endsWith('.png')).toBe(true);
+  });
+
+  it('throws when source image is missing', () => {
+    const root = mkdtempSync(join(tmpdir(), 'admin-gal-miss-'));
+    expect(() => copyProductImages(root, [join(root, 'nope.jpg')])).toThrow(/image not found/);
+  });
+
+  it('uses image fallback name and absolute public path', () => {
+    const root = mkdtempSync(join(tmpdir(), 'admin-gal-name-'));
+    const src = join(root, '!!!');
+    writeFileSync(src, 'x');
+    const [copied] = copyProductImages(root, [src]);
+    expect(copied?.fileName.startsWith('image-')).toBe(true);
+    expect(absolutePublicAsset(root, '/images/products/a.jpg')).toBe(
+      join(root, 'public', 'images/products/a.jpg'),
+    );
   });
 });

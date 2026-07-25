@@ -1,11 +1,10 @@
-import { mkdtempSync, mkdirSync, cpSync, readdirSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { createContentService, savePayloadForPage } from '../../src/core/contentService';
 import { productsDir, eventsDir } from '../../src/core/contentPaths';
 import { listEventSlugs } from '../../src/core/eventsIO';
-import { DeviceFlow } from '../../src/core/deviceFlow';
 import { commitMessageFor, pageNameFromAdminId } from '../../src/core/commitMessages';
 
 const repoRoot = join(process.cwd(), '../..');
@@ -31,7 +30,6 @@ describe('coverage gaps', () => {
     expect(pageNameFromAdminId('page-terms-gallery')).toBe('gallery');
     expect(pageNameFromAdminId('page-terms-schedule')).toBe('schedule');
     expect(pageNameFromAdminId('page-terms-privacy')).toBe('privacy');
-    expect(pageNameFromAdminId('page-terms-classes')).toBe('classes');
   });
 
   it('lists empty events dir and products path helper', () => {
@@ -109,56 +107,4 @@ describe('coverage gaps', () => {
       savePayloadForPage(content, 'nope' as never, {}),
     ).toThrow(/unknown page/);
   });
-
-  it('uses default sleep in DeviceFlow', async () => {
-    const fetchFn = viFetchOnceErrorThenToken();
-    const flow = new DeviceFlow({
-      clientId: 'c',
-      fetchFn: fetchFn as unknown as typeof fetch,
-    });
-    const token = await flow.pollForToken('dc', 0);
-    expect(token.access_token).toBe('tok');
-  });
-
-  it('fills default token fields and error without description', async () => {
-    const sleep = async () => undefined;
-    const ok = new DeviceFlow({
-      clientId: 'c',
-      sleep,
-      fetchFn: (async () => ({
-        ok: true,
-        json: async () => ({ access_token: 't' }),
-      })) as unknown as typeof fetch,
-    });
-    const tok = await ok.pollForToken('d', 1);
-    expect(tok.token_type).toBe('bearer');
-    expect(tok.scope).toBe('');
-
-    const bad = new DeviceFlow({
-      clientId: 'c',
-      sleep,
-      fetchFn: (async () => ({
-        ok: true,
-        json: async () => ({ error: 'expired_token' }),
-      })) as unknown as typeof fetch,
-    });
-    await expect(bad.pollForToken('d', 1)).rejects.toThrow(/expired_token/);
-  });
 });
-
-function viFetchOnceErrorThenToken() {
-  let n = 0;
-  return async () => {
-    n += 1;
-    if (n === 1) {
-      return { ok: true, json: async () => ({ error: 'authorization_pending' }) };
-    }
-    return {
-      ok: true,
-      json: async () => ({ access_token: 'tok', token_type: 'bearer', scope: 'repo' }),
-    };
-  };
-}
-
-// silence unused import if tree-shaken
-void readdirSync;

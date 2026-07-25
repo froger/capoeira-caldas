@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import { api } from '../ports/api';
 import { useDirtyForm } from '../shared/dirtyForm';
 import type { GalleryFile, SyncResult } from '../core/schemas';
+import { GalleryFileSchema } from '../core/schemas';
+import type { FieldErrors } from '../core/formErrors';
+import { validateLocalePair } from '../core/formErrors';
 import { PageShell } from '../components/PageShell';
 import { SaveButton } from '../components/SaveButton';
 import { ConfirmDialog } from '../components/ConfirmDialog';
+import { FieldError, fieldClass } from '../components/FieldError';
 import { ipcError } from '../components/PairedTermsEditor';
 
 type Props = {
@@ -25,6 +29,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [picking, setPicking] = useState(false);
   const [pendingRemove, setPendingRemove] = useState<string | null>(null);
+  const [errors, setErrors] = useState<FieldErrors>({});
 
   useEffect(() => {
     let cancelled = false;
@@ -63,15 +68,21 @@ export function GalleryPage({ onResult, onSaved }: Props) {
   }, [imagePaths.join('|')]);
 
   async function save() {
+    const parsed = validateLocalePair(GalleryFileSchema, form.value);
+    if (!parsed.ok) {
+      setErrors(parsed.errors);
+      return;
+    }
     setSaving(true);
     try {
       const result = await api('content.saveAndPublish', {
         pageId: 'gallery',
-        payload: form.value,
+        payload: parsed.data,
       });
       onResult(result);
       if (result.kind === 'ok') {
         form.markSaved();
+        setErrors({});
         onSaved();
       }
     } finally {
@@ -82,6 +93,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
   function updateItem(locale: 'pt' | 'en', patch: Partial<(typeof form.value.pt.items)[0]>) {
     const items = form.value[locale].items.map((it, i) => (i === index ? { ...it, ...patch } : it));
     form.setValue({ ...form.value, [locale]: { items } });
+    setErrors({});
   }
 
   function patchShared(patch: { id?: string; src?: string; images?: string[] }) {
@@ -93,6 +105,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
         items: form.value.en.items.map((it, i) => (i === index ? { ...it, ...patch } : it)),
       },
     });
+    setErrors({});
   }
 
   async function addImages() {
@@ -136,6 +149,7 @@ export function GalleryPage({ onResult, onSaved }: Props) {
       en: { items: [...form.value.en.items, { ...blank, title: 'New item' }] },
     });
     setIndex(nextIndex);
+    setErrors({});
   }
 
   return (
@@ -152,6 +166,9 @@ export function GalleryPage({ onResult, onSaved }: Props) {
       }
     >
       {loadError ? <p className="error">{loadError}</p> : null}
+      {Object.keys(errors).length > 0 ? (
+        <p className="form-error-banner">Fix the highlighted fields before saving.</p>
+      ) : null}
       <ConfirmDialog
         open={Boolean(pendingRemove)}
         title="Remove image?"
@@ -167,7 +184,13 @@ export function GalleryPage({ onResult, onSaved }: Props) {
       ) : null}
       <label className="field">
         Item
-        <select value={index} onChange={(e) => setIndex(Number(e.target.value))}>
+        <select
+          value={index}
+          onChange={(e) => {
+            setIndex(Number(e.target.value));
+            setErrors({});
+          }}
+        >
           {form.value.pt.items.map((it, i) => (
             <option key={it.id} value={i}>
               {it.id}
@@ -180,23 +203,28 @@ export function GalleryPage({ onResult, onSaved }: Props) {
         <>
           <section className="shared-block">
             <h3>Shared</h3>
-            <label className="field">
+            <label className={fieldClass(errors, `pt.items.${index}.id`)}>
               <span>id</span>
               <input value={item.id} onChange={(e) => patchShared({ id: e.target.value })} />
+              <FieldError errors={errors} path={`pt.items.${index}.id`} />
             </label>
-            <label className="field">
+            <label className={fieldClass(errors, `pt.items.${index}.src`)}>
               <span>cover (src)</span>
               <code>{item.src || '—'}</code>
+              <FieldError errors={errors} path={`pt.items.${index}.src`} />
             </label>
-            <div className="row">
-              <button
-                type="button"
-                className="btn btn-new"
-                disabled={picking}
-                onClick={() => void addImages()}
-              >
-                {picking ? 'Opening…' : 'Add images…'}
-              </button>
+            <div className={fieldClass(errors, `pt.items.${index}.images`)}>
+              <div className="row">
+                <button
+                  type="button"
+                  className="btn btn-new"
+                  disabled={picking}
+                  onClick={() => void addImages()}
+                >
+                  {picking ? 'Opening…' : 'Add images…'}
+                </button>
+              </div>
+              <FieldError errors={errors} path={`pt.items.${index}.images`} />
             </div>
             <div className="thumb-grid">
               {item.images.map((path) => (
@@ -230,19 +258,21 @@ export function GalleryPage({ onResult, onSaved }: Props) {
             {(['pt', 'en'] as const).map((locale) => (
               <div key={locale} className="card">
                 <h3>{locale.toUpperCase()}</h3>
-                <label className="field">
+                <label className={fieldClass(errors, `${locale}.items.${index}.title`)}>
                   <span>title</span>
                   <input
                     value={form.value[locale].items[index]?.title ?? ''}
                     onChange={(e) => updateItem(locale, { title: e.target.value })}
                   />
+                  <FieldError errors={errors} path={`${locale}.items.${index}.title`} />
                 </label>
-                <label className="field">
+                <label className={fieldClass(errors, `${locale}.items.${index}.price`)}>
                   <span>price</span>
                   <input
                     value={form.value[locale].items[index]?.price ?? ''}
                     onChange={(e) => updateItem(locale, { price: e.target.value })}
                   />
+                  <FieldError errors={errors} path={`${locale}.items.${index}.price`} />
                 </label>
               </div>
             ))}

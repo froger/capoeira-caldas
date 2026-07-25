@@ -16,6 +16,11 @@ export default defineConfig({
               external: ['electron', 'simple-git', '@octokit/rest', 'yaml', 'gray-matter', 'zod'],
             },
           },
+          define: {
+            'process.env.GITHUB_OAUTH_CLIENT_ID': JSON.stringify(
+              process.env.GITHUB_OAUTH_CLIENT_ID ?? '',
+            ),
+          },
         },
       },
       preload: {

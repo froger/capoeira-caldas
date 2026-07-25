@@ -60,6 +60,57 @@ describe('RepoService', () => {
     expect(g.pull).toHaveBeenCalled();
   });
 
+  it('pulls with authed url when token provided', async () => {
+    const g = mockGit({
+      status: vi.fn(async () => ({ ahead: 0, behind: 1, staged: [], files: [] })),
+      revparse: vi
+        .fn()
+        .mockResolvedValueOnce('local')
+        .mockResolvedValueOnce('remote'),
+    });
+    const svc = new RepoService({ createGit: () => g as never });
+    const result = await svc.pull(
+      '/tmp/r',
+      'https://github.com/froger/capoeira-caldas.git',
+      'tok',
+    );
+    expect(result.kind).toBe('ok');
+    expect(g.fetch).toHaveBeenCalled();
+    expect(g.pull).toHaveBeenCalled();
+  });
+
+  it('publish returns ok when nothing to commit', async () => {
+    const g = mockGit({
+      status: vi.fn(async () => ({ ahead: 0, behind: 0, staged: [], files: [] })),
+    });
+    const svc = new RepoService({ createGit: () => g as never });
+    const result = await svc.publish({
+      repoDir: '/tmp/r',
+      paths: ['x'],
+      message: 'm',
+      token: 't',
+      remoteUrl: 'https://github.com/froger/capoeira-caldas.git',
+    });
+    expect(result.kind).toBe('ok');
+    expect(g.commit).not.toHaveBeenCalled();
+  });
+
+  it('resolveConflict error stringifies non-Error', async () => {
+    const g = mockGit({
+      push: vi.fn(async () => {
+        throw 'lease boom';
+      }),
+    });
+    const svc = new RepoService({ createGit: () => g as never });
+    const err = await svc.resolveConflict(
+      '/tmp/r',
+      'force-push-mine',
+      'https://github.com/froger/capoeira-caldas.git',
+      't',
+    );
+    expect(err).toEqual({ kind: 'error', message: 'lease boom' });
+  });
+
   it('reports conflict when diverged', async () => {
     const g = mockGit({
       status: vi.fn(async () => ({ ahead: 1, behind: 1, staged: [], files: [] })),
