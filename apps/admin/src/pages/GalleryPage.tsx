@@ -127,10 +127,29 @@ export function GalleryPage({ onResult, onSaved }: Props) {
     patchShared({ src: path });
   }
 
+  function addItem() {
+    const id = `item-${Date.now()}`;
+    const blank = { id, src: '', title: 'New item', price: '', images: [] as string[] };
+    const nextIndex = form.value.pt.items.length;
+    form.setValue({
+      pt: { items: [...form.value.pt.items, { ...blank }] },
+      en: { items: [...form.value.en.items, { ...blank, title: 'New item' }] },
+    });
+    setIndex(nextIndex);
+  }
+
   return (
     <PageShell
       title="Gallery products"
-      actions={<SaveButton dirty={form.dirty} saving={saving} onSave={() => void save()} />}
+      actions={
+        <>
+          <button type="button" className="btn btn-new" onClick={addItem}>
+            New
+          </button>
+          <span className="action-sep" aria-hidden="true" />
+          <SaveButton dirty={form.dirty} saving={saving} onSave={() => void save()} />
+        </>
+      }
     >
       {loadError ? <p className="error">{loadError}</p> : null}
       <ConfirmDialog
@@ -143,6 +162,9 @@ export function GalleryPage({ onResult, onSaved }: Props) {
           if (pendingRemove) removeImage(pendingRemove);
         }}
       />
+      {form.value.pt.items.length === 0 ? (
+        <p>No products yet. Click New to add one.</p>
+      ) : null}
       <label className="field">
         Item
         <select value={index} onChange={(e) => setIndex(Number(e.target.value))}>

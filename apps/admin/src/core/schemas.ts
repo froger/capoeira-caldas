@@ -56,9 +56,9 @@ export type EventDoc = z.infer<typeof EventDocSchema>;
 
 export const GalleryItemSchema = z.object({
   id: z.string().min(1),
-  src: z.string().min(1),
+  src: z.string(),
   title: z.string().min(1),
-  price: z.string().min(1),
+  price: z.string(),
   images: z.array(z.string()),
 });
 export type GalleryItem = z.infer<typeof GalleryItemSchema>;
