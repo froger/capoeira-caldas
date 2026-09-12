@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
+exit 0
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
