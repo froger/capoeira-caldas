@@ -38,8 +38,10 @@ docker compose -f docker/docker-compose.yml run --rm build   # → dist/
 
 1. Enable Pages → Source: **GitHub Actions**
 2. Set custom domain in repo settings
-3. Update `public/CNAME` with your hostname
+3. Put that hostname in `public/CNAME` (not `*.example.org`)
 4. Push to `main` — workflow deploys `dist/`
+
+Build URLs come from `SITE` (origin, default `https://<CNAME>` or `https://<owner>.github.io`) and `BASE_PATH` (pathname, default `/` when `public/CNAME` is a real host, otherwise `/<repo>/`). Override with env or GitHub Actions variables `SITE` / `BASE_PATH`. Empty workflow_dispatch inputs fall through to those defaults.
 
 ## Static form limitations
 

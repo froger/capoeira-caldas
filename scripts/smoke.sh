@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-exit 0
+
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
@@ -45,10 +45,14 @@ if [[ -n "$BASE_PREFIX" ]]; then
     exit 1
   fi
 else
-  grep -qE 'href="/_astro/' dist/index.html || {
-    echo "ERROR: Astro CSS link not found at site root"
+  grep -qE '(href|src)="/(_astro|images)/' dist/index.html || {
+    echo "ERROR: site-root /_astro/ or /images/ assets not found"
     exit 1
   }
+  if grep -qE '(href|src)="/[^"]*capoeira-caldas/' dist/index.html; then
+    echo "ERROR: leftover /capoeira-caldas/ prefix on a root BASE_PATH build"
+    exit 1
+  fi
 fi
 
 if [[ ! -f dist/en/index.html ]]; then
