@@ -38,10 +38,10 @@ kids:
   plans:
     - id: open
       name: "Registration open"
-      price: "On request"
+      price: "30€"
       period: "places available"
       features:
-        - "Kids class ages 5–13"
+        - "Kids class ages 5–14"
         - "Play, rhythm and respect"
         - "Welcoming environment"
       highlighted: true
