@@ -1,7 +1,7 @@
 programs:
   - id: kids
     title: "Capoeira Kids"
-    age_range: "5–13 anos"
+    age_range: "5–14 anos"
     description: "Jogo, ritmo e respeito num ambiente acolhedor — desenvolvimento através da Capoeira Angola."
     image: "/images/kid_pandeiro.jpg"
     path: "/aulas/criancas"
