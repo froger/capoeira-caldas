@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "description": "Desktop content admin for Capoeira Caldas",
+  "homepage": "https://capoeira-caldas.pt",
+  "author": "Associação Capoeira Caldas <capoeiraangola.pt@gmail.com>",
   "main": "dist-electron/main.js",
   "type": "module",
   "engines": {
