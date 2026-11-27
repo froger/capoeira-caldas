@@ -1,7 +1,7 @@
 programs:
   - id: kids
     title: "Capoeira Kids"
-    age_range: "5–13 years"
+    age_range: "5–14 years"
     description: "Play, rhythm and respect in a welcoming space — development through Capoeira Angola."
     image: "/images/kid_pandeiro.jpg"
     path: "/en/classes/kids"
