@@ -11,6 +11,22 @@ linux:
     - AppImage
     - deb
   category: Office
+  # Ubuntu's AppArmor blocks Chromium's user-namespace sandbox, so the menu
+  # entry exits before a window. Pass the flag the desktop file will keep.
+  executableArgs:
+    - --no-sandbox
+deb:
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - libsecret-1-0
+    - git
 mac:
   target:
     - dmg

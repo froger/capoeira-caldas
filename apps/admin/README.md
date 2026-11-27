@@ -40,6 +40,6 @@ git tag v0.0.1
 git push origin v0.0.1
 ```
 
-Assets: Linux AppImage + `.deb`, macOS `.dmg`, Windows NSIS `.exe`.
+Assets: Linux AppImage + `.deb`, macOS `.dmg`, Windows NSIS `.exe`. The `.deb` depends on `git`. The Linux menu entry passes `--no-sandbox` so it starts on Ubuntu.
 
 Repo secret required for sign-in in the packaged app: `ADMIN_GITHUB_OAUTH_CLIENT_ID` (OAuth App client id with Device Flow).

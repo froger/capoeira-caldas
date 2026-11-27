@@ -59,13 +59,13 @@ jobs:
           BASE_PATH: ${{ env.BASE_PATH }}
 
       - uses: actions/upload-pages-artifact@v5
-        if: (github.event_name == 'push' || github.event_name == 'schedule') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         with:
           path: dist
 
   deploy:
     name: Deploy to GitHub Pages
-    if: (github.event_name == 'push' || github.event_name == 'schedule') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     needs: build
     runs-on: ubuntu-latest
     permissions:
