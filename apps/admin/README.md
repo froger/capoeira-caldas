@@ -33,11 +33,11 @@ Critical paths with stricter coverage floors: `deviceFlow` (login/poll failures)
 
 ## Installers / GitHub Releases
 
-Push a tag to build unsigned installers and attach them to a GitHub Release:
+Push any git tag to build unsigned installers and attach them to that tag's GitHub Release. A manual run of the Admin workflow on a branch only stores the files on the Actions run.
 
 ```bash
-git tag admin-v0.1.0
-git push origin admin-v0.1.0
+git tag v0.0.1
+git push origin v0.0.1
 ```
 
 Assets: Linux AppImage + `.deb`, macOS `.dmg`, Windows NSIS `.exe`.
