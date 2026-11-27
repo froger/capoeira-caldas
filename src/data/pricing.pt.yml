@@ -36,7 +36,7 @@ kids:
   plans:
     - id: open
       name: "Inscrições abertas"
-      price: "20€ / mês"
+      price: "30€ / mês"
       period: "vagas limitadas"
       features:
         - "Turma infantil 5–13 anos"
