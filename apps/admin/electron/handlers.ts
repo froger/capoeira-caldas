@@ -208,6 +208,11 @@ export const handlers: HandlerMap = {
       remoteUrl: ctx.remoteUrl,
       token,
     });
+    const synced = await ctx.repo.pull(ctx.repoDir, ctx.remoteUrl, token);
+    if (synced.kind === 'conflict') {
+      throw new Error('Workspace diverged from GitHub. Discard local edits in the workspace folder, then open the app again.');
+    }
+    if (synced.kind === 'error') throw new Error(synced.message);
     assertContentLayout(ctx);
     return { repoDir: ctx.repoDir };
   },
