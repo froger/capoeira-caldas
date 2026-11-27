@@ -1,16 +1,16 @@
 classes:
-  - day: Monday
-    time: "18:00–19:30"
+  - day: Monday!
+    time: 18:00–19:30
     level: All levels
-    instructor: "Instructors"
-    location: "Caldas — Sociedade Columbófila Caldense"
+    instructor: Instructors
+    location: Caldas — Sociedade Columbófila Caldense
   - day: Thursday
-    time: "19:00–20:30"
+    time: 19:00–20:30
     level: All levels
-    instructor: "Instructors"
-    location: "Caldas — Sociedade Columbófila Caldense"
-  - day: Tuesday
-    time: "19:00–20:30"
+    instructor: Instructors
+    location: Caldas — Sociedade Columbófila Caldense
+  - day: Saturday
+    time: 18:00-19:30
     level: All levels
-    instructor: "Instructors"
-    location: "Gaeiras — Espaço O"
+    instructor: Instructors
+    location: Caldas — Sociedade Columbófila Caldense
