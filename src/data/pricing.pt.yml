@@ -39,9 +39,9 @@ kids:
       price: "30€ / mês"
       period: "vagas limitadas"
       features:
-        - "Turma infantil 5–14 anos"
-        - "Jogo, ritmo e respeito"
-        - "Ambiente acolhedor"
+        - "Turma infantil 5–8 anos"
+        - "Turma Teens 9-14 anos"
+        
       highlighted: true
       cta: "Inscrever-se"
   bring_items:
