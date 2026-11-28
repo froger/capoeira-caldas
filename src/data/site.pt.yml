@@ -1,5 +1,5 @@
 name: "Associação Capoeira Caldas"
-description: "Associação de Capoeira Angola em Caldas da Rainha e Gaeiras — movimentos dinâmicos, ritmo e comunidade."
+description: "Associação de Capoeira Angola em Caldas da Rainha — movimentos dinâmicos, ritmo e comunidade."
 
 contact:
   email: "capoeiraangola.pt@gmail.com"
@@ -12,8 +12,6 @@ contact:
 locations:
   - name: "Sociedade Columbófila Caldense"
     addressLocality: "Caldas da Rainha"
-  - name: "Espaço O"
-    addressLocality: "Gaeiras"
 
 social:
   instagram: "https://www.instagram.com/capoeira_caldas/"
