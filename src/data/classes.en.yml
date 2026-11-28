@@ -22,7 +22,7 @@ programs:
       - "Water bottle"
   - id: adult
     title: "Capoeira Adults"
-    age_range: "14+ years"
+    age_range: "15+ years"
     description: "Explore the dynamic movement and captivating rhythm of Capoeira Angola, with experienced instructors in a welcoming environment."
     image: "/images/roda_zumbi_pedrinha.jpg"
     path: "/en/classes/adults"
@@ -35,7 +35,7 @@ programs:
         label: "Rhythm and Musicality"
       - icon: "🤝"
         label: "Community"
-    schedule_note: "Monday and Thursday (Caldas), Tuesday (Gaeiras)"
+    schedule_note: "Monday, Thursday and Saturday"
     equipment:
       - "Comfortable clothes"
       - "Water bottle"
