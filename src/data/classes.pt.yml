@@ -22,7 +22,7 @@ programs:
       - "Garrafa de água"
   - id: adult
     title: "Capoeira Adulto"
-    age_range: "14+ anos"
+    age_range: "15+ anos"
     description: "Explore movimentos dinâmicos e ritmo cativante da Capoeira Angola, com professores experientes num ambiente acolhedor."
     image: "/images/roda_zumbi_pedrinha.jpg"
     path: "/aulas/adultos"
@@ -35,7 +35,7 @@ programs:
         label: "Ritmo e Musicalidade"
       - icon: "🤝"
         label: "Comunidade"
-    schedule_note: "Segunda e Quinta (Caldas), Terça (Gaeiras)"
+    schedule_note: "Segunda, Quinta, Sabado
     equipment:
       - "Roupa confortável"
       - "Garrafa de água"
